@@ -9,17 +9,20 @@
 import Foundation
 
 class User: Codable {
-    let id: Int
+    let userid: Int
     let email: String
     let username: String
-    let password: String
-    let avatar: URL?
+    var avatar: URL? = nil
 
-    init(id: Int, email: String, username: String, password: String, avatar: URL?) {
-        self.id = id
+    enum CodingKeys: String, CodingKey {
+        case userid, username, avatar
+        case email = "primaryemail"
+    }
+
+    init(userid: Int, email: String, username: String, avatar: URL?) {
+        self.userid = userid
         self.email = email
         self.username = username
-        self.password = password
         self.avatar = avatar
     }
 }
