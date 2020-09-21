@@ -10,7 +10,7 @@
         <!--New Topic-->
         <scene sceneID="63p-IN-GZg">
             <objects>
-                <viewController id="9vY-a2-0ad" sceneMemberID="viewController">
+                <viewController id="9vY-a2-0ad" customClass="NewTopicViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y5D-XO-Eoh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -50,7 +50,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Vqv-WH-Xay" kind="show" id="esJ-r2-K4n"/>
+                                            <segue destination="Vqv-WH-Xay" kind="show" identifier="NameTopicSegue" id="esJ-r2-K4n"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -80,7 +80,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Topic" id="wm4-eF-N1f"/>
                     <connections>
-                        <outlet property="tableView" destination="L0y-Fg-wC8" id="s75-sa-1gp"/>
+                        <outlet property="tableView" destination="L0y-Fg-wC8" id="csU-22-fxd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baG-CU-cps" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -90,7 +90,7 @@
         <!--Context Title-->
         <scene sceneID="chN-4i-pS6">
             <objects>
-                <viewController id="Vqv-WH-Xay" sceneMemberID="viewController">
+                <viewController id="Vqv-WH-Xay" customClass="NameTopicViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nB9-Kz-39p">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,6 +158,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Vqv-WH-Xay" id="HYQ-yD-0j5"/>
+                                    <outlet property="delegate" destination="Vqv-WH-Xay" id="zhq-Tg-CPp"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -175,10 +179,14 @@
                     <navigationItem key="navigationItem" title="Context Title" id="KUw-wf-Mfr">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="Ytf-ah-fRE">
                             <connections>
-                                <segue destination="jL0-0O-voG" kind="show" id="tIx-q8-jBD"/>
+                                <segue destination="jL0-0O-voG" kind="show" identifier="ContextQuestionsSegue" id="tIx-q8-jBD"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Gf9-Aq-alx" id="laQ-la-Efo"/>
+                        <outlet property="topicNameTextField" destination="WlI-xh-l3Z" id="503-Ff-14Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2l8-QU-aNv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,7 +195,7 @@
         <!--Context Title-->
         <scene sceneID="72p-ym-l8n">
             <objects>
-                <viewController id="jL0-0O-voG" sceneMemberID="viewController">
+                <viewController id="jL0-0O-voG" customClass="ContextQuestionsViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hhY-fz-YIY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -235,10 +243,17 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="jL0-0O-voG" id="Xsq-yd-LSD"/>
+                                    <outlet property="delegate" destination="jL0-0O-voG" id="S3X-6a-5QU"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu8-z7-G7M">
                                 <rect key="frame" x="143" y="832" width="128" height="30"/>
                                 <state key="normal" title="Add New Question"/>
+                                <connections>
+                                    <action selector="addNewQuestionTapped:" destination="jL0-0O-voG" eventType="touchUpInside" id="zJq-Gc-Rdm"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -259,10 +274,13 @@
                     <navigationItem key="navigationItem" title="Context Title" id="m1i-J4-wo9">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="bGj-FP-Unk">
                             <connections>
-                                <segue destination="Gsa-qB-RFk" kind="show" id="RpG-kt-d8B"/>
+                                <segue destination="Gsa-qB-RFk" kind="show" identifier="MemberQuestionsSegue" id="RpG-kt-d8B"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="x3P-V2-Qje" id="RYh-4a-rap"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lft-dd-EgO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -289,7 +307,7 @@
         <!--Context Title-->
         <scene sceneID="0x3-Zq-mJb">
             <objects>
-                <viewController id="Gsa-qB-RFk" sceneMemberID="viewController">
+                <viewController id="Gsa-qB-RFk" customClass="MemberQuestionsViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E4y-no-WbK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -337,10 +355,17 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Gsa-qB-RFk" id="Ttm-Bn-6uH"/>
+                                    <outlet property="delegate" destination="Gsa-qB-RFk" id="nXA-gM-axP"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsz-WB-3gt">
                                 <rect key="frame" x="143" y="832" width="128" height="30"/>
                                 <state key="normal" title="Add New Question"/>
+                                <connections>
+                                    <action selector="addNewQuestionTapped:" destination="Gsa-qB-RFk" eventType="touchUpInside" id="ZPw-rp-zhB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -361,19 +386,22 @@
                     <navigationItem key="navigationItem" title="Context Title" id="VFI-kk-puw">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="lEW-wP-2ez">
                             <connections>
-                                <segue destination="bhv-hp-bGH" kind="show" id="JUF-Do-0xe"/>
+                                <segue destination="bhv-hp-bGH" kind="show" identifier="TopicCodeSegue" id="JUF-Do-0xe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Tbi-ZQ-p1Z" id="Hg2-52-iPk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="69G-Lr-pNa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3202.898550724638" y="156.69642857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Topic Code View Controller-->
         <scene sceneID="ObA-k1-m9n">
             <objects>
-                <viewController id="bhv-hp-bGH" sceneMemberID="viewController">
+                <viewController id="bhv-hp-bGH" customClass="TopicCodeViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WqW-fQ-sil">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -408,6 +436,9 @@
                                                 <state key="normal" title="97XTY" image="doc.on.doc" catalog="system">
                                                     <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="codeCopyTapped:" destination="bhv-hp-bGH" eventType="touchUpInside" id="Niy-Oc-6Da"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -426,6 +457,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Take me there"/>
+                                <connections>
+                                    <action selector="completedButtonTapped:" destination="bhv-hp-bGH" eventType="touchUpInside" id="Scu-zB-NXt"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -441,6 +475,9 @@
                         <viewLayoutGuide key="safeArea" id="TP2-cL-WVd"/>
                     </view>
                     <navigationItem key="navigationItem" id="Hj6-8U-2EE"/>
+                    <connections>
+                        <outlet property="completedButton" destination="dlZ-zV-12l" id="8FD-KV-WDB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N9b-dB-SB2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
