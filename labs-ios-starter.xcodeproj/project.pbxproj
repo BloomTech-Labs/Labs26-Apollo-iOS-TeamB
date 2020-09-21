@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BED231325191C17006C5DE8 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230925191C17006C5DE8 /* Survey.swift */; };
+		2BED231425191C17006C5DE8 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230A25191C17006C5DE8 /* Topic.swift */; };
+		2BED231525191C17006C5DE8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230B25191C17006C5DE8 /* Comment.swift */; };
+		2BED231625191C17006C5DE8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230C25191C17006C5DE8 /* Message.swift */; };
+		2BED231725191C17006C5DE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230D25191C17006C5DE8 /* User.swift */; };
+		2BED231825191C17006C5DE8 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230E25191C17006C5DE8 /* Context.swift */; };
+		2BED231925191C17006C5DE8 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230F25191C17006C5DE8 /* Question.swift */; };
+		2BED231A25191C17006C5DE8 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED231025191C17006C5DE8 /* Response.swift */; };
+		2BED231B25191C17006C5DE8 /* TopicResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED231125191C17006C5DE8 /* TopicResults.swift */; };
+		2BED231C25191C17006C5DE8 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED231225191C17006C5DE8 /* Sender.swift */; };
+		2BED232225191C64006C5DE8 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED231E25191C64006C5DE8 /* SurveyViewController.swift */; };
+		2BED232325191C64006C5DE8 /* TopicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED231F25191C64006C5DE8 /* TopicTableViewController.swift */; };
+		2BED232425191C64006C5DE8 /* ThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED232025191C64006C5DE8 /* ThreadViewController.swift */; };
+		2BED232525191C64006C5DE8 /* SurveyResponseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED232125191C64006C5DE8 /* SurveyResponseTableViewCell.swift */; };
 		2C429DFE25082A2D002D7F00 /* Wizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C429DFD25082A2D002D7F00 /* Wizard.storyboard */; };
 		463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
@@ -15,7 +29,7 @@
 		466C427B249A8748007D033E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466C4279249A8748007D033E /* Main.storyboard */; };
 		466C427D249A8749007D033E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 466C427C249A8749007D033E /* Assets.xcassets */; };
 		466C4280249A8749007D033E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 466C427E249A8749007D033E /* LaunchScreen.storyboard */; };
-		46BEB4DF24C8F88C00FE0CD1 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 46BEB4DE24C8F88C00FE0CD1 /* SwiftPackageProductDependency */; };
+		46BEB4DF24C8F88C00FE0CD1 /* OktaAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 46BEB4DE24C8F88C00FE0CD1 /* OktaAuth */; };
 		46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E024C9828800FE0CD1 /* Profile.swift */; };
 		46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E424C98CDC00FE0CD1 /* LoginViewController.swift */; };
 		46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BEB4E624C98D8900FE0CD1 /* Notifications.swift */; };
@@ -27,6 +41,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2BED230925191C17006C5DE8 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
+		2BED230A25191C17006C5DE8 /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		2BED230B25191C17006C5DE8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		2BED230C25191C17006C5DE8 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		2BED230D25191C17006C5DE8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2BED230E25191C17006C5DE8 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		2BED230F25191C17006C5DE8 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		2BED231025191C17006C5DE8 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		2BED231125191C17006C5DE8 /* TopicResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicResults.swift; sourceTree = "<group>"; };
+		2BED231225191C17006C5DE8 /* Sender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		2BED231E25191C64006C5DE8 /* SurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		2BED231F25191C64006C5DE8 /* TopicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicTableViewController.swift; sourceTree = "<group>"; };
+		2BED232025191C64006C5DE8 /* ThreadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadViewController.swift; sourceTree = "<group>"; };
+		2BED232125191C64006C5DE8 /* SurveyResponseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyResponseTableViewCell.swift; sourceTree = "<group>"; };
 		2C429DFD25082A2D002D7F00 /* Wizard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wizard.storyboard; sourceTree = "<group>"; };
 		463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46BEB4DF24C8F88C00FE0CD1 /* BuildFile in Frameworks */,
+				46BEB4DF24C8F88C00FE0CD1 /* OktaAuth in Frameworks */,
 				FC061DE9D1895C62F4ABC064 /* Pods_labs_ios_starter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,6 +157,16 @@
 			isa = PBXGroup;
 			children = (
 				46BEB4E024C9828800FE0CD1 /* Profile.swift */,
+				2BED230B25191C17006C5DE8 /* Comment.swift */,
+				2BED230E25191C17006C5DE8 /* Context.swift */,
+				2BED230C25191C17006C5DE8 /* Message.swift */,
+				2BED230F25191C17006C5DE8 /* Question.swift */,
+				2BED231025191C17006C5DE8 /* Response.swift */,
+				2BED231225191C17006C5DE8 /* Sender.swift */,
+				2BED230925191C17006C5DE8 /* Survey.swift */,
+				2BED230A25191C17006C5DE8 /* Topic.swift */,
+				2BED231125191C17006C5DE8 /* TopicResults.swift */,
+				2BED230D25191C17006C5DE8 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,6 +195,10 @@
 			children = (
 				463AD24224CF275900447BB8 /* ProfileDetailViewController.swift */,
 				46BEB4F024C98F0D00FE0CD1 /* Profiles.storyboard */,
+				2BED232125191C64006C5DE8 /* SurveyResponseTableViewCell.swift */,
+				2BED231E25191C64006C5DE8 /* SurveyViewController.swift */,
+				2BED232025191C64006C5DE8 /* ThreadViewController.swift */,
+				2BED231F25191C64006C5DE8 /* TopicTableViewController.swift */,
 			);
 			path = Profiles;
 			sourceTree = "<group>";
@@ -167,7 +209,6 @@
 				CFEB7377A2439DFB72A0026F /* Pods-labs-ios-starter.debug.xcconfig */,
 				FCCD66662884B1EBA13EDBD8 /* Pods-labs-ios-starter.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -198,7 +239,7 @@
 			);
 			name = "labs-ios-starter";
 			packageProductDependencies = (
-				46BEB4DE24C8F88C00FE0CD1 /* SwiftPackageProductDependency */,
+				46BEB4DE24C8F88C00FE0CD1 /* OktaAuth */,
 			);
 			productName = LabsScaffolding;
 			productReference = 466C4270249A8748007D033E /* labs-ios-starter.app */;
@@ -229,7 +270,7 @@
 			);
 			mainGroup = 466C4267249A8748007D033E;
 			packageReferences = (
-				46BEB4DD24C8F88C00FE0CD1 /* RemoteSwiftPackageReference */,
+				46BEB4DD24C8F88C00FE0CD1 /* XCRemoteSwiftPackageReference "OktaAuth" */,
 			);
 			productRefGroup = 466C4271249A8748007D033E /* Products */;
 			projectDirPath = "";
@@ -303,15 +344,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
+				2BED232225191C64006C5DE8 /* SurveyViewController.swift in Sources */,
+				2BED231425191C17006C5DE8 /* Topic.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
+				2BED232525191C64006C5DE8 /* SurveyResponseTableViewCell.swift in Sources */,
+				2BED231925191C17006C5DE8 /* Question.swift in Sources */,
+				2BED231C25191C17006C5DE8 /* Sender.swift in Sources */,
+				2BED231A25191C17006C5DE8 /* Response.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				46BEB4E124C9828800FE0CD1 /* Profile.swift in Sources */,
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
+				2BED231325191C17006C5DE8 /* Survey.swift in Sources */,
+				2BED231725191C17006C5DE8 /* User.swift in Sources */,
+				2BED232425191C64006C5DE8 /* ThreadViewController.swift in Sources */,
+				2BED231525191C17006C5DE8 /* Comment.swift in Sources */,
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
 				463AD24324CF275900447BB8 /* ProfileDetailViewController.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
+				2BED232325191C64006C5DE8 /* TopicTableViewController.swift in Sources */,
+				2BED231B25191C17006C5DE8 /* TopicResults.swift in Sources */,
+				2BED231825191C17006C5DE8 /* Context.swift in Sources */,
 				466C4276249A8748007D033E /* SceneDelegate.swift in Sources */,
+				2BED231625191C17006C5DE8 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,7 +568,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		46BEB4DD24C8F88C00FE0CD1 /* RemoteSwiftPackageReference */ = {
+		46BEB4DD24C8F88C00FE0CD1 /* XCRemoteSwiftPackageReference "OktaAuth" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:SpencerCurtis/OktaAuth.git";
 			requirement = {
@@ -524,9 +579,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		46BEB4DE24C8F88C00FE0CD1 /* SwiftPackageProductDependency */ = {
+		46BEB4DE24C8F88C00FE0CD1 /* OktaAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 46BEB4DD24C8F88C00FE0CD1 /* RemoteSwiftPackageReference */;
+			package = 46BEB4DD24C8F88C00FE0CD1 /* XCRemoteSwiftPackageReference "OktaAuth" */;
 			productName = OktaAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
