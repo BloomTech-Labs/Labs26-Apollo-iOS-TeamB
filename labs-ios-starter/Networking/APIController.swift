@@ -79,7 +79,7 @@ class APIContoller {
             }
 
             guard let data = data else {
-                NSLog("No user data for surveys request")
+                NSLog("No survey data for surveys request")
                 completion(nil)
                 return
             }
@@ -89,6 +89,33 @@ class APIContoller {
                 DispatchQueue.main.async { completion(surveys) }
             } catch {
                 NSLog("Error decoding surveys data: \(error)")
+                completion(nil)
+            }
+        }.resume()
+    }
+
+    func fetchQuestions(completion: @escaping (QuestionResults?) -> Void) {
+        let requestURL = baseURL.appendingPathComponent("questions")
+        let request = URLRequest(url: requestURL)
+
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                NSLog("Error fetching questions: \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                NSLog("No question data for questions request")
+                completion(nil)
+                return
+            }
+
+            do {
+                let questions = try JSONDecoder().decode(QuestionResults.self, from: data)
+                DispatchQueue.main.async { completion(questions) }
+            } catch {
+                NSLog("Error decoding questions data: \(error)")
                 completion(nil)
             }
         }.resume()
