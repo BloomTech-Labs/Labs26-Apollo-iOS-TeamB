@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
                                                object: nil,
                                                queue: .main,
                                                using: alertUserOfExpiredCredentials)
-        
+
     }
     
     // MARK: - Actions
@@ -57,11 +57,13 @@ class LoginViewController: UIViewController {
             guard let self = self,
                 self.presentedViewController == nil else { return }
             
-            if exists {
+//            if exists {
                 self.performSegue(withIdentifier: "ShowDetailProfileList", sender: nil)
-            } else {
-                self.performSegue(withIdentifier: "ModalAddProfile", sender: nil)
-            }
+//            }
+
+//            else {
+//                self.performSegue(withIdentifier: "ModalAddProfile", sender: nil)
+//            }
         }
     }
     

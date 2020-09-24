@@ -10,9 +10,8 @@
 import Foundation
 import OktaAuth
 
-class APIController: ProfileController {
+extension ProfileController {
 
-    private let baseURL = URL(string: "https://apollo-b-api.herokuapp.com")!
 
     func fetchTopics(completion: @escaping (TopicResults?) -> Void) {
         let oktaCredentials: OktaCredentials

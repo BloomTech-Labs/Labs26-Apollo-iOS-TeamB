@@ -10,6 +10,8 @@ import UIKit
 import OktaAuth
 
 class ProfileController {
+
+    let baseURL = URL(string: "https://apollo-b-api.herokuapp.com")!
     
     static let shared = ProfileController()
     
@@ -17,10 +19,9 @@ class ProfileController {
                             clientID: "0oalwkxvqtKeHBmLI4x6",
                             redirectURI: "labs://scaffolding/implicit/callback")
     
-    private(set) var authenticatedUserProfile: Profile?
-    private(set) var profiles: [Profile] = []
+    private(set) var authenticatedUserProfile: User?
+    private(set) var profiles: [User] = []
     
-    private let baseURL = URL(string: "https://labs-api-starter.herokuapp.com/")!
     
     init() {
         NotificationCenter.default.addObserver(self,
@@ -78,7 +79,7 @@ class ProfileController {
             let decoder = JSONDecoder()
             
             do {
-                let profiles = try decoder.decode([Profile].self, from: data)
+                let profiles = try decoder.decode([User].self, from: data)
                 
                 DispatchQueue.main.async {
                     self.profiles = profiles

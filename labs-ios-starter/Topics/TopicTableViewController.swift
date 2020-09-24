@@ -13,13 +13,12 @@ class TopicTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     let data: [String] = []
-    let apiController = APIController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         print("Beginning test")
-        apiController.fetchTopics { results in
+        ProfileController.shared.fetchTopics { results in
             print("Got stuff back")
             guard let results = results else {
                 print("Results were empty")
