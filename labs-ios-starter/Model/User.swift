@@ -11,7 +11,7 @@ import Foundation
 class User: Decodable {
     let userid: Int
     let username: String
-    var topics: [(String, Int)]? = nil
+    var topics: [(String, Int)]?
 
     init(userid: Int, username: String) {
         self.userid = userid
@@ -37,8 +37,8 @@ class User: Decodable {
         let keyedOwnedTopicsContainer = try unkeyedOwnedTopicsContainer.nestedContainer(keyedBy: CodingKeys.self)
 
         while !unkeyedOwnedTopicsContainer.isAtEnd {
-            let title = try keyedOwnedTopicsContainer.decode(String.self, forKey: .title)
-            let topicId = try keyedOwnedTopicsContainer.decode(Int.self, forKey: .topicId)
+            guard let title = try keyedOwnedTopicsContainer.decodeIfPresent(String.self, forKey: .title),
+                  let topicId = try keyedOwnedTopicsContainer.decodeIfPresent(Int.self, forKey: .topicId) else { break }
 
             topicsArray.append((title, topicId))
         }
@@ -48,8 +48,8 @@ class User: Decodable {
         let keyedTopicsContainer = try unkeyedTopicsContainer.nestedContainer(keyedBy: CodingKeys.self)
 
         while !unkeyedTopicsContainer.isAtEnd {
-            let title = try keyedTopicsContainer.decode(String.self, forKey: .title)
-            let topicId = try keyedTopicsContainer.decode(Int.self, forKey: .topicId)
+            guard let title = try keyedTopicsContainer.decodeIfPresent(String.self, forKey: .title),
+                  let topicId = try keyedTopicsContainer.decodeIfPresent(Int.self, forKey: .topicId) else { break }
 
             if !topicsArray.contains(where: { $0.1 == topicId }) {
                 topicsArray.append((title, topicId))

@@ -10,7 +10,7 @@ import Foundation
 
 class Survey: Decodable {
     let surveyId: Int
-    let topicId: Int
+    let topicId: Int?
     let questions: [Question]
 
     init(surveyId: Int, topicId: Int, questions: [Question]) {
@@ -29,8 +29,9 @@ class Survey: Decodable {
         let topicContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .topic)
 
         self.surveyId = try container.decode(Int.self, forKey: .surveyId)
-        self.topicId = try topicContainer.decode(Int.self, forKey: .topicId)
         self.questions = try container.decode([Question].self, forKey: .questions)
+
+        self.topicId = try topicContainer.decodeIfPresent(Int.self, forKey: .topicId)
     }
 }
 
