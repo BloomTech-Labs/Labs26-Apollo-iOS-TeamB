@@ -40,33 +40,6 @@ class APIContoller {
         }.resume()
     }
 
-    func fetchUsers(completion: @escaping (UserResults?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("users").appendingPathComponent("users")
-        let request = URLRequest(url: requestURL)
-
-        URLSession.shared.dataTask(with: request) { data, _, error in
-            if let error = error {
-                NSLog("Error fetching users: \(error)")
-                completion(nil)
-                return
-            }
-
-            guard let data = data else {
-                NSLog("No user data for users request")
-                completion(nil)
-                return
-            }
-
-            do {
-                let users = try JSONDecoder().decode(UserResults.self, from: data)
-                DispatchQueue.main.async { completion(users) }
-            } catch {
-                NSLog("Error decoding users data: \(error)")
-                completion(nil)
-            }
-        }.resume()
-    }
-
     func fetchSurveys(completion: @escaping (SurveyResults?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("surveys").appendingPathComponent("all")
         let request = URLRequest(url: requestURL)
