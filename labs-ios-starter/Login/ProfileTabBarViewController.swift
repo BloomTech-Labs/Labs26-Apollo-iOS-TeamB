@@ -1,5 +1,5 @@
 //
-//  ProfileTabBarViewController.swift
+//  UserTabBarViewController.swift
 //  labs-ios-starter
 //
 //  Created by Spencer Curtis on 7/31/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileTabBarViewController: UITabBarController {
+class UserTabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,5 +1,5 @@
 //
-//  ProfileDetailViewController.swift
+//  UserDetailViewController.swift
 //  LabsScaffolding
 //
 //  Created by Spencer Curtis on 7/27/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileDetailViewController: UIViewController {
+class UserDetailViewController: UIViewController {
     
     // MARK: - Properties and Outlets
     
@@ -21,9 +21,9 @@ class ProfileDetailViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var avatarURLTextField: UITextField!
     
-    var profileController: ProfileController = ProfileController.shared
-    var profile: Profile?
-    var isUsersProfile = true
+    var userController: UserController = UserController.shared
+    var user: User?
+    var isUsersUser = true
     
     // MARK: - View Lifecycle
     
@@ -33,13 +33,13 @@ class ProfileDetailViewController: UIViewController {
         updateViews()
     }
     
-    @IBAction func cancelProfileUpdate(_ sender: Any) {
+    @IBAction func cancelUserUpdate(_ sender: Any) {
         setEditing(false, animated: true)
     }
     
-    @IBAction func updateProfile(_ sender: Any) {
+    @IBAction func updateUser(_ sender: Any) {
         
-        guard let profile = profileController.authenticatedUserProfile,
+        guard let user = userController.authenticatedUserUser,
             let name = nameTextField.text,
             let email = emailTextField.text,
             let avatarURLString = avatarURLTextField.text,
@@ -52,10 +52,10 @@ class ProfileDetailViewController: UIViewController {
                 return
         }
         
-        profileController.updateAuthenticatedUserProfile(profile, with: name, email: email, avatarURL: avatarURL) { [weak self] (updatedProfile) in
+        userController.updateAuthenticatedUserUser(user, with: name, email: email, avatarURL: avatarURL) { [weak self] (updatedUser) in
             
             guard let self = self else { return }
-            self.updateViews(with: updatedProfile)
+            self.updateViews(with: updatedUser)
         }
     }
     
@@ -77,39 +77,27 @@ class ProfileDetailViewController: UIViewController {
     
     private func updateViews() {
         
-        if let profile = profile {
+        if let user = user {
             title = "Details"
-            updateViews(with: profile)
-        } else if isUsersProfile,
-            let profile = profileController.authenticatedUserProfile {
+            updateViews(with: user)
+        } else if isUsersUser,
+            let user = userController.authenticatedUserUser {
             title = "Me"
-            updateViews(with: profile)
+            updateViews(with: user)
         }
     }
     
-    private func updateViews(with profile: Profile) {
+    private func updateViews(with user: User) {
         guard isViewLoaded else { return }
         
-        nameLabel.text = profile.name
-//        emailLabel.text = profile.email
+        nameLabel.text = user.username
+
+
         
-        if let avatarImage = profile.avatarImage {
-            avatarImageView.image = avatarImage
-        } else if let avatarURL = profile.avatarURL {
-            profileController.image(for: avatarURL, completion: { [weak self] (avatarImage) in
-                guard let self = self else { return }
-                
-                self.profile?.avatarImage = avatarImage
-                self.avatarImageView.image = avatarImage
-            })
-        }
-        
-        guard isUsersProfile else { return }
+        guard isUsersUser else { return }
         
         navigationItem.rightBarButtonItem = editButtonItem
         
-        nameTextField.text = profile.name
-//        emailTextField.text = profile.email
-        avatarURLTextField.text = profile.avatarURL?.absoluteString
+        nameTextField.text = user.username
     }
 }

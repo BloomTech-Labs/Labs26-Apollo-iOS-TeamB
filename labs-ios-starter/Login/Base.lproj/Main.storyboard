@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5kU-21-3IP">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -25,16 +24,16 @@
             </objects>
             <point key="canvasLocation" x="671.01449275362324" y="83.705357142857139"/>
         </scene>
-        <!--ProfileViewer-->
+        <!--UserViewer-->
         <scene sceneID="6M8-Hn-aJP">
             <objects>
                 <viewController id="4a7-cC-Xlp" customClass="LoginViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="INU-fS-Snd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQk-Xf-had">
-                                <rect key="frame" x="149" y="486" width="116" height="30"/>
+                                <rect key="frame" x="242" y="333" width="116" height="30"/>
                                 <state key="normal" title="Sign in with Okta"/>
                                 <connections>
                                     <action selector="signIn:" destination="4a7-cC-Xlp" eventType="touchUpInside" id="qez-xn-3z4"/>
@@ -48,10 +47,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="R8l-LV-vJe"/>
                     </view>
-                    <navigationItem key="navigationItem" title="ProfileViewer" id="fm5-ES-PwH"/>
+                    <navigationItem key="navigationItem" title="UserViewer" id="fm5-ES-PwH"/>
                     <connections>
-                        <segue destination="o9A-9L-jW8" kind="presentation" identifier="ModalAddProfile" id="vYb-th-yYx"/>
-                        <segue destination="aOC-qF-9qB" kind="presentation" identifier="ShowDetailProfileList" modalPresentationStyle="fullScreen" id="Tfb-bT-2YH"/>
+                        <segue destination="o9A-9L-jW8" kind="presentation" identifier="ModalAddUser" id="vYb-th-yYx"/>
+                        <segue destination="aOC-qF-9qB" kind="presentation" identifier="ShowDetailUserList" modalPresentationStyle="fullScreen" id="Tfb-bT-2YH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcT-Mn-ZnW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -68,42 +67,42 @@
             </objects>
             <point key="canvasLocation" x="2231" y="84"/>
         </scene>
-        <!--Add Profile View Controller-->
+        <!--Add User View Controller-->
         <scene sceneID="Rcb-Kk-CcR">
             <objects>
-                <viewController id="o9A-9L-jW8" customClass="AddProfileViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="o9A-9L-jW8" customClass="AddUserViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ECQ-R5-khC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="C7b-Qv-MEf">
-                                <rect key="frame" x="20" y="69" width="374" height="136"/>
+                                <rect key="frame" x="20" y="69" width="560" height="136"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UhE-9G-fp3">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yi1-iK-B9t">
-                                        <rect key="frame" x="0.0" y="51" width="374" height="34"/>
+                                        <rect key="frame" x="0.0" y="51" width="560" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Avatar URL:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dji-1H-z5a">
-                                        <rect key="frame" x="0.0" y="102" width="374" height="34"/>
+                                        <rect key="frame" x="0.0" y="102" width="560" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Your Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8x-4x-PO2">
-                                <rect key="frame" x="20" y="20" width="374" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Your User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8x-4x-PO2">
+                                <rect key="frame" x="20" y="20" width="560" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iny-A2-ZpV">
-                                <rect key="frame" x="0.0" y="759" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="536" width="600" height="44"/>
                                 <items>
                                     <barButtonItem title="Cancel" id="QPd-zf-qIe">
                                         <connections>
@@ -113,13 +112,13 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ZQn-wd-Ebp"/>
                                     <barButtonItem title="Add" id="PxD-RX-bGd">
                                         <connections>
-                                            <action selector="addProfile:" destination="o9A-9L-jW8" id="p87-z6-0cl"/>
+                                            <action selector="addUser:" destination="o9A-9L-jW8" id="p87-z6-0cl"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yu2-g9-PBg">
-                                <rect key="frame" x="188.5" y="285" width="37" height="37"/>
+                                <rect key="frame" x="281.5" y="285" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

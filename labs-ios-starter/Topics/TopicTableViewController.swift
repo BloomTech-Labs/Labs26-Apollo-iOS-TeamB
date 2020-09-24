@@ -18,7 +18,7 @@ class TopicTableViewController: UIViewController {
         super.viewDidLoad()
 
         print("Beginning test")
-        ProfileController.shared.fetchTopics { results in
+        UserController.shared.fetchTopics { results in
             print("Got stuff back")
             guard let results = results else {
                 print("Results were empty")

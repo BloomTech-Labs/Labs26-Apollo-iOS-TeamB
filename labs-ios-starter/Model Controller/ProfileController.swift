@@ -1,5 +1,5 @@
 //
-//  ProfileController.swift
+//  UserController.swift
 //  LabsScaffolding
 //
 //  Created by Spencer Curtis on 7/23/20.
@@ -9,32 +9,32 @@
 import UIKit
 import OktaAuth
 
-class ProfileController {
+class UserController {
 
     let baseURL = URL(string: "https://apollo-b-api.herokuapp.com")!
     
-    static let shared = ProfileController()
+    static let shared = UserController()
     
     let oktaAuth = OktaAuth(baseURL: URL(string: "https://auth.lambdalabs.dev/")!,
                             clientID: "0oalwkxvqtKeHBmLI4x6",
                             redirectURI: "labs://scaffolding/implicit/callback")
     
-    private(set) var authenticatedUserProfile: User?
-    private(set) var profiles: [User] = []
+    private(set) var authenticatedUserUser: User?
+    private(set) var users: [User] = []
     
     
     init() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshProfiles),
+                                               selector: #selector(refreshUsers),
                                                name: .oktaAuthenticationSuccessful,
                                                object: nil)
     }
     
-    @objc func refreshProfiles() {
-        getAllProfiles()
+    @objc func refreshUsers() {
+        getAllUsers()
     }
     
-    func getAllProfiles(completion: @escaping () -> Void = {}) {
+    func getAllUsers(completion: @escaping () -> Void = {}) {
         
         var oktaCredentials: OktaCredentials
         
@@ -42,14 +42,14 @@ class ProfileController {
             oktaCredentials = try oktaAuth.credentialsIfAvailable()
         } catch {
             postAuthenticationExpiredNotification()
-            NSLog("Credentials do not exist. Unable to get profiles from API")
+            NSLog("Credentials do not exist. Unable to get users from API")
             DispatchQueue.main.async {
                 completion()
             }
             return
         }
         
-        let requestURL = baseURL.appendingPathComponent("profiles")
+        let requestURL = baseURL.appendingPathComponent("users")
         var request = URLRequest(url: requestURL)
         
         request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
@@ -63,7 +63,7 @@ class ProfileController {
             }
             
             if let error = error {
-                NSLog("Error getting all profiles: \(error)")
+                NSLog("Error getting all users: \(error)")
             }
             
             if let response = response as? HTTPURLResponse,
@@ -72,34 +72,34 @@ class ProfileController {
             }
             
             guard let data = data else {
-                NSLog("No data returned from getting all profiles")
+                NSLog("No data returned from getting all users")
                 return
             }
             
             let decoder = JSONDecoder()
             
             do {
-                let profiles = try decoder.decode([User].self, from: data)
+                let users = try decoder.decode([User].self, from: data)
                 
                 DispatchQueue.main.async {
-                    self.profiles = profiles
+                    self.users = users
                 }
             } catch {
-                NSLog("Unable to decode [Profile] from data: \(error)")
+                NSLog("Unable to decode [User] from data: \(error)")
             }
         }
         
         dataTask.resume()
     }
     
-    func getAuthenticatedUserProfile(completion: @escaping () -> Void = { }) {
+    func getAuthenticatedUserUser(completion: @escaping () -> Void = { }) {
         var oktaCredentials: OktaCredentials
         
         do {
             oktaCredentials = try oktaAuth.credentialsIfAvailable()
         } catch {
             postAuthenticationExpiredNotification()
-            NSLog("Credentials do not exist. Unable to get authenticated user profile from API")
+            NSLog("Credentials do not exist. Unable to get authenticated user user from API")
             DispatchQueue.main.async {
                 completion()
             }
@@ -114,21 +114,21 @@ class ProfileController {
             return
         }
         
-        getSingleProfile(userID) { (profile) in
-            self.authenticatedUserProfile = profile
+        getSingleUser(userID) { (user) in
+            self.authenticatedUserUser = user
             DispatchQueue.main.async {
                 completion()
             }
         }
     }
     
-    func checkForExistingAuthenticatedUserProfile(completion: @escaping (Bool) -> Void) {
-        getAuthenticatedUserProfile {
-            completion(self.authenticatedUserProfile != nil)
+    func checkForExistingAuthenticatedUserUser(completion: @escaping (Bool) -> Void) {
+        getAuthenticatedUserUser {
+            completion(self.authenticatedUserUser != nil)
         }
     }
     
-    func getSingleProfile(_ userID: String, completion: @escaping (Profile?) -> Void) {
+    func getSingleUser(_ userID: String, completion: @escaping (User?) -> Void) {
         
         var oktaCredentials: OktaCredentials
         
@@ -136,7 +136,7 @@ class ProfileController {
             oktaCredentials = try oktaAuth.credentialsIfAvailable()
         } catch {
             postAuthenticationExpiredNotification()
-            NSLog("Credentials do not exist. Unable to get profile from API")
+            NSLog("Credentials do not exist. Unable to get user from API")
             DispatchQueue.main.async {
                 completion(nil)
             }
@@ -144,7 +144,7 @@ class ProfileController {
         }
         
         let requestURL = baseURL
-            .appendingPathComponent("profiles")
+            .appendingPathComponent("users")
             .appendingPathComponent(userID)
         var request = URLRequest(url: requestURL)
         
@@ -152,16 +152,16 @@ class ProfileController {
         
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            var fetchedProfile: Profile?
+            var fetchedUser: User?
             
             defer {
                 DispatchQueue.main.async {
-                    completion(fetchedProfile)
+                    completion(fetchedUser)
                 }
             }
             
             if let error = error {
-                NSLog("Error getting all profiles: \(error)")
+                NSLog("Error getting all users: \(error)")
             }
             
             if let response = response as? HTTPURLResponse,
@@ -170,24 +170,24 @@ class ProfileController {
             }
             
             guard let data = data else {
-                NSLog("No data returned from getting all profiles")
+                NSLog("No data returned from getting all users")
                 return
             }
             
             let decoder = JSONDecoder()
             
             do {
-                let profile = try decoder.decode(Profile.self, from: data)
-                fetchedProfile = profile
+                let user = try decoder.decode(User.self, from: data)
+                fetchedUser = user
             } catch {
-                NSLog("Unable to decode Profile from data: \(error)")
+                NSLog("Unable to decode User from data: \(error)")
             }
         }
         
         dataTask.resume()
     }
     
-    func updateAuthenticatedUserProfile(_ profile: Profile, with name: String, email: String, avatarURL: URL, completion: @escaping (Profile) -> Void) {
+    func updateAuthenticatedUserUser(_ user: User, with name: String, email: String, avatarURL: URL, completion: @escaping (User) -> Void) {
         
         var oktaCredentials: OktaCredentials
         
@@ -195,42 +195,42 @@ class ProfileController {
             oktaCredentials = try oktaAuth.credentialsIfAvailable()
         } catch {
             postAuthenticationExpiredNotification()
-            NSLog("Credentials do not exist. Unable to get authenticated user profile from API")
+            NSLog("Credentials do not exist. Unable to get authenticated user user from API")
             DispatchQueue.main.async {
-                completion(profile)
+                completion(user)
             }
             return
         }
         
         let requestURL = baseURL
-            .appendingPathComponent("profiles")
+            .appendingPathComponent("users")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = "PUT"
         request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
         
-        do {
-            request.httpBody = try JSONEncoder().encode(profile)
-        } catch {
-            NSLog("Error encoding profile JSON: \(error)")
-            DispatchQueue.main.async {
-                completion(profile)
-            }
-            return
-        }
+//        do {
+//            request.httpBody = try JSONEncoder().encode(user)
+//        } catch {
+//            NSLog("Error encoding user JSON: \(error)")
+//            DispatchQueue.main.async {
+//                completion(user)
+//            }
+//            return
+//        }
         
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            var profile = profile
+            var user = user
             
             defer {
                 DispatchQueue.main.async {
-                    completion(profile)
+                    completion(user)
                 }
             }
             
             if let error = error {
-                NSLog("Error adding profile: \(error)")
+                NSLog("Error adding user: \(error)")
                 return
             }
             
@@ -241,52 +241,49 @@ class ProfileController {
             }
             
             guard let data = data else {
-                NSLog("No data returned from updating profile")
+                NSLog("No data returned from updating user")
                 return
             }
             
-            do {
-                profile = try JSONDecoder().decode(ProfileWithMessage.self, from: data).profile
-                self.authenticatedUserProfile = profile
-            } catch {
-                NSLog("Error decoding `ProfileWithMessage`: \(error)")
-            }
+//            do {
+//                user = try JSONDecoder().decode(UserWithMessage.self, from: data).user
+//                self.authenticatedUserUser = user
+//            } catch {
+//                NSLog("Error decoding `UserWithMessage`: \(error)")
+//            }
         }
         
         dataTask.resume()
     }
     
-    // NOTE: This method is unused, but left as an example for creating a profile.
+    // NOTE: This method is unused, but left as an example for creating a user.
     
-    func createProfile(with email: String, name: String, avatarURL: URL) -> Profile? {
+//    func createUser(with email: String, name: String, avatarURL: URL) {
+//        var oktaCredentials: OktaCredentials
+//        
+//        do {
+//            oktaCredentials = try oktaAuth.credentialsIfAvailable()
+//        } catch {
+//            postAuthenticationExpiredNotification()
+//            NSLog("Credentials do not exist. Unable to create a user for the authenticated user")
+//        }
+//        
+//        guard let userID = oktaCredentials.userID else {
+//            NSLog("Credentials do not exist. Unable to create user")
+//        }
+//    }
+    
+    // NOTE: This method is unused, but left as an example for creating a user on the scaffolding backend.
+    
+    func addUser(_ user: User, completion: @escaping () -> Void) {
+        
         var oktaCredentials: OktaCredentials
         
         do {
             oktaCredentials = try oktaAuth.credentialsIfAvailable()
         } catch {
             postAuthenticationExpiredNotification()
-            NSLog("Credentials do not exist. Unable to create a profile for the authenticated user")
-            return nil
-        }
-        
-        guard let userID = oktaCredentials.userID else {
-            NSLog("Credentials do not exist. Unable to create profile")
-            return nil
-        }
-        return Profile(id: userID, email: email, name: name, avatarURL: avatarURL)
-    }
-    
-    // NOTE: This method is unused, but left as an example for creating a profile on the scaffolding backend.
-    
-    func addProfile(_ profile: Profile, completion: @escaping () -> Void) {
-        
-        var oktaCredentials: OktaCredentials
-        
-        do {
-            oktaCredentials = try oktaAuth.credentialsIfAvailable()
-        } catch {
-            postAuthenticationExpiredNotification()
-            NSLog("Credentials do not exist. Unable to add profile to API")
+            NSLog("Credentials do not exist. Unable to add user to API")
             defer {
                 DispatchQueue.main.async {
                     completion()
@@ -295,22 +292,22 @@ class ProfileController {
             return
         }
         
-        let requestURL = baseURL.appendingPathComponent("profiles")
+        let requestURL = baseURL.appendingPathComponent("users")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "POST"
         request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
         
-        do {
-            request.httpBody = try JSONEncoder().encode(profile)
-        } catch {
-            NSLog("Error encoding profile: \(profile)")
-            defer {
-                DispatchQueue.main.async {
-                    completion()
-                }
-            }
-            return
-        }
+//        do {
+//            request.httpBody = try JSONEncoder().encode(user)
+//        } catch {
+//            NSLog("Error encoding user: \(user)")
+//            defer {
+//                DispatchQueue.main.async {
+//                    completion()
+//                }
+//            }
+//            return
+//        }
         
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -321,7 +318,7 @@ class ProfileController {
             }
             
             if let error = error {
-                NSLog("Error adding profile: \(error)")
+                NSLog("Error adding user: \(error)")
             }
             
             if let response = response as? HTTPURLResponse,
@@ -330,7 +327,7 @@ class ProfileController {
                 return
             }
             
-            self.profiles.append(profile)
+            self.users.append(user)
         }
         dataTask.resume()
     }

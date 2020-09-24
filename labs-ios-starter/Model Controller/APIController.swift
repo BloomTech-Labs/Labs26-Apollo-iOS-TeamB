@@ -10,7 +10,7 @@
 import Foundation
 import OktaAuth
 
-extension ProfileController {
+extension UserController {
 
 
     func fetchTopics(completion: @escaping (TopicResults?) -> Void) {
@@ -25,7 +25,7 @@ extension ProfileController {
         }
         print("Made it passed getting oktaCred")
 
-//        let requestURL = baseURL.appendingPathComponent("profiles")
+//        let requestURL = baseURL.appendingPathComponent("users")
 //        var request = URLRequest(url: requestURL)
 
         let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
