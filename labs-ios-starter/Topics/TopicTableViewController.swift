@@ -13,17 +13,27 @@ class TopicTableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     let data: [String] = []
+    let apiController = APIController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        print("Beginning test")
+        apiController.fetchTopics { results in
+            print("Got stuff back")
+            guard let results = results else {
+                print("Results were empty")
+                return
+            }
+            print(results)
+        }
     }
 
 }
 
 extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return data.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

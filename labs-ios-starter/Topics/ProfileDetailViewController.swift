@@ -91,7 +91,7 @@ class ProfileDetailViewController: UIViewController {
         guard isViewLoaded else { return }
         
         nameLabel.text = profile.name
-        emailLabel.text = profile.email
+//        emailLabel.text = profile.email
         
         if let avatarImage = profile.avatarImage {
             avatarImageView.image = avatarImage
@@ -109,7 +109,7 @@ class ProfileDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = editButtonItem
         
         nameTextField.text = profile.name
-        emailTextField.text = profile.email
+//        emailTextField.text = profile.email
         avatarURLTextField.text = profile.avatarURL?.absoluteString
     }
 }

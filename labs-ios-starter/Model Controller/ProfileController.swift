@@ -22,7 +22,7 @@ class ProfileController {
     
     private let baseURL = URL(string: "https://labs-api-starter.herokuapp.com/")!
     
-    private init() {
+    init() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(refreshProfiles),
                                                name: .oktaAuthenticationSuccessful,
