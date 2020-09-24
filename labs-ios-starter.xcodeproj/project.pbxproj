@@ -25,6 +25,9 @@
 		2BED2338251922B4006C5DE8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED2331251922B4006C5DE8 /* HomeViewController.swift */; };
 		2BED2339251922B4006C5DE8 /* Topics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BED2332251922B4006C5DE8 /* Topics.storyboard */; };
 		2BED233A251922B4006C5DE8 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED2333251922B4006C5DE8 /* SurveyViewController.swift */; };
+		2C1D074F251D0ED9008B9051 /* SurveyResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D074E251D0ED9008B9051 /* SurveyResults.swift */; };
+		2C1D0751251D0EE5008B9051 /* QuestionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D0750251D0EE5008B9051 /* QuestionResults.swift */; };
+		2C1D0753251D0EEC008B9051 /* UserResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D0752251D0EEC008B9051 /* UserResults.swift */; };
 		2C429DFE25082A2D002D7F00 /* Wizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C429DFD25082A2D002D7F00 /* Wizard.storyboard */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
@@ -59,6 +62,9 @@
 		2BED2331251922B4006C5DE8 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2BED2332251922B4006C5DE8 /* Topics.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Topics.storyboard; sourceTree = "<group>"; };
 		2BED2333251922B4006C5DE8 /* SurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		2C1D074E251D0ED9008B9051 /* SurveyResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyResults.swift; sourceTree = "<group>"; };
+		2C1D0750251D0EE5008B9051 /* QuestionResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResults.swift; sourceTree = "<group>"; };
+		2C1D0752251D0EEC008B9051 /* UserResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResults.swift; sourceTree = "<group>"; };
 		2C429DFD25082A2D002D7F00 /* Wizard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wizard.storyboard; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* labs-ios-starter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "labs-ios-starter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,12 +183,15 @@
 				2BED230E25191C17006C5DE8 /* Context.swift */,
 				2BED230C25191C17006C5DE8 /* Message.swift */,
 				2BED230F25191C17006C5DE8 /* Question.swift */,
+				2C1D0750251D0EE5008B9051 /* QuestionResults.swift */,
 				2BED231025191C17006C5DE8 /* Response.swift */,
 				2BED231225191C17006C5DE8 /* Sender.swift */,
 				2BED230925191C17006C5DE8 /* Survey.swift */,
+				2C1D074E251D0ED9008B9051 /* SurveyResults.swift */,
 				2BED230A25191C17006C5DE8 /* Topic.swift */,
 				2BED231125191C17006C5DE8 /* TopicResults.swift */,
 				2BED230D25191C17006C5DE8 /* User.swift */,
+				2C1D0752251D0EEC008B9051 /* UserResults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -347,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
+				2C1D0753251D0EEC008B9051 /* UserResults.swift in Sources */,
 				2BED231425191C17006C5DE8 /* Topic.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				2BED2334251922B4006C5DE8 /* TopicTableViewController.swift in Sources */,
@@ -358,6 +368,8 @@
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				2BED2338251922B4006C5DE8 /* HomeViewController.swift in Sources */,
+				2C1D0751251D0EE5008B9051 /* QuestionResults.swift in Sources */,
+				2C1D074F251D0ED9008B9051 /* SurveyResults.swift in Sources */,
 				2BED231325191C17006C5DE8 /* Survey.swift in Sources */,
 				2BED231725191C17006C5DE8 /* User.swift in Sources */,
 				2BED233A251922B4006C5DE8 /* SurveyViewController.swift in Sources */,
