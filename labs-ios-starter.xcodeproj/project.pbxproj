@@ -27,7 +27,6 @@
 		2BED233A251922B4006C5DE8 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED2333251922B4006C5DE8 /* SurveyViewController.swift */; };
 		2C1D074F251D0ED9008B9051 /* SurveyResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D074E251D0ED9008B9051 /* SurveyResults.swift */; };
 		2C1D0751251D0EE5008B9051 /* QuestionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D0750251D0EE5008B9051 /* QuestionResults.swift */; };
-		2C1D0753251D0EEC008B9051 /* UserResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D0752251D0EEC008B9051 /* UserResults.swift */; };
 		2C1D0757251D0FDE008B9051 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D0756251D0FDE008B9051 /* APIController.swift */; };
 		2C429DFE25082A2D002D7F00 /* Wizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C429DFD25082A2D002D7F00 /* Wizard.storyboard */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
@@ -65,7 +64,6 @@
 		2BED2333251922B4006C5DE8 /* SurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
 		2C1D074E251D0ED9008B9051 /* SurveyResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyResults.swift; sourceTree = "<group>"; };
 		2C1D0750251D0EE5008B9051 /* QuestionResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResults.swift; sourceTree = "<group>"; };
-		2C1D0752251D0EEC008B9051 /* UserResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResults.swift; sourceTree = "<group>"; };
 		2C1D0756251D0FDE008B9051 /* APIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		2C429DFD25082A2D002D7F00 /* Wizard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wizard.storyboard; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
@@ -142,15 +140,6 @@
 			name = Topic;
 			sourceTree = "<group>";
 		};
-		2BED23C3251D124F006C5DE8 /* User */ = {
-			isa = PBXGroup;
-			children = (
-				2BED230D25191C17006C5DE8 /* User.swift */,
-				2C1D0752251D0EEC008B9051 /* UserResults.swift */,
-			);
-			name = User;
-			sourceTree = "<group>";
-		};
 		2C429DFC25082A16002D7F00 /* Wizard */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,7 +205,7 @@
 		46BEB4EB24C98EB400FE0CD1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2BED23C3251D124F006C5DE8 /* User */,
+				2BED230D25191C17006C5DE8 /* User.swift */,
 				2BED23C2251D1243006C5DE8 /* Topic */,
 				2BED23C1251D1236006C5DE8 /* Survey */,
 				2BED23C0251D1220006C5DE8 /* Question */,
@@ -391,7 +380,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				46BEB4EE24C98ECC00FE0CD1 /* ProfileController.swift in Sources */,
-				2C1D0753251D0EEC008B9051 /* UserResults.swift in Sources */,
 				2BED231425191C17006C5DE8 /* Topic.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
 				2BED2334251922B4006C5DE8 /* TopicTableViewController.swift in Sources */,
