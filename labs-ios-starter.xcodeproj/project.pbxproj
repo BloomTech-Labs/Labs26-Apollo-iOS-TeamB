@@ -115,6 +115,42 @@
 			path = Topics;
 			sourceTree = "<group>";
 		};
+		2BED23C0251D1220006C5DE8 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				2BED230F25191C17006C5DE8 /* Question.swift */,
+				2C1D0750251D0EE5008B9051 /* QuestionResults.swift */,
+			);
+			name = Question;
+			sourceTree = "<group>";
+		};
+		2BED23C1251D1236006C5DE8 /* Survey */ = {
+			isa = PBXGroup;
+			children = (
+				2BED230925191C17006C5DE8 /* Survey.swift */,
+				2C1D074E251D0ED9008B9051 /* SurveyResults.swift */,
+			);
+			name = Survey;
+			sourceTree = "<group>";
+		};
+		2BED23C2251D1243006C5DE8 /* Topic */ = {
+			isa = PBXGroup;
+			children = (
+				2BED230A25191C17006C5DE8 /* Topic.swift */,
+				2BED231125191C17006C5DE8 /* TopicResults.swift */,
+			);
+			name = Topic;
+			sourceTree = "<group>";
+		};
+		2BED23C3251D124F006C5DE8 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				2BED230D25191C17006C5DE8 /* User.swift */,
+				2C1D0752251D0EEC008B9051 /* UserResults.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
 		2C429DFC25082A16002D7F00 /* Wizard */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,20 +216,16 @@
 		46BEB4EB24C98EB400FE0CD1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				46BEB4E024C9828800FE0CD1 /* Profile.swift */,
+				2BED23C3251D124F006C5DE8 /* User */,
+				2BED23C2251D1243006C5DE8 /* Topic */,
+				2BED23C1251D1236006C5DE8 /* Survey */,
+				2BED23C0251D1220006C5DE8 /* Question */,
 				2BED230B25191C17006C5DE8 /* Comment.swift */,
 				2BED230E25191C17006C5DE8 /* Context.swift */,
 				2BED230C25191C17006C5DE8 /* Message.swift */,
-				2BED230F25191C17006C5DE8 /* Question.swift */,
-				2C1D0750251D0EE5008B9051 /* QuestionResults.swift */,
 				2BED231025191C17006C5DE8 /* Response.swift */,
 				2BED231225191C17006C5DE8 /* Sender.swift */,
-				2BED230925191C17006C5DE8 /* Survey.swift */,
-				2C1D074E251D0ED9008B9051 /* SurveyResults.swift */,
-				2BED230A25191C17006C5DE8 /* Topic.swift */,
-				2BED231125191C17006C5DE8 /* TopicResults.swift */,
-				2BED230D25191C17006C5DE8 /* User.swift */,
-				2C1D0752251D0EEC008B9051 /* UserResults.swift */,
+				46BEB4E024C9828800FE0CD1 /* Profile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
