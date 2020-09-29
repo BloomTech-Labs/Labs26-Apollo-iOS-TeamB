@@ -12,32 +12,28 @@ class TopicTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    let data: [String] = []
+    var topics: [Topic] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("Beginning test")
-        UserController.shared.fetchTopics { results in
-            print("Got stuff back")
-            guard let results = results else {
-                print("Results were empty")
-                return
+        UserController.shared.fetchTopics { topics in
+            if let topics = topics {
+                self.topics = topics.results
             }
-            print(results)
         }
     }
-
 }
 
 extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return topics.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopicCell", for: indexPath)
-        cell.textLabel?.text = data[indexPath.row]
+        let topic = topics[indexPath.row].title
+        cell.textLabel?.text = topic
         return cell
     }
 }
