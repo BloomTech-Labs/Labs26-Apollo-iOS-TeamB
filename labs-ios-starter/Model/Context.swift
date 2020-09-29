@@ -18,4 +18,15 @@ class Context: Decodable {
         self.survey = survey
         self.contextId = contextId
     }
+
+    enum CodingKeys: String, CodingKey {
+        case description, survey, contextId
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.description = try container.decode(String.self, forKey: .description)
+        self.survey = try container.decode(Survey.self, forKey: .survey)
+        self.contextId = try container.decode(Int.self, forKey: .contextId)
+    }
 }
