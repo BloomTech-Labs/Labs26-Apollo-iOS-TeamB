@@ -8,21 +8,54 @@
 
 import Foundation
 
-class User: Codable {
+class User: Decodable {
     let userid: Int
-    let email: String
     let username: String
-    var avatar: URL? = nil
+    var topics: [(String, Int)]?
 
-    enum CodingKeys: String, CodingKey {
-        case userid, username, avatar
-        case email = "primaryemail"
+    init(userid: Int, username: String) {
+        self.userid = userid
+        self.username = username
     }
 
-    init(userid: Int, email: String, username: String, avatar: URL?) {
-        self.userid = userid
-        self.email = email
-        self.username = username
-        self.avatar = avatar
+    enum CodingKeys: String, CodingKey {
+        case userid, username
+        case ownedtopics, topics
+        case topicId, title
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        userid = try container.decode(Int.self, forKey: .userid)
+        username = try container.decode(String.self, forKey: .username)
+
+        var topicsArray = [(String, Int)]()
+
+        // This grabs all the topics for the owned topics object
+        var unkeyedOwnedTopicsContainer = try container.nestedUnkeyedContainer(forKey: .ownedtopics)
+        let keyedOwnedTopicsContainer = try unkeyedOwnedTopicsContainer.nestedContainer(keyedBy: CodingKeys.self)
+
+        while !unkeyedOwnedTopicsContainer.isAtEnd {
+            guard let title = try keyedOwnedTopicsContainer.decodeIfPresent(String.self, forKey: .title),
+                  let topicId = try keyedOwnedTopicsContainer.decodeIfPresent(Int.self, forKey: .topicId) else { break }
+
+            topicsArray.append((title, topicId))
+        }
+
+        // This grabs all the topics from the topics object and combines them with the other topics
+        var unkeyedTopicsContainer = try container.nestedUnkeyedContainer(forKey: .topics)
+        let keyedTopicsContainer = try unkeyedTopicsContainer.nestedContainer(keyedBy: CodingKeys.self)
+
+        while !unkeyedTopicsContainer.isAtEnd {
+            guard let title = try keyedTopicsContainer.decodeIfPresent(String.self, forKey: .title),
+                  let topicId = try keyedTopicsContainer.decodeIfPresent(Int.self, forKey: .topicId) else { break }
+
+            if !topicsArray.contains(where: { $0.1 == topicId }) {
+                topicsArray.append((title, topicId))
+            }
+        }
+
+        topics = topicsArray
     }
 }

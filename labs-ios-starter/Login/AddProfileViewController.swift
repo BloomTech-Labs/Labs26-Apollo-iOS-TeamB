@@ -1,5 +1,5 @@
 //
-//  AddProfileViewController.swift
+//  AddUserViewController.swift
 //  LabsScaffolding
 //
 //  Created by Spencer Curtis on 7/27/20.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol AddProfileDelegate: class {
-    func profileWasAdded()
+protocol AddUserDelegate: class {
+    func userWasAdded()
 }
 
-class AddProfileViewController: UIViewController {
+class AddUserViewController: UIViewController {
 
     // MARK: - Properties and Outlets
     
@@ -21,9 +21,9 @@ class AddProfileViewController: UIViewController {
     @IBOutlet weak var avatarURLTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    weak var delegate: AddProfileDelegate?
+    weak var delegate: AddUserDelegate?
     
-    var profileController: ProfileController = ProfileController.shared
+    var userController: UserController = UserController.shared
     var keyboardDismissalTapRecognizer: UITapGestureRecognizer!
     
     // MARK: - View Lifecycle
@@ -44,28 +44,27 @@ class AddProfileViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addProfile(_ sender: Any) {
+    @IBAction func addUser(_ sender: Any) {
         
         guard let name = nameTextField.text,
             let email = emailTextField.text,
             let avatarURLString = avatarURLTextField.text,
-            let avatarURL = URL(string: avatarURLString),
-            let profile = profileController.createProfile(with: email, name: name, avatarURL: avatarURL) else {
+            let avatarURL = URL(string: avatarURLString) else {
                 NSLog("Fields missing information. Present alert to notify user to enter all information.")
                 return
         }
         
         activityIndicator.startAnimating()
         
-        profileController.addProfile(profile) { [weak self] in
-            
-            guard let self = self else { return }
-            
-            self.activityIndicator.stopAnimating()
-            self.dismiss(animated: true, completion: {
-                self.delegate?.profileWasAdded()
-            })
-        }
+//        userController.addUser(user) { [weak self] in
+//            
+//            guard let self = self else { return }
+//            
+//            self.activityIndicator.stopAnimating()
+//            self.dismiss(animated: true, completion: {
+//                self.delegate?.userWasAdded()
+//            })
+//        }
     }
     
     // MARK: - Private Methods
@@ -83,7 +82,7 @@ class AddProfileViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 
-extension AddProfileViewController: UITextFieldDelegate {
+extension AddUserViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case nameTextField:

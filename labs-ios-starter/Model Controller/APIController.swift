@@ -8,20 +8,41 @@
 //
 
 import Foundation
+import OktaAuth
 
-class APIContoller {
+extension UserController {
 
-    private let baseURL = URL(string: "http://apollo-b-api.herokuapp.com")!
 
     func fetchTopics(completion: @escaping (TopicResults?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
-        let request = URLRequest(url: requestURL)
+        let oktaCredentials: OktaCredentials
+        print("BREAK 1")
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        do {
+            oktaCredentials = try oktaAuth.credentialsIfAvailable()
+        } catch {
+            print("AUTH FAIL: \(error)")
+            return
+        }
+        print("Made it passed getting oktaCred")
+
+//        let requestURL = baseURL.appendingPathComponent("users")
+//        var request = URLRequest(url: requestURL)
+
+        let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
+        var request = URLRequest(url: requestURL)
+
+        request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            print("Server returned request")
             if let error = error {
                 NSLog("Error fetching topics: \(error)")
                 completion(nil)
                 return
+            }
+
+            if let response = response as? HTTPURLResponse {
+                print("Response is: \(response.statusCode)")
             }
 
             guard let data = data else {
@@ -38,33 +59,7 @@ class APIContoller {
                 completion(nil)
             }
         }.resume()
-    }
-
-    func fetchUsers(completion: @escaping (UserResults?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("users").appendingPathComponent("users")
-        let request = URLRequest(url: requestURL)
-
-        URLSession.shared.dataTask(with: request) { data, _, error in
-            if let error = error {
-                NSLog("Error fetching users: \(error)")
-                completion(nil)
-                return
-            }
-
-            guard let data = data else {
-                NSLog("No user data for users request")
-                completion(nil)
-                return
-            }
-
-            do {
-                let users = try JSONDecoder().decode(UserResults.self, from: data)
-                DispatchQueue.main.async { completion(users) }
-            } catch {
-                NSLog("Error decoding users data: \(error)")
-                completion(nil)
-            }
-        }.resume()
+        print("Sent request to server")
     }
 
     func fetchSurveys(completion: @escaping (SurveyResults?) -> Void) {

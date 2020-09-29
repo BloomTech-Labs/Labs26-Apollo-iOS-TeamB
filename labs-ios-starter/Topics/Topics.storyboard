@@ -13,7 +13,6 @@
                 <navigationController id="Qtu-zv-a3B" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Topics" image="doc.plaintext" catalog="system" id="g9L-uN-kCt"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="E4J-bA-0ha">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -90,10 +89,10 @@
             </objects>
             <point key="canvasLocation" x="1082.608695652174" y="928.79464285714278"/>
         </scene>
-        <!--Profile Detail View Controller-->
+        <!--User Detail View Controller-->
         <scene sceneID="BCJ-ov-d7q">
             <objects>
-                <viewController id="iv4-Wu-uvp" customClass="ProfileDetailViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iv4-Wu-uvp" customClass="UserDetailViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N1u-LA-j4m">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,7 +131,7 @@
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lyM-qh-hqy">
                                 <rect key="frame" x="20" y="227.33333333333331" width="374" height="184.33333333333331"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update Profile:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX1-ea-I4h">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update User:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX1-ea-I4h">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <nil key="textColor"/>
@@ -162,14 +161,14 @@
                                                     <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="cancelProfileUpdate:" destination="iv4-Wu-uvp" eventType="touchUpInside" id="TG6-jk-3Tg"/>
+                                                    <action selector="cancelUserUpdate:" destination="iv4-Wu-uvp" eventType="touchUpInside" id="TG6-jk-3Tg"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tro-Vv-xAw">
                                                 <rect key="frame" x="198" y="0.0" width="176" height="30"/>
                                                 <state key="normal" title="Save"/>
                                                 <connections>
-                                                    <action selector="updateProfile:" destination="iv4-Wu-uvp" eventType="touchUpInside" id="88k-Un-Hr2"/>
+                                                    <action selector="updateUser:" destination="iv4-Wu-uvp" eventType="touchUpInside" id="88k-Un-Hr2"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -210,7 +209,6 @@
                     <tabBarItem key="tabBarItem" title="Home" image="person.2.square.stack" catalog="system" id="4KK-Qi-yLJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="z9V-nA-Cbu">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -296,7 +294,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iv4-Wu-uvp" kind="show" identifier="ShowProfileSegue" id="AL1-ps-5zb"/>
+                                            <segue destination="iv4-Wu-uvp" kind="show" identifier="ShowUserSegue" id="AL1-ps-5zb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -423,10 +421,10 @@
             </objects>
             <point key="canvasLocation" x="1911.594202898551" y="928.79464285714278"/>
         </scene>
-        <!--Profile Tab Bar View Controller-->
+        <!--User Tab Bar View Controller-->
         <scene sceneID="IUW-ly-e69">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qoB-kH-nth" customClass="ProfileTabBarViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qoB-kH-nth" customClass="UserTabBarViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4CC-np-kAJ">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

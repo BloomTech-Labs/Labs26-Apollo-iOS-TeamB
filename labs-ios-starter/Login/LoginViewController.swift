@@ -11,7 +11,7 @@ import OktaAuth
 
 class LoginViewController: UIViewController {
     
-    let profileController = ProfileController.shared
+    let userController = UserController.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,19 +19,19 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: .oktaAuthenticationSuccessful,
                                                object: nil,
                                                queue: .main,
-                                               using: checkForExistingProfile)
+                                               using: checkForExistingUser)
         
         NotificationCenter.default.addObserver(forName: .oktaAuthenticationExpired,
                                                object: nil,
                                                queue: .main,
                                                using: alertUserOfExpiredCredentials)
-        
+
     }
     
     // MARK: - Actions
     
     @IBAction func signIn(_ sender: Any) {
-        UIApplication.shared.open(ProfileController.shared.oktaAuth.identityAuthURL()!)
+        UIApplication.shared.open(UserController.shared.oktaAuth.identityAuthURL()!)
     }
     
     // MARK: - Private Methods
@@ -47,38 +47,40 @@ class LoginViewController: UIViewController {
     
     // MARK: Notification Handling
     
-    private func checkForExistingProfile(with notification: Notification) {
-        checkForExistingProfile()
+    private func checkForExistingUser(with notification: Notification) {
+        checkForExistingUser()
     }
     
-    private func checkForExistingProfile() {
-        profileController.checkForExistingAuthenticatedUserProfile { [weak self] (exists) in
+    private func checkForExistingUser() {
+        userController.checkForExistingAuthenticatedUserUser { [weak self] (exists) in
             
             guard let self = self,
                 self.presentedViewController == nil else { return }
             
-            if exists {
-                self.performSegue(withIdentifier: "ShowDetailProfileList", sender: nil)
-            } else {
-                self.performSegue(withIdentifier: "ModalAddProfile", sender: nil)
-            }
+//            if exists {
+                self.performSegue(withIdentifier: "ShowDetailUserList", sender: nil)
+//            }
+
+//            else {
+//                self.performSegue(withIdentifier: "ModalAddUser", sender: nil)
+//            }
         }
     }
     
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ModalAddProfile" {
-            guard let addProfileVC = segue.destination as? AddProfileViewController else { return }
-            addProfileVC.delegate = self
+        if segue.identifier == "ModalAddUser" {
+            guard let addUserVC = segue.destination as? AddUserViewController else { return }
+            addUserVC.delegate = self
         }
     }
 }
 
-// MARK: - Add Profile Delegate
+// MARK: - Add User Delegate
 
-extension LoginViewController: AddProfileDelegate {
-    func profileWasAdded() {
-        checkForExistingProfile()
+extension LoginViewController: AddUserDelegate {
+    func userWasAdded() {
+        checkForExistingUser()
     }
 }

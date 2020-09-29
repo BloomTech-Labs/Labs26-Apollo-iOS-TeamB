@@ -8,74 +8,64 @@
 
 import Foundation
 
-class Topic: Codable {
-    let topicId: Int?
-    let userId: Int?
+class Topic: Decodable {
+    let topicId: Int
     let title: String
-    let surveys: [Int]?
-    let users: [User]?
-    var dateCreated: Date? = nil
-    var lastModified: Date? = nil
-    var frequency: String? = nil
-    var contextType: Context? = nil
-    var leaderQuestions: [Question]? = nil
-    var memberQuestions: [Question]? = nil
+    let userid: Int
+    var frequency: String
+    let defaultSurvey: Survey
+    let joincode: String
+    let surveys: [Survey]
+    let users: [User]
+
+    init(topicId: Int,
+         title: String,
+         userid: Int,
+         frequency: String,
+         defaultSurvey: Survey,
+         joincode: String,
+         surveys: [Survey],
+         users: [User]) {
+
+        self.topicId = topicId
+        self.title = title
+        self.userid = userid
+        self.frequency = frequency
+        self.defaultSurvey = defaultSurvey
+        self.joincode = joincode
+        self.surveys = surveys
+        self.users = users
+    }
 
     enum TopicKeys: String, CodingKey {
-        case topicId
-        case userId
-        case title
-        case surveys = "survey"
-        case users
-        case lastModified
-        case frequency
-        case contextType
-        case leaderQuestions
-        case memberQuestions
-        case owner
-        case surveyId
+        case topicId, title, frequency, joincode, users
+        case owner, userid
+        case defaultsurvey, surveysrequests
     }
 
     required init(from decoder: Decoder) throws {
-        let topicContainer = try decoder.container(keyedBy: TopicKeys.self)
-        let ownerContainer = try topicContainer.nestedContainer(keyedBy: TopicKeys.self, forKey: .owner)
-        var surveyContainer = try topicContainer.nestedUnkeyedContainer(forKey: .surveys)
-        let surveyIdContainer = try surveyContainer.nestedContainer(keyedBy: TopicKeys.self)
+        let container = try decoder.container(keyedBy: TopicKeys.self)
+        let ownerContainer = try container.nestedContainer(keyedBy: TopicKeys.self, forKey: .owner)
+        let defaultSurveyContainer = try container.nestedContainer(keyedBy: TopicKeys.self, forKey: .defaultsurvey)
 
-        userId = try ownerContainer.decode(Int.self, forKey: .userId)
-        title = try topicContainer.decode(String.self, forKey: .title)
-        topicId = try topicContainer.decode(Int.self, forKey: .topicId)
-        users = try topicContainer.decode([User].self, forKey: .users)
-
-        var surveyIds: [Int] = []
-
-        while !surveyContainer.isAtEnd {
-            let surveyID = try surveyIdContainer.decode(Int.self, forKey: .surveyId)
-            surveyIds.append(surveyID)
-        }
-
-        surveys = surveyIds
+        self.topicId = try container.decode(Int.self, forKey: .topicId)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.userid = try ownerContainer.decode(Int.self, forKey: .userid)
+        self.frequency = try container.decode(String.self, forKey: .frequency)
+        self.defaultSurvey = try defaultSurveyContainer.decode(Survey.self, forKey: .defaultsurvey)
+        self.joincode = try container.decode(String.self, forKey: .joincode)
+        self.surveys = try container.decode([Survey].self, forKey: .surveysrequests)
+        self.users = try container.decode([User].self, forKey: .users)
     }
 
-    init(topicId: Int?,
-         userId: Int?,
-         title: String,
-         surveys: [Int]?,
-         dateCreated: Date?,
-         lastModified: Date?,
-         frequency: String?,
-         contextType: Context?,
-         users: [User]?) {
-        self.topicId = topicId
-        self.userId = userId
-        self.title = title
-        self.surveys = surveys
-        self.dateCreated = dateCreated
-        self.lastModified = lastModified
-        self.frequency = frequency
-        self.contextType = contextType
-        self.leaderQuestions = contextType!.leaderQuestions
-        self.memberQuestions = contextType!.memberQuestions
-        self.users = users
+}
+
+extension Topic: Encodable {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: TopicKeys.self)
+
+        try container.encode(title, forKey: .title)
+        try container.encode(frequency, forKey: .frequency)
+        try container.encode(defaultSurvey, forKey: .defaultsurvey)
     }
 }
