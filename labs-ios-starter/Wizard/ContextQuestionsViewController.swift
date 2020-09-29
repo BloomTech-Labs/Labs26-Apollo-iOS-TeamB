@@ -13,7 +13,7 @@ class ContextQuestionsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
 
     var newTopic: Topic?
-    var wizardTitle: String = ""
+    var selectedContext: Context?
 
     override func viewDidLoad() {
         super.viewDidLoad()

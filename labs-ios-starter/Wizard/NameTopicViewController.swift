@@ -17,7 +17,6 @@ class NameTopicViewController: UIViewController {
     @IBOutlet var nextButton: UIBarButtonItem!
 
     var selectedContext: Context?
-    var wizardTitle: String = "Context Topic"
     let frequencyArray = ["Daily",
                           "Weekly",
                           "Monthly",
@@ -32,8 +31,7 @@ class NameTopicViewController: UIViewController {
         topicNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
 
         if let selectedContext = selectedContext {
-            self.wizardTitle = "\(selectedContext.description.split(separator: " ")[0].capitalized) Topic"
-            title = self.wizardTitle
+            title = "\(selectedContext.description.split(separator: " ")[0].capitalized) Topic"
         }
     }
 
