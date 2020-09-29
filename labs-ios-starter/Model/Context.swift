@@ -8,17 +8,14 @@
 
 import Foundation
 
-class Context: Codable {
-    let id: Int
-    let name: String
-    let leaderQuestions: [Question]
-    let memberQuestions: [Question]
+class Context: Decodable {
+    let description: String
+    let survey: Survey
+    let contextId: Int
 
-
-    init(id: Int, name: String, leaderQuestions: [Question], memberQuestions: [Question]) {
-        self.id = id
-        self.name = name
-        self.leaderQuestions = leaderQuestions
-        self.memberQuestions = memberQuestions
+    init(description: String, survey: Survey, contextId: Int) {
+        self.description = description
+        self.survey = survey
+        self.contextId = contextId
     }
 }
