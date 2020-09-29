@@ -17,8 +17,6 @@ class NewTopicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("NEW TOPIC")
-
         UserController.shared.fetchContexts { contexts in
             if let contexts = contexts {
                 self.contexts = contexts.results
@@ -27,6 +25,14 @@ class NewTopicViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "NameTopicSegue" {
+            guard let vc = segue.destination as? NameTopicViewController, let selectedContext = tableView.indexPathForSelectedRow?.row else { return }
+            let context = self.contexts[selectedContext]
+            vc.selectedContext = context
         }
     }
 }

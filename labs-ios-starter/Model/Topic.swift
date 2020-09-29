@@ -9,23 +9,23 @@
 import Foundation
 
 class Topic: Decodable {
-    let topicId: Int
-    let title: String
-    let userid: Int
-    var frequency: String
-    let defaultSurvey: Survey
-    let joincode: String
-    let surveys: [Survey]
-    let users: [User]
+    var topicId: Int?
+    var title: String?
+    var userid: Int?
+    var frequency: String?
+    var defaultSurvey: Survey?
+    var joincode: String?
+    var surveys: [Survey]?
+    var users: [User]?
 
-    init(topicId: Int,
-         title: String,
-         userid: Int,
-         frequency: String,
-         defaultSurvey: Survey,
-         joincode: String,
-         surveys: [Survey],
-         users: [User]) {
+    init(topicId: Int?,
+         title: String?,
+         userid: Int?,
+         frequency: String?,
+         defaultSurvey: Survey?,
+         joincode: String?,
+         surveys: [Survey]?,
+         users: [User]?) {
 
         self.topicId = topicId
         self.title = title
@@ -58,6 +58,9 @@ class Topic: Decodable {
         self.users = try container.decode([User].self, forKey: .users)
     }
 
+    convenience init() {
+        self.init(topicId: nil, title: nil, userid: nil, frequency: nil, defaultSurvey: nil, joincode: nil, surveys: nil, users: nil)
+    }
 }
 
 extension Topic: Encodable {

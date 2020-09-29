@@ -25,6 +25,7 @@
 		2BED2338251922B4006C5DE8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED2331251922B4006C5DE8 /* HomeViewController.swift */; };
 		2BED2339251922B4006C5DE8 /* Topics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BED2332251922B4006C5DE8 /* Topics.storyboard */; };
 		2BED233A251922B4006C5DE8 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED2333251922B4006C5DE8 /* SurveyViewController.swift */; };
+		2BED23D32523DE15006C5DE8 /* FrequencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED23D22523DE15006C5DE8 /* FrequencyTableViewCell.swift */; };
 		2C1D074F251D0ED9008B9051 /* SurveyResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D074E251D0ED9008B9051 /* SurveyResults.swift */; };
 		2C1D0751251D0EE5008B9051 /* QuestionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D0750251D0EE5008B9051 /* QuestionResults.swift */; };
 		2C1D0757251D0FDE008B9051 /* UserController+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D0756251D0FDE008B9051 /* UserController+API.swift */; };
@@ -85,6 +86,7 @@
 		2BED2331251922B4006C5DE8 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2BED2332251922B4006C5DE8 /* Topics.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Topics.storyboard; sourceTree = "<group>"; };
 		2BED2333251922B4006C5DE8 /* SurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		2BED23D22523DE15006C5DE8 /* FrequencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyTableViewCell.swift; sourceTree = "<group>"; };
 		2C1D074E251D0ED9008B9051 /* SurveyResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyResults.swift; sourceTree = "<group>"; };
 		2C1D0750251D0EE5008B9051 /* QuestionResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResults.swift; sourceTree = "<group>"; };
 		2C1D0756251D0FDE008B9051 /* UserController+API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserController+API.swift"; sourceTree = "<group>"; };
@@ -190,10 +192,11 @@
 			isa = PBXGroup;
 			children = (
 				2C429DFD25082A2D002D7F00 /* Wizard.storyboard */,
+				2C61BF052523C44200460C2B /* NewTopicViewController.swift */,
+				2C61BF042523C44200460C2B /* NameTopicViewController.swift */,
+				2BED23D22523DE15006C5DE8 /* FrequencyTableViewCell.swift */,
 				2C61BF032523C44200460C2B /* ContextQuestionsViewController.swift */,
 				2C61BF022523C44100460C2B /* MemberQuestionsViewController.swift */,
-				2C61BF042523C44200460C2B /* NameTopicViewController.swift */,
-				2C61BF052523C44200460C2B /* NewTopicViewController.swift */,
 				2C61BF062523C44200460C2B /* TopicCodeViewController.swift */,
 			);
 			path = Wizard;
@@ -547,6 +550,7 @@
 				2BED231725191C17006C5DE8 /* User.swift in Sources */,
 				2C61BF072523C44200460C2B /* MemberQuestionsViewController.swift in Sources */,
 				2BED233A251922B4006C5DE8 /* SurveyViewController.swift in Sources */,
+				2BED23D32523DE15006C5DE8 /* FrequencyTableViewCell.swift in Sources */,
 				2BED2337251922B4006C5DE8 /* ThreadViewController.swift in Sources */,
 				2BED231525191C17006C5DE8 /* Comment.swift in Sources */,
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
