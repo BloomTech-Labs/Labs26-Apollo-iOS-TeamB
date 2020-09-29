@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         styleButtons()
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     // MARK: - Methods
