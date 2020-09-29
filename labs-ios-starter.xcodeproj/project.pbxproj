@@ -35,6 +35,7 @@
 		2C61BF092523C44200460C2B /* NameTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF042523C44200460C2B /* NameTopicViewController.swift */; };
 		2C61BF0A2523C44200460C2B /* NewTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF052523C44200460C2B /* NewTopicViewController.swift */; };
 		2C61BF0B2523C44200460C2B /* TopicCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF062523C44200460C2B /* TopicCodeViewController.swift */; };
+		2C61BF0E2523CA9C00460C2B /* ContextResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF0D2523CA9C00460C2B /* ContextResults.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
 		466C4276249A8748007D033E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4275249A8748007D033E /* SceneDelegate.swift */; };
@@ -96,6 +97,7 @@
 		2C61BF042523C44200460C2B /* NameTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameTopicViewController.swift; sourceTree = "<group>"; };
 		2C61BF052523C44200460C2B /* NewTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTopicViewController.swift; sourceTree = "<group>"; };
 		2C61BF062523C44200460C2B /* TopicCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCodeViewController.swift; sourceTree = "<group>"; };
+		2C61BF0D2523CA9C00460C2B /* ContextResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextResults.swift; sourceTree = "<group>"; };
 		2C87489325239B7F0021889C /* labs-ios-starterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "labs-ios-starterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* labs-ios-starter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "labs-ios-starter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +208,15 @@
 			path = NetworkingTests;
 			sourceTree = "<group>";
 		};
+		2C61BF0C2523CA8900460C2B /* Context */ = {
+			isa = PBXGroup;
+			children = (
+				2BED230E25191C17006C5DE8 /* Context.swift */,
+				2C61BF0D2523CA9C00460C2B /* ContextResults.swift */,
+			);
+			name = Context;
+			sourceTree = "<group>";
+		};
 		465DAA2724BD0BC100D94C24 /* App Lifecycle */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,7 +282,7 @@
 				2BED23C1251D1236006C5DE8 /* Survey */,
 				2BED23C0251D1220006C5DE8 /* Question */,
 				2BED230B25191C17006C5DE8 /* Comment.swift */,
-				2BED230E25191C17006C5DE8 /* Context.swift */,
+				2C61BF0C2523CA8900460C2B /* Context */,
 				2BED230C25191C17006C5DE8 /* Message.swift */,
 				2BED231025191C17006C5DE8 /* Response.swift */,
 				2BED231225191C17006C5DE8 /* Sender.swift */,
@@ -521,6 +532,7 @@
 				2BED231925191C17006C5DE8 /* Question.swift in Sources */,
 				2BED231C25191C17006C5DE8 /* Sender.swift in Sources */,
 				2BED231A25191C17006C5DE8 /* Response.swift in Sources */,
+				2C61BF0E2523CA9C00460C2B /* ContextResults.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,

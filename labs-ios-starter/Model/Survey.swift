@@ -26,12 +26,15 @@ class Survey: Decodable {
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let topicContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .topic)
 
         self.surveyId = try container.decode(Int.self, forKey: .surveyId)
         self.questions = try container.decode([Question].self, forKey: .questions)
 
-        self.topicId = try topicContainer.decodeIfPresent(Int.self, forKey: .topicId)
+        if let topicContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: .topic) {
+            self.topicId = try topicContainer.decodeIfPresent(Int.self, forKey: .topicId)
+        } else {
+            self.topicId = nil
+        }
     }
 }
 

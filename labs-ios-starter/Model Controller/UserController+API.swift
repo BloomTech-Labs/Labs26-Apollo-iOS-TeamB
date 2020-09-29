@@ -14,7 +14,6 @@ extension UserController {
 
     func fetchTopics(completion: @escaping (TopicResults?) -> Void) {
         let oktaCredentials: OktaCredentials
-        print("BREAK 1")
 
         do {
             oktaCredentials = try oktaAuth.credentialsIfAvailable()
@@ -22,10 +21,6 @@ extension UserController {
             print("AUTH FAIL: \(error)")
             return
         }
-        print("Made it passed getting oktaCred")
-
-//        let requestURL = baseURL.appendingPathComponent("users")
-//        var request = URLRequest(url: requestURL)
 
         let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
         var request = URLRequest(url: requestURL)
@@ -110,6 +105,44 @@ extension UserController {
                 DispatchQueue.main.async { completion(questions) }
             } catch {
                 NSLog("Error decoding questions data: \(error)")
+                completion(nil)
+            }
+        }.resume()
+    }
+
+    func fetchContexts(completion: @escaping (ContextResults?) -> Void) {
+        let oktaCredentials: OktaCredentials
+
+        do {
+            oktaCredentials = try oktaAuth.credentialsIfAvailable()
+        } catch {
+            print("AUTH FAIL: \(error)")
+            return
+        }
+
+        let requestURL = baseURL.appendingPathComponent("contexts").appendingPathComponent("contexts")
+        var request = URLRequest(url: requestURL)
+
+        request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                NSLog("Error fetching contexts: \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                NSLog("No context data")
+                completion(nil)
+                return
+            }
+
+            do {
+                let contexts = try JSONDecoder().decode(ContextResults.self, from: data)
+                DispatchQueue.main.async { completion(contexts) }
+            } catch {
+                NSLog("Error decoding contexts data: \(error)")
                 completion(nil)
             }
         }.resume()

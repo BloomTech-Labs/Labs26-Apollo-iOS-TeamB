@@ -8,17 +8,25 @@
 
 import Foundation
 
-class Context: Codable {
-    let id: Int
-    let name: String
-    let leaderQuestions: [Question]
-    let memberQuestions: [Question]
+class Context: Decodable {
+    let description: String
+    let survey: Survey
+    let contextId: Int
 
+    init(description: String, survey: Survey, contextId: Int) {
+        self.description = description
+        self.survey = survey
+        self.contextId = contextId
+    }
 
-    init(id: Int, name: String, leaderQuestions: [Question], memberQuestions: [Question]) {
-        self.id = id
-        self.name = name
-        self.leaderQuestions = leaderQuestions
-        self.memberQuestions = memberQuestions
+    enum CodingKeys: String, CodingKey {
+        case description, survey, contextId
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.description = try container.decode(String.self, forKey: .description)
+        self.survey = try container.decode(Survey.self, forKey: .survey)
+        self.contextId = try container.decode(Int.self, forKey: .contextId)
     }
 }
