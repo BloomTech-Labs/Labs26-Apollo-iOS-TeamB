@@ -12,7 +12,6 @@ import OktaAuth
 
 extension UserController {
 
-
     func fetchTopics(completion: @escaping (TopicResults?) -> Void) {
         let oktaCredentials: OktaCredentials
         print("BREAK 1")
