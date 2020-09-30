@@ -36,7 +36,7 @@ class NameTopicViewController: UIViewController {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if !(topicNameTextField.text?.isEmpty ?? false) && (selectedContext != nil) {
+        if !(topicNameTextField.text?.isEmpty ?? false) && (selectedFrequency != nil) {
             nextButton.isEnabled = true
         } else {
             nextButton.isEnabled = false
@@ -47,12 +47,12 @@ class NameTopicViewController: UIViewController {
         if segue.identifier == "ContextQuestionsSegue" {
             guard let vc = segue.destination as? ContextQuestionsViewController,
                   let topicTitle = topicNameTextField.text,
-                  let frequency = selectedFrequency?.textLabel?.text else { return }
+                  let frequency = selectedFrequency?.frequencyLabel?.text else { return }
             let newTopic = Topic()
             newTopic.title = topicTitle
             newTopic.frequency = frequency.uppercased()
             vc.newTopic = newTopic
-            vc.wizardTitle = wizardTitle
+            vc.selectedContext = selectedContext
         }
     }
 }
