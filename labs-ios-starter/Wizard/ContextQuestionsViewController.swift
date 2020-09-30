@@ -48,7 +48,6 @@ class ContextQuestionsViewController: UIViewController {
                 let survey = Survey()
                 survey.questions = leaderQuestions
                 newTopic?.defaultSurvey = survey
-                print(newTopic?.defaultSurvey?.questions)
                 destinationVC.newTopic = newTopic
                 destinationVC.selectedContext = selectedContext
             }

@@ -14,12 +14,21 @@ class TopicTableViewController: UIViewController {
 
     var topics: [Topic] = []
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         UserController.shared.fetchTopics { topics in
             if let topics = topics {
                 self.topics = topics.results
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -35,5 +44,9 @@ extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
         let topic = topics[indexPath.row].title
         cell.textLabel?.text = topic
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

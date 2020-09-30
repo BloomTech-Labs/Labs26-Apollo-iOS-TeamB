@@ -20,15 +20,10 @@ extension UserController {
         request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            print("Server returned request")
             if let error = error {
                 NSLog("Error fetching topics: \(error)")
                 completion(nil)
                 return
-            }
-
-            if let response = response as? HTTPURLResponse {
-                print("Response is: \(response.statusCode)")
             }
 
             guard let data = data else {
@@ -142,16 +137,14 @@ extension UserController {
 
         do {
             let newTopic = try JSONEncoder().encode(topic)
-            print(String(data: newTopic, encoding: .utf8)!)
             request.httpBody = newTopic
-            completion(topic)
         } catch {
             NSLog("Error encoding topic: \(error)")
             completion(nil)
             return
         }
 
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 NSLog("Error creating new topic: \(error)")
                 completion(nil)
@@ -159,12 +152,27 @@ extension UserController {
             }
 
             if let response = response as? HTTPURLResponse,
-                response.statusCode != 200 {
+                response.statusCode != 201 {
                 NSLog("Received \(response.statusCode) code while creating a new topic")
                 completion(nil)
                 return
             }
-            completion(topic)
+
+            guard let data = data else {
+                print("Data returned was nil")
+                completion(nil)
+                return
+            }
+
+            do {
+                let topic = try JSONDecoder().decode(Topic.self, from: data)
+                DispatchQueue.main.async {
+                    completion(topic)
+                }
+            } catch {
+                NSLog("Error decoding contexts data: \(error)")
+                completion(nil)
+            }
         }.resume()
     }
 

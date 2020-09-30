@@ -33,11 +33,10 @@ class TopicCodeViewController: UIViewController {
     private func createNewTopic() {
         guard let newTopic = newTopic else { return }
         UserController.shared.createTopic(newTopic) { topic in
-            if let topic = topic,
-                let joinCode = topic.joincode {
-
+            if let topic = topic {
+                print("Topic not nil")
                 DispatchQueue.main.async {
-                    self.joinCodeButton.setTitle(joinCode, for: .normal)
+                    self.joinCodeButton.setTitle(topic.joincode, for: .normal)
                 }
             }
         }
