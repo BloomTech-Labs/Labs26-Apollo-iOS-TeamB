@@ -24,7 +24,9 @@ class ContextQuestionsViewController: UIViewController {
         if let selectedContext = selectedContext {
             title = "\(selectedContext.description.split(separator: " ")[0].capitalized) Topic"
 
-            for question in selectedContext.survey.questions {
+            guard let questions = selectedContext.survey.questions else { return }
+
+            for question in questions {
                 if question.leader ?? false {
                     leaderQuestions.append(question)
                 }
@@ -38,6 +40,18 @@ class ContextQuestionsViewController: UIViewController {
         let newQuestion = Question(body: "", type: "TEXT", leader: true)
         leaderQuestions.append(newQuestion)
         tableView.reloadData()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MemberQuestionsSegue" {
+            if let destinationVC = segue.destination as? MemberQuestionsViewController {
+                let survey = Survey()
+                survey.questions = leaderQuestions
+                newTopic?.defaultSurvey = survey
+                destinationVC.newTopic = newTopic
+                destinationVC.selectedContext = selectedContext
+            }
+        }
     }
 }
 

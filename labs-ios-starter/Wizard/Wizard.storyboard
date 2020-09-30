@@ -334,7 +334,7 @@
                                 <rect key="frame" x="0.0" y="250.5" width="414" height="561.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="112" id="Ncd-45-Ffw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberQuestionCell" rowHeight="112" id="Ncd-45-Ffw" customClass="QuestionsTableViewCell" customModule="labs_ios_starter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ncd-45-Ffw" id="HvD-pi-OYm">
@@ -365,6 +365,10 @@
                                                 <constraint firstItem="BXE-3E-1AO" firstAttribute="leading" secondItem="HvD-pi-OYm" secondAttribute="leadingMargin" id="WxW-ue-b2d"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="questionBodyTextField" destination="NJx-Dw-GFw" id="IeF-QN-Lwh"/>
+                                            <outlet property="questionNumberLabel" destination="mwh-ps-p34" id="9mb-Ke-Rag"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -445,7 +449,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glt-f5-1ct">
                                                 <rect key="frame" x="0.0" y="45.5" width="334" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
-                                                <state key="normal" title="97XTY" image="doc.on.doc" catalog="system">
+                                                <state key="normal" image="doc.on.doc" catalog="system">
                                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                                 </state>
                                                 <connections>
@@ -473,11 +477,16 @@
                                     <action selector="completedButtonTapped:" destination="bhv-hp-bGH" eventType="touchUpInside" id="Scu-zB-NXt"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ikm-3Y-THM">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TP2-cL-WVd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="TP2-cL-WVd" firstAttribute="trailing" secondItem="dlZ-zV-12l" secondAttribute="trailing" constant="60" id="CZj-hS-9gm"/>
+                            <constraint firstItem="ikm-3Y-THM" firstAttribute="centerX" secondItem="WqW-fQ-sil" secondAttribute="centerX" id="Gfa-vG-neM"/>
+                            <constraint firstItem="ikm-3Y-THM" firstAttribute="centerY" secondItem="WqW-fQ-sil" secondAttribute="centerY" id="Kf7-dL-c5U"/>
                             <constraint firstItem="0rZ-WM-xzn" firstAttribute="leading" secondItem="WqW-fQ-sil" secondAttribute="leading" constant="20" id="Zc5-KK-C0p"/>
                             <constraint firstItem="dlZ-zV-12l" firstAttribute="leading" secondItem="TP2-cL-WVd" secondAttribute="leading" constant="60" id="ZvN-zc-lA9"/>
                             <constraint firstItem="dlZ-zV-12l" firstAttribute="top" secondItem="0rZ-WM-xzn" secondAttribute="bottom" constant="70" id="w0h-Ib-0cD"/>
@@ -488,7 +497,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="Hj6-8U-2EE"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="ikm-3Y-THM" id="8fP-or-Dm1"/>
                         <outlet property="completedButton" destination="dlZ-zV-12l" id="8FD-KV-WDB"/>
+                        <outlet property="joinCodeButton" destination="glt-f5-1ct" id="ogH-8J-Ii7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N9b-dB-SB2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

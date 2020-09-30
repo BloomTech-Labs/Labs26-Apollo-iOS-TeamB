@@ -9,14 +9,18 @@
 import Foundation
 
 class Survey: Decodable {
-    let surveyId: Int
+    let surveyId: Int?
     let topicId: Int?
-    let questions: [Question]
+    var questions: [Question]?
 
-    init(surveyId: Int, topicId: Int, questions: [Question]) {
+    init(surveyId: Int?, topicId: Int?, questions: [Question]?) {
         self.surveyId = surveyId
         self.topicId = topicId
         self.questions = questions
+    }
+
+    convenience init() {
+        self.init(surveyId: nil, topicId: nil, questions: nil)
     }
 
     enum CodingKeys: String, CodingKey {
@@ -40,12 +44,12 @@ class Survey: Decodable {
 
 extension Survey: Encodable {
     enum EncodingCodingKeys: String, CodingKey {
-        case defaultsurvey
+        case questions
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: EncodingCodingKeys.self)
 
-        try container.encode(questions, forKey: .defaultsurvey)
+        try container.encode(questions, forKey: .questions)
     }
 }
