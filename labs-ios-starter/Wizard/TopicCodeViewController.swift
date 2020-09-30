@@ -12,6 +12,7 @@ class TopicCodeViewController: UIViewController {
 
     @IBOutlet var completedButton: UIButton!
     @IBOutlet var joinCodeButton: UIButton!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     var joinCode: String?
     var newTopic: Topic?
@@ -21,6 +22,7 @@ class TopicCodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         styleButton()
+        activityIndicator.startAnimating()
         createNewTopic()
     }
 
@@ -34,9 +36,14 @@ class TopicCodeViewController: UIViewController {
         guard let newTopic = newTopic else { return }
         UserController.shared.createTopic(newTopic) { topic in
             if let topic = topic {
-                print("Topic not nil")
                 DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
                     self.joinCodeButton.setTitle(topic.joincode, for: .normal)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.presentSimpleAlert(with: "ERROR", message: "Failed to create topic", preferredStyle: .alert, dismissText: "OK")
                 }
             }
         }
