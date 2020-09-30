@@ -14,7 +14,6 @@ class TopicCodeViewController: UIViewController {
     @IBOutlet var joinCodeButton: UIButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
-    var joinCode: String?
     var newTopic: Topic?
 
     // MARK: - View Lifecycle
@@ -50,10 +49,14 @@ class TopicCodeViewController: UIViewController {
     }
 
     @IBAction func codeCopyTapped(_ sender: Any) {
+        UIPasteboard.general.string = joinCodeButton.titleLabel?.text
     }
 
     @IBAction func completedButtonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-        // TODO: - Present the topics tab
+        if let tabBarController = self.presentingViewController as? UITabBarController {
+            self.dismiss(animated: true) {
+                tabBarController.selectedIndex = 1
+            }
+        }
     }
 }
