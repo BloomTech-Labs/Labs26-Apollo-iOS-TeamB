@@ -13,19 +13,11 @@ import OktaAuth
 extension UserController {
 
     func fetchTopics(completion: @escaping (TopicResults?) -> Void) {
-        let oktaCredentials: OktaCredentials
-
-        do {
-            oktaCredentials = try oktaAuth.credentialsIfAvailable()
-        } catch {
-            print("AUTH FAIL: \(error)")
-            return
-        }
+        guard let oktaCredentials = getOktaAuth() else { return }
 
         let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
         var request = URLRequest(url: requestURL)
-
-        request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             print("Server returned request")
@@ -53,7 +45,6 @@ extension UserController {
                 completion(nil)
             }
         }.resume()
-        print("Sent request to server")
     }
 
     func fetchSurveys(completion: @escaping (SurveyResults?) -> Void) {
@@ -111,18 +102,10 @@ extension UserController {
     }
 
     func fetchContexts(completion: @escaping (ContextResults?) -> Void) {
-        let oktaCredentials: OktaCredentials
-
-        do {
-            oktaCredentials = try oktaAuth.credentialsIfAvailable()
-        } catch {
-            print("AUTH FAIL: \(error)")
-            return
-        }
+        guard let oktaCredentials = getOktaAuth() else { return }
 
         let requestURL = baseURL.appendingPathComponent("contexts").appendingPathComponent("contexts")
         var request = URLRequest(url: requestURL)
-
         request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, _, error in
@@ -146,5 +129,55 @@ extension UserController {
                 completion(nil)
             }
         }.resume()
+    }
+
+    func createTopic(_ topic: Topic, completion: @escaping (Topic?) -> Void) {
+        guard let oktaCredentials = getOktaAuth() else { return }
+
+        let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("new")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            let newTopic = try JSONEncoder().encode(topic)
+            print(String(data: newTopic, encoding: .utf8)!)
+            request.httpBody = newTopic
+            completion(topic)
+        } catch {
+            NSLog("Error encoding topic: \(error)")
+            completion(nil)
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error creating new topic: \(error)")
+                completion(nil)
+                return
+            }
+
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 200 {
+                NSLog("Received \(response.statusCode) code while creating a new topic")
+                completion(nil)
+                return
+            }
+            completion(topic)
+        }.resume()
+    }
+
+    private func getOktaAuth() -> OktaCredentials? {
+        let oktaCredentials: OktaCredentials
+
+        do {
+            oktaCredentials = try oktaAuth.credentialsIfAvailable()
+        } catch {
+            print("AUTH FAIL: \(error)")
+            return nil
+        }
+
+        return oktaCredentials
     }
 }
