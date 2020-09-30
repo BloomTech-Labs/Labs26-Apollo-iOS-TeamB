@@ -39,6 +39,15 @@ class ContextQuestionsViewController: UIViewController {
         leaderQuestions.append(newQuestion)
         tableView.reloadData()
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MemberQuestionsSegue" {
+            if let destinationVC = segue.destination as? MemberQuestionsViewController {
+                destinationVC.newTopic = newTopic
+                destinationVC.selectedContext = selectedContext
+            }
+        }
+    }
 }
 
 extension ContextQuestionsViewController: UITableViewDelegate, UITableViewDataSource {
