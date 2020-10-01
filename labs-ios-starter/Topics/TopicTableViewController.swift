@@ -48,6 +48,16 @@ class TopicTableViewController: UIViewController {
             }
         }
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowTopicDetailSegue" {
+            if let destionationVC = segue.destination as? SurveyViewController,
+                let indexPath = tableView.indexPathForSelectedRow {
+                guard let surveys = topics[indexPath.row].surveys else { return }
+                destionationVC.surveys = surveys
+            }
+        }
+    }
 }
 
 extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
@@ -65,6 +75,4 @@ extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-
 }
