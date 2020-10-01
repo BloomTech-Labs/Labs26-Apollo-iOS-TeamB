@@ -14,7 +14,7 @@ class SurveyViewController: UIViewController {
     @IBOutlet var surveyButton: UIButton!
     @IBOutlet var surveyTableView: UITableView!
 
-    var surveys: [Survey] = []
+    var surveys: [Survey]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case surveyTableView:
-            return surveys.count
+            return surveys?.count ?? 0
         default:
             return 1
         }
@@ -53,12 +53,12 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
         switch tableView{
         case surveyTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyCell", for: indexPath)
-            let survey = surveys[indexPath.row]
-            cell.textLabel?.text = survey.topicId?.description
+            let survey = surveys?[indexPath.row]
+            let date = String((survey?.createdDate?.split(separator: " ")[0])!)
+            cell.textLabel?.text = date
             return cell
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyResponseCell", for: indexPath) as? SurveyResponseTableViewCell else { return UITableViewCell() }
-
             return cell
         }
     }
@@ -66,8 +66,9 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case surveyTableView:
-            let survey = surveys[indexPath.row]
-            surveyButton.setTitle("\(String(describing: survey.surveyId))", for: .normal)
+            let survey = surveys?[indexPath.row]
+            let date = String((survey?.createdDate?.split(separator: " ")[0])!)
+            surveyButton.setTitle(date, for: .normal)
             animate(toggle: false)
         default:
             let threadViewController = ThreadViewController()
