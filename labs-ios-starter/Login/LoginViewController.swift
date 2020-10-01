@@ -57,13 +57,13 @@ class LoginViewController: UIViewController {
             guard let self = self,
                 self.presentedViewController == nil else { return }
             
-//            if exists {
+            if exists {
                 self.performSegue(withIdentifier: "ShowDetailUserList", sender: nil)
-//            }
+            }
 
-//            else {
-//                self.performSegue(withIdentifier: "ModalAddUser", sender: nil)
-//            }
+            else {
+                self.performSegue(withIdentifier: "ModalAddUser", sender: nil)
+            }
         }
     }
     
