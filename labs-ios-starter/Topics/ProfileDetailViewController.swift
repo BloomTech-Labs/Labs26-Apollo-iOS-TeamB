@@ -22,7 +22,7 @@ class UserDetailViewController: UIViewController {
     @IBOutlet weak var avatarURLTextField: UITextField!
     
     var userController: UserController = UserController.shared
-    var user: User?
+    var user: OktaProfile?
     var isUsersUser = true
     
     // MARK: - View Lifecycle
@@ -87,10 +87,10 @@ class UserDetailViewController: UIViewController {
         }
     }
     
-    private func updateViews(with user: User) {
+    private func updateViews(with user: OktaProfile) {
         guard isViewLoaded else { return }
         
-        nameLabel.text = user.username
+        nameLabel.text = user.name
 
 
         
@@ -98,6 +98,6 @@ class UserDetailViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = editButtonItem
         
-        nameTextField.text = user.username
+        nameTextField.text = user.name
     }
 }

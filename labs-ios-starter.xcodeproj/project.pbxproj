@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1916F1252674B50040CB91 /* OktaProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1916F0252674B50040CB91 /* OktaProfile.swift */; };
 		2BED231325191C17006C5DE8 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230925191C17006C5DE8 /* Survey.swift */; };
 		2BED231425191C17006C5DE8 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230A25191C17006C5DE8 /* Topic.swift */; };
 		2BED231525191C17006C5DE8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230B25191C17006C5DE8 /* Comment.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B1916F0252674B50040CB91 /* OktaProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktaProfile.swift; sourceTree = "<group>"; };
 		2BED230925191C17006C5DE8 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		2BED230A25191C17006C5DE8 /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		2BED230B25191C17006C5DE8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 		46BEB4EB24C98EB400FE0CD1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2B1916F0252674B50040CB91 /* OktaProfile.swift */,
 				2BED230D25191C17006C5DE8 /* User.swift */,
 				2BED23C2251D1243006C5DE8 /* Topic */,
 				2BED23C1251D1236006C5DE8 /* Survey */,
@@ -547,6 +550,7 @@
 				2BED2338251922B4006C5DE8 /* HomeViewController.swift in Sources */,
 				2C1D0751251D0EE5008B9051 /* QuestionResults.swift in Sources */,
 				2C61BF082523C44200460C2B /* ContextQuestionsViewController.swift in Sources */,
+				2B1916F1252674B50040CB91 /* OktaProfile.swift in Sources */,
 				2C1D074F251D0ED9008B9051 /* SurveyResults.swift in Sources */,
 				2BED231325191C17006C5DE8 /* Survey.swift in Sources */,
 				2C61BF0A2523C44200460C2B /* NewTopicViewController.swift in Sources */,

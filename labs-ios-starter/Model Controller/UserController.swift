@@ -12,6 +12,7 @@ import OktaAuth
 class UserController {
 
     let baseURL = URL(string: "https://apollo-b-api.herokuapp.com")!
+    let oktaBaseURL = URL(string: "https://labs-api-starter.herokuapp.com/")!
     
     static let shared = UserController()
     
@@ -19,8 +20,8 @@ class UserController {
                             clientID: "0oalwkxvqtKeHBmLI4x6",
                             redirectURI: "labs://scaffolding/implicit/callback")
     
-    private(set) var authenticatedUserUser: User?
-    private(set) var users: [User] = []
+    private(set) var authenticatedUserUser: OktaProfile?
+    private(set) var users: [OktaProfile] = []
     
     
     init() {
@@ -49,7 +50,7 @@ class UserController {
             return
         }
         
-        let requestURL = baseURL.appendingPathComponent("users")
+        let requestURL = oktaBaseURL.appendingPathComponent("profiles")
         var request = URLRequest(url: requestURL)
         
         request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
@@ -79,7 +80,7 @@ class UserController {
             let decoder = JSONDecoder()
             
             do {
-                let users = try decoder.decode([User].self, from: data)
+                let users = try decoder.decode([OktaProfile].self, from: data)
                 
                 DispatchQueue.main.async {
                     self.users = users
@@ -128,7 +129,7 @@ class UserController {
         }
     }
     
-    func getSingleUser(_ userID: String, completion: @escaping (User?) -> Void) {
+    func getSingleUser(_ userID: String, completion: @escaping (OktaProfile?) -> Void) {
         
         var oktaCredentials: OktaCredentials
         
@@ -143,8 +144,8 @@ class UserController {
             return
         }
         
-        let requestURL = baseURL
-            .appendingPathComponent("users")
+        let requestURL = oktaBaseURL
+            .appendingPathComponent("profiles")
             .appendingPathComponent(userID)
         var request = URLRequest(url: requestURL)
         
@@ -152,7 +153,7 @@ class UserController {
         
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            var fetchedUser: User?
+            var fetchedUser: OktaProfile?
             
             defer {
                 DispatchQueue.main.async {
@@ -177,7 +178,7 @@ class UserController {
             let decoder = JSONDecoder()
             
             do {
-                let user = try decoder.decode(User.self, from: data)
+                let user = try decoder.decode(OktaProfile.self, from: data)
                 fetchedUser = user
             } catch {
                 NSLog("Unable to decode User from data: \(error)")
@@ -187,7 +188,7 @@ class UserController {
         dataTask.resume()
     }
     
-    func updateAuthenticatedUserUser(_ user: User, with name: String, email: String, avatarURL: URL, completion: @escaping (User) -> Void) {
+    func updateAuthenticatedUserUser(_ user: OktaProfile, with name: String, email: String, avatarURL: URL, completion: @escaping (OktaProfile) -> Void) {
         
         var oktaCredentials: OktaCredentials
         
@@ -202,8 +203,8 @@ class UserController {
             return
         }
         
-        let requestURL = baseURL
-            .appendingPathComponent("users")
+        let requestURL = oktaBaseURL
+            .appendingPathComponent("profiles")
         
         var request = URLRequest(url: requestURL)
         request.httpMethod = "PUT"
@@ -275,7 +276,7 @@ class UserController {
     
     // NOTE: This method is unused, but left as an example for creating a user on the scaffolding backend.
     
-    func addUser(_ user: User, completion: @escaping () -> Void) {
+    func addUser(_ user: OktaProfile, completion: @escaping () -> Void) {
         
         var oktaCredentials: OktaCredentials
         
@@ -292,7 +293,7 @@ class UserController {
             return
         }
         
-        let requestURL = baseURL.appendingPathComponent("users")
+        let requestURL = oktaBaseURL.appendingPathComponent("profiles")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "POST"
         request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
