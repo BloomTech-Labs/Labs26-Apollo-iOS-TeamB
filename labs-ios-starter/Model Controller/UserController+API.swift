@@ -176,6 +176,35 @@ extension UserController {
         }.resume()
     }
 
+    func joinTopic(_ joincode: String, completion: @escaping (Bool) -> Void) {
+        guard let oktaCredentials = getOktaAuth() else { return }
+
+        let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topic").appendingPathComponent(joincode)
+        var request = URLRequest(url: requestURL)
+
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                NSLog("Error creating new topic: \(error)")
+                completion(false)
+                return
+            }
+
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 201 {
+                NSLog("Received \(response.statusCode) code while trying to join topic")
+                completion(false)
+                return
+            }
+
+            DispatchQueue.main.async {
+                completion(true)
+            }
+        }.resume()
+    }
+
     private func getOktaAuth() -> OktaCredentials? {
         let oktaCredentials: OktaCredentials
 
