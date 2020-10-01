@@ -12,19 +12,21 @@ class Survey: Decodable {
     let surveyId: Int?
     let topicId: Int?
     var questions: [Question]?
+    let createdDate: String?
 
-    init(surveyId: Int?, topicId: Int?, questions: [Question]?) {
+    init(surveyId: Int?, topicId: Int?, questions: [Question]?, createdDate: String?) {
         self.surveyId = surveyId
         self.topicId = topicId
         self.questions = questions
+        self.createdDate = createdDate
     }
 
     convenience init() {
-        self.init(surveyId: nil, topicId: nil, questions: nil)
+        self.init(surveyId: nil, topicId: nil, questions: nil, createdDate: nil)
     }
 
     enum CodingKeys: String, CodingKey {
-        case surveyId, questions
+        case surveyId, questions, createdDate
         case topic, topicId
     }
 
@@ -33,6 +35,7 @@ class Survey: Decodable {
 
         self.surveyId = try container.decode(Int.self, forKey: .surveyId)
         self.questions = try container.decode([Question].self, forKey: .questions)
+        self.createdDate = try container.decode(String.self, forKey: .createdDate)
 
         if let topicContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: .topic) {
             self.topicId = try topicContainer.decodeIfPresent(Int.self, forKey: .topicId)
