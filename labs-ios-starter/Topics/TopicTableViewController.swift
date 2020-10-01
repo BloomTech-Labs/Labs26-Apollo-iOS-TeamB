@@ -45,6 +45,11 @@ class TopicTableViewController: UIViewController {
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
                 }
+            } else {
+                DispatchQueue.main.async {
+                    self.presentSimpleAlert(with: "ERROR", message: "Failed to get topics from server. Please try again later.", preferredStyle: .alert, dismissText: "OK")
+                    self.refreshControl.endRefreshing()
+                }
             }
         }
     }
