@@ -12,22 +12,19 @@ class User: Decodable {
     let userid: Int
     let username: String
     var topics: [(String, Int)]?
-
     init(userid: Int, username: String) {
         self.userid = userid
         self.username = username
     }
-
     enum CodingKeys: String, CodingKey {
         case user, userid, username
         case ownedtopics, topics
         case topicId, title
     }
-
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let userContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .user)
-
+      
         userid = try userContainer.decode(Int.self, forKey: .userid)
         username = try userContainer.decode(String.self, forKey: .username)
 
