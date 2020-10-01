@@ -15,6 +15,7 @@ class SurveyViewController: UIViewController {
     @IBOutlet var surveyTableView: UITableView!
 
     var surveys: [Survey]?
+    var selectedSurveyQuestions: [Question]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,25 @@ class SurveyViewController: UIViewController {
 }
 
 extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch tableView {
+        case self.tableView:
+            return selectedSurveyQuestions?[section].body
+        default:
+            return nil
+        }
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        switch tableView {
+        case self.tableView:
+            guard let questionCount = selectedSurveyQuestions?.count else { return 0 }
+            return questionCount
+        default:
+            return 1
+        }
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case surveyTableView:
@@ -70,6 +90,18 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             let date = String((survey?.createdDate?.split(separator: " ")[0])!)
             surveyButton.setTitle(date, for: .normal)
             animate(toggle: false)
+
+            var memberQuestions:[Question] = []
+            if let survey = survey,
+               let questions = survey.questions {
+                for question in questions {
+                    if !(question.leader ?? false) {
+                        memberQuestions.append(question)
+                    }
+                }
+            }
+            self.selectedSurveyQuestions = memberQuestions
+            self.tableView.reloadData()
         default:
             let threadViewController = ThreadViewController()
             threadViewController.title = "Thread"
