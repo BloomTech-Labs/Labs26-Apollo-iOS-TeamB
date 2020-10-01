@@ -39,5 +39,23 @@ class HomeViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func joinCodeButtonTapped(_ sender: Any) {
+        guard let joincode = codeTextField.text,
+              !joincode.isEmpty else {
+            self.presentSimpleAlert(with: "ERROR", message: "Please enter a valid join code.", preferredStyle: .alert, dismissText: "OK")
+            return
+        }
+
+        UserController.shared.joinTopic(joincode) { result in
+            DispatchQueue.main.async {
+                if result {
+                    self.presentSimpleAlert(with: "Success", message: "You have successfully joined the topic!", preferredStyle: .alert, dismissText: "OK") { _ in
+                        self.codeTextField.text = ""
+                        self.tabBarController?.selectedIndex = 1
+                    }
+                } else {
+                    self.presentSimpleAlert(with: "ERROR", message: "There was an error joining the topic. Please make sure you inputed the correct join code.", preferredStyle: .alert, dismissText: "OK")
+                }
+            }
+        }
     }
 }
