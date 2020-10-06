@@ -32,8 +32,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-zq-zWz">
+                                <rect key="frame" x="0.0" y="140" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l8F-rO-7M5">
-                                <rect key="frame" x="0.0" y="164" width="414" height="649"/>
+                                <rect key="frame" x="0.0" y="216" width="414" height="597"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TopicCell" textLabel="5dG-AA-xc6" rowHeight="69" style="IBUITableViewCellStyleDefault" id="Pya-z1-aFP">
@@ -62,10 +66,6 @@
                                     <outlet property="delegate" destination="pwG-a5-Kri" id="p2f-Zi-fJJ"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-zq-zWz">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -80,7 +80,11 @@
                         <viewLayoutGuide key="safeArea" id="1H7-aC-Jps"/>
                     </view>
                     <navigationItem key="navigationItem" title="Topics" id="e49-m9-mVb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gYJ-v7-diz"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gYJ-v7-diz">
+                            <connections>
+                                <segue destination="ZLg-5k-s4S" kind="presentation" id="TOR-hV-Gve"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="l8F-rO-7M5" id="hZ8-Lu-kj5"/>
@@ -90,10 +94,10 @@
             </objects>
             <point key="canvasLocation" x="1082.608695652174" y="928.79464285714278"/>
         </scene>
-        <!--Profile Detail View Controller-->
+        <!--User Detail View Controller-->
         <scene sceneID="BCJ-ov-d7q">
             <objects>
-                <viewController id="iv4-Wu-uvp" customClass="ProfileDetailViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iv4-Wu-uvp" customClass="UserDetailViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N1u-LA-j4m">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,7 +136,7 @@
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lyM-qh-hqy">
                                 <rect key="frame" x="20" y="227.33333333333331" width="374" height="184.33333333333331"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update Profile:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX1-ea-I4h">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Update User:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX1-ea-I4h">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <nil key="textColor"/>
@@ -162,14 +166,14 @@
                                                     <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="cancelProfileUpdate:" destination="iv4-Wu-uvp" eventType="touchUpInside" id="TG6-jk-3Tg"/>
+                                                    <action selector="cancelUserUpdate:" destination="iv4-Wu-uvp" eventType="touchUpInside" id="TG6-jk-3Tg"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tro-Vv-xAw">
                                                 <rect key="frame" x="198" y="0.0" width="176" height="30"/>
                                                 <state key="normal" title="Save"/>
                                                 <connections>
-                                                    <action selector="updateProfile:" destination="iv4-Wu-uvp" eventType="touchUpInside" id="88k-Un-Hr2"/>
+                                                    <action selector="updateUser:" destination="iv4-Wu-uvp" eventType="touchUpInside" id="88k-Un-Hr2"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -296,7 +300,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="50"/>
                                         </state>
                                         <connections>
-                                            <segue destination="iv4-Wu-uvp" kind="show" identifier="ShowProfileSegue" id="AL1-ps-5zb"/>
+                                            <segue destination="iv4-Wu-uvp" kind="show" identifier="ShowUserSegue" id="AL1-ps-5zb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -348,7 +352,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DS1-HF-NlI">
-                                <rect key="frame" x="0.0" y="202" width="414" height="611"/>
+                                <rect key="frame" x="0.0" y="316" width="414" height="497"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SurveyResponseCell" rowHeight="162" id="yDB-Pn-MqP" customClass="SurveyResponseTableViewCell" customModule="labs_ios_starter" customModuleProvider="target">
@@ -396,26 +400,77 @@
                                     <outlet property="delegate" destination="l0w-ui-Ntr" id="ien-Bh-t2d"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2tE-GX-wv9">
-                                <rect key="frame" x="20" y="148" width="374" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2tE-GX-wv9">
+                                <rect key="frame" x="20" y="148" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="FQ6-GO-xec"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lX-Bt-xrs">
+                                <rect key="frame" x="20" y="148" width="374" height="50"/>
+                                <state key="normal" title="Select A Survey">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="surveyButtonTapped:" destination="l0w-ui-Ntr" eventType="touchUpInside" id="XvM-jH-PHD"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxI-8c-9oN">
+                                <rect key="frame" x="20" y="198" width="374" height="110"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="gcZ-jp-F6X"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SurveyCell" textLabel="h1a-er-xOc" style="IBUITableViewCellStyleDefault" id="uVo-CZ-iSl">
+                                        <rect key="frame" x="0.0" y="28" width="374" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uVo-CZ-iSl" id="Msm-Wh-Dch">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h1a-er-xOc">
+                                                    <rect key="frame" x="20" y="0.0" width="334" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="l0w-ui-Ntr" id="LuB-fR-mgP"/>
+                                    <outlet property="delegate" destination="l0w-ui-Ntr" id="mQn-AA-CpB"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="0lX-Bt-xrs" firstAttribute="trailing" secondItem="2tE-GX-wv9" secondAttribute="trailing" id="0ic-UW-qK6"/>
                             <constraint firstItem="2tE-GX-wv9" firstAttribute="leading" secondItem="Kj7-l6-mMK" secondAttribute="leading" constant="20" id="5H6-5x-BnX"/>
+                            <constraint firstItem="JxI-8c-9oN" firstAttribute="leading" secondItem="0lX-Bt-xrs" secondAttribute="leading" id="8bm-eS-Eh3"/>
                             <constraint firstItem="DS1-HF-NlI" firstAttribute="trailing" secondItem="Kj7-l6-mMK" secondAttribute="trailing" id="AiT-oC-7mh"/>
+                            <constraint firstItem="JxI-8c-9oN" firstAttribute="top" secondItem="2tE-GX-wv9" secondAttribute="bottom" id="MSb-OL-geU"/>
+                            <constraint firstItem="JxI-8c-9oN" firstAttribute="trailing" secondItem="0lX-Bt-xrs" secondAttribute="trailing" id="NeY-Gb-MFc"/>
                             <constraint firstItem="DS1-HF-NlI" firstAttribute="leading" secondItem="Kj7-l6-mMK" secondAttribute="leading" id="REU-Rd-y3K"/>
+                            <constraint firstItem="0lX-Bt-xrs" firstAttribute="top" secondItem="2tE-GX-wv9" secondAttribute="top" id="Xzm-bT-sxF"/>
                             <constraint firstItem="2tE-GX-wv9" firstAttribute="top" secondItem="Kj7-l6-mMK" secondAttribute="top" constant="8" id="f4P-YG-XsP"/>
                             <constraint firstItem="DS1-HF-NlI" firstAttribute="bottom" secondItem="Kj7-l6-mMK" secondAttribute="bottom" id="fCH-zL-UHf"/>
                             <constraint firstItem="Kj7-l6-mMK" firstAttribute="trailing" secondItem="2tE-GX-wv9" secondAttribute="trailing" constant="20" id="fzJ-re-jKM"/>
-                            <constraint firstItem="DS1-HF-NlI" firstAttribute="top" secondItem="2tE-GX-wv9" secondAttribute="bottom" constant="20" id="maS-mE-F8S"/>
+                            <constraint firstItem="0lX-Bt-xrs" firstAttribute="leading" secondItem="2tE-GX-wv9" secondAttribute="leading" id="tqI-Ct-9z5"/>
+                            <constraint firstItem="DS1-HF-NlI" firstAttribute="top" secondItem="JxI-8c-9oN" secondAttribute="bottom" constant="8" id="uAL-Wo-CvQ"/>
+                            <constraint firstItem="0lX-Bt-xrs" firstAttribute="bottom" secondItem="2tE-GX-wv9" secondAttribute="bottom" id="uEv-tz-Hia"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kj7-l6-mMK"/>
                     </view>
                     <navigationItem key="navigationItem" title="Topic Title" id="hal-cB-4dp"/>
                     <connections>
+                        <outlet property="surveyButton" destination="0lX-Bt-xrs" id="HIZ-MD-bnb"/>
+                        <outlet property="surveyTableView" destination="JxI-8c-9oN" id="kK9-m6-qiM"/>
                         <outlet property="tableView" destination="DS1-HF-NlI" id="4Wl-PS-U7H"/>
                     </connections>
                 </viewController>
@@ -423,10 +478,10 @@
             </objects>
             <point key="canvasLocation" x="1911.594202898551" y="928.79464285714278"/>
         </scene>
-        <!--Profile Tab Bar View Controller-->
+        <!--User Tab Bar View Controller-->
         <scene sceneID="IUW-ly-e69">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qoB-kH-nth" customClass="ProfileTabBarViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qoB-kH-nth" customClass="UserTabBarViewController" customModule="labs_ios_starter" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4CC-np-kAJ">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -443,6 +498,9 @@
             <point key="canvasLocation" x="150.72463768115944" y="193.52678571428569"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="TOR-hV-Gve"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="doc.plaintext" catalog="system" width="115" height="128"/>
         <image name="person.2.square.stack" catalog="system" width="113" height="128"/>
