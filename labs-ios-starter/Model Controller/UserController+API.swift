@@ -12,41 +12,48 @@ import OktaAuth
 
 extension UserController {
 
-    func fetchTopics(completion: @escaping (TopicResults?) -> Void) {
-        guard let oktaCredentials = getOktaAuth() else { return }
-
+    func fetchTopics(isMock: Bool = false, completion: @escaping (TopicResults?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
         var request = URLRequest(url: requestURL)
-        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        if !isMock {
+            guard let oktaCredentials = getOktaAuth() else { return }
+            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+        dataLoader.loadData(using: request) { data, response, error in
             if let error = error {
-                NSLog("Error fetching topics: \(error)")
-                completion(nil)
-                return
-            }
+                    NSLog("Error fetching topics: \(error)")
+                    completion(nil)
+                    return
+                }
 
-            guard let data = data else {
-                NSLog("No topic data for topics request")
-                completion(nil)
-                return
-            }
+                guard let data = data else {
+                    NSLog("No topic data for topics request")
+                    completion(nil)
+                    return
+                }
 
-            do {
-                let topics = try JSONDecoder().decode(TopicResults.self, from: data)
-                DispatchQueue.main.async { completion(topics) }
-            } catch {
-                NSLog("Error decoding topics data: \(error)")
-                completion(nil)
+                do {
+                    let topics = try JSONDecoder().decode(TopicResults.self, from: data)
+                    DispatchQueue.main.async { completion(topics) }
+                } catch {
+                    NSLog("Error decoding topics data: \(error)")
+                    completion(nil)
+                }
             }
-        }.resume()
     }
 
-    func fetchSurveys(completion: @escaping (SurveyResults?) -> Void) {
+    func fetchSurveys(isMock: Bool = false, completion: @escaping (SurveyResults?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("surveys").appendingPathComponent("all")
-        let request = URLRequest(url: requestURL)
+        var request = URLRequest(url: requestURL)
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        if !isMock {
+            guard let oktaCredentials = getOktaAuth() else { return }
+            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+        dataLoader.loadData(using: request) { data, _, error in
             if let error = error {
                 NSLog("Error fetching surveys: \(error)")
                 completion(nil)
@@ -66,14 +73,19 @@ extension UserController {
                 NSLog("Error decoding surveys data: \(error)")
                 completion(nil)
             }
-        }.resume()
+        }
     }
 
-    func fetchQuestions(completion: @escaping (QuestionResults?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("questions")
-        let request = URLRequest(url: requestURL)
+    func fetchQuestions(isMock: Bool = false, completion: @escaping (QuestionResults?) -> Void) {
+        let requestURL = baseURL.appendingPathComponent("questions").appendingPathComponent("all")
+        var request = URLRequest(url: requestURL)
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        if !isMock {
+            guard let oktaCredentials = getOktaAuth() else { return }
+            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+        dataLoader.loadData(using: request) { data, _, error in
             if let error = error {
                 NSLog("Error fetching questions: \(error)")
                 completion(nil)
@@ -93,17 +105,19 @@ extension UserController {
                 NSLog("Error decoding questions data: \(error)")
                 completion(nil)
             }
-        }.resume()
+        }
     }
 
-    func fetchContexts(completion: @escaping (ContextResults?) -> Void) {
-        guard let oktaCredentials = getOktaAuth() else { return }
-
+    func fetchContexts(isMock: Bool = false, completion: @escaping (ContextResults?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("contexts").appendingPathComponent("contexts")
         var request = URLRequest(url: requestURL)
-        request.addValue("Bearer \(oktaCredentials.idToken)", forHTTPHeaderField: "Authorization")
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        if !isMock {
+            guard let oktaCredentials = getOktaAuth() else { return }
+            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+        dataLoader.loadData(using: request) { data, _, error in
             if let error = error {
                 NSLog("Error fetching contexts: \(error)")
                 completion(nil)
@@ -123,7 +137,7 @@ extension UserController {
                 NSLog("Error decoding contexts data: \(error)")
                 completion(nil)
             }
-        }.resume()
+        }
     }
 
     func createTopic(_ topic: Topic, completion: @escaping (Topic?) -> Void) {
