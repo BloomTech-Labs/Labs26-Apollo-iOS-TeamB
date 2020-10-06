@@ -22,9 +22,11 @@ class UserController {
     
     private(set) var authenticatedUserUser: OktaProfile?
     private(set) var users: [OktaProfile] = []
+
+    let dataLoader: NetworkDataLoader
     
-    
-    init() {
+    init(dataLoader: NetworkDataLoader = URLSession.shared) {
+        self.dataLoader = dataLoader
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(refreshUsers),
                                                name: .oktaAuthenticationSuccessful,
