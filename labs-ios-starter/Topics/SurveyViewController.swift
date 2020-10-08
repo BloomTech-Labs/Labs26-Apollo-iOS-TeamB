@@ -14,6 +14,7 @@ class SurveyViewController: UIViewController {
     @IBOutlet var surveyButton: UIButton!
     @IBOutlet var surveyTableView: UITableView!
 
+    var topicTitle: String?
     var surveys: [Survey]?
     var selectedSurveyQuestions: [Question]?
 
@@ -21,6 +22,7 @@ class SurveyViewController: UIViewController {
         super.viewDidLoad()
         surveyTableView.isHidden = true
         surveyTableView.separatorStyle = .none
+        setUpView()
     }
 
     private func animate(toggle: Bool) {
@@ -35,6 +37,13 @@ class SurveyViewController: UIViewController {
         }
     }
 
+    private func setUpView() {
+        surveyButton.layer.borderWidth = 1
+        title = topicTitle
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 44
+    }
+
     @IBAction func surveyButtonTapped(_ sender: Any) {
         surveyTableView.isHidden ? animate(toggle: true) : animate(toggle: false)
     }
@@ -47,6 +56,22 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             return selectedSurveyQuestions?[section].body
         default:
             return nil
+        }
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch tableView {
+        case self.tableView:
+            let questionLabel = UILabel()
+            questionLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            questionLabel.numberOfLines = 0
+            questionLabel.textAlignment = .center
+            questionLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+            questionLabel.backgroundColor = UIColor.opaqueSeparator
+
+            return questionLabel
+        default:
+            return UIView()
         }
     }
 
@@ -65,7 +90,8 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
         case surveyTableView:
             return surveys?.count ?? 0
         default:
-            return 1
+            guard let answerCount = selectedSurveyQuestions?[section].answers?.count else { return 0 }
+            return answerCount
         }
     }
 
@@ -78,7 +104,12 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = date
             return cell
         default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyResponseCell", for: indexPath) as? SurveyResponseTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyResponseCell", for: indexPath) as? SurveyResponseTableViewCell else {
+                return UITableViewCell()
+            }
+
+            cell.usernameLabel.text = selectedSurveyQuestions?[indexPath.section].answers?[indexPath.row].username
+            cell.responseTextView.text = selectedSurveyQuestions?[indexPath.section].answers?[indexPath.row].body
             return cell
         }
     }
