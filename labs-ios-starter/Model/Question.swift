@@ -14,17 +14,19 @@ class Question: Decodable {
     var body: String?
     let type: String?
     let leader: Bool?
+    let answers: [Answer]?
 
-    init(questionId: Int?, surveyId: Int?, body: String, type: String, leader: Bool) {
+    init(questionId: Int?, surveyId: Int?, body: String, type: String, leader: Bool, answers: [Answer]?) {
         self.questionId = questionId
         self.surveyId = surveyId
         self.body = body
         self.type = type
         self.leader = leader
+        self.answers = answers
     }
 
     enum CodingKeys: String, CodingKey {
-        case questionId, body, type, leader
+        case questionId, body, type, leader, answers
         case survey, surveyId
     }
 
@@ -35,6 +37,16 @@ class Question: Decodable {
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
         self.leader = try container.decodeIfPresent(Bool.self, forKey: .leader)
 
+        var answersContainer = try container.nestedUnkeyedContainer(forKey: .answers)
+        var answersArray: [Answer] = []
+
+        while !answersContainer.isAtEnd {
+            let answer = try answersContainer.decode(Answer.self)
+            answersArray.append(answer)
+        }
+
+        self.answers = answersArray
+
         if let surveyContainer = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: .survey) {
             self.surveyId = try surveyContainer.decodeIfPresent(Int.self, forKey: .surveyId)
         } else {
@@ -43,7 +55,7 @@ class Question: Decodable {
     }
 
     convenience init(body: String, type: String, leader: Bool) {
-        self.init(questionId: nil, surveyId: nil, body: body, type: type, leader: leader)
+        self.init(questionId: nil, surveyId: nil, body: body, type: type, leader: leader, answers: nil)
     }
 }
 
