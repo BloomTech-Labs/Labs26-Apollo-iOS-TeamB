@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+class AnswerResults: Decodable {
+    let results: [Answer]
+
+    required init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+
+        var results: [Answer] = []
+
+        while !container.isAtEnd {
+            let answer = try container.decode(Answer.self)
+            results.append(answer)
+        }
+
+        self.results = results
+    }
+
+}
