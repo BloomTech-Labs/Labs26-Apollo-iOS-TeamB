@@ -1,5 +1,5 @@
 //
-//  Response.swift
+//  Answer.swift
 //  labs-ios-starter
 //
 //  Created by Tobi Kuyoro on 10/09/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Response: Codable {
+class Answer: Codable {
     let id: Int
     let body: String
     let comments: [Comment]
