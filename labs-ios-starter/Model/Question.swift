@@ -52,7 +52,6 @@ extension Question: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(body, forKey: .body)
-        try container.encode(type, forKey: .type)
-        try container.encode(leader, forKey: .leader)
+        try container.encode(questionId, forKey: .questionId)
     }
 }
