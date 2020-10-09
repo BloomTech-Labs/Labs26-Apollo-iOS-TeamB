@@ -65,6 +65,6 @@ extension Question: Encodable {
 
         try container.encode(body, forKey: .body)
         try container.encode(type, forKey: .type)
-        try container.encode(leader, forKey: .leader)
+        try container.encode(questionId, forKey: .questionId)
     }
 }

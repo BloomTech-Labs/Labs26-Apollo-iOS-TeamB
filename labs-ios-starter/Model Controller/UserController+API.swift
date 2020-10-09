@@ -190,6 +190,41 @@ extension UserController {
         }.resume()
     }
 
+    func answerSurveyRequest(for questions: [Question], completion: @escaping (Error?) -> Void) {
+        guard let oktaCredentials = getOktaAuth() else { return }
+
+        let requestURL = baseURL.appendingPathComponent("surveys").appendingPathComponent("response")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            let memberQuestions = try JSONEncoder().encode(questions)
+            request.httpBody = memberQuestions
+        } catch {
+            NSLog("Error answering survey request: \(error)")
+            completion(error)
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error posting request: \(error)")
+                completion(error)
+                return
+            }
+
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 201 {
+                NSLog("Received \(response.statusCode) code while answering survey request")
+                completion(nil)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+
     func joinTopic(_ joincode: String, completion: @escaping (Bool) -> Void) {
         guard let oktaCredentials = getOktaAuth() else { return }
 
