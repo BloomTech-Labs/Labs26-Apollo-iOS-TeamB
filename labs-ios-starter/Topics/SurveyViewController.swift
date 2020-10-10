@@ -17,6 +17,7 @@ class SurveyViewController: UIViewController {
     var topicTitle: String?
     var surveys: [Survey]?
     var selectedSurveyQuestions: [Question]?
+    var index: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,19 @@ class SurveyViewController: UIViewController {
 
     @IBAction func surveyButtonTapped(_ sender: Any) {
         surveyTableView.isHidden ? animate(toggle: true) : animate(toggle: false)
+    }
+
+    @IBAction func answerButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "ContextQuestionsSegue", sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ContextQuestionsSegue" {
+            if let destinationVC = segue.destination as? LeaderAnswersViewController,
+                let index = index {
+                destinationVC.surveyId = surveys?[index].surveyId
+            }
+        }
     }
 }
 
@@ -120,6 +134,7 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             let survey = surveys?[indexPath.row]
             let date = String((survey?.createdDate?.split(separator: " ")[0])!)
             surveyButton.setTitle(date, for: .normal)
+            index = indexPath.row
             animate(toggle: false)
 
             var memberQuestions:[Question] = []
