@@ -225,6 +225,43 @@ extension UserController {
         }.resume()
     }
 
+    func fetchLeaderQuestions(using surveyId: Int, completion: @escaping (QuestionResults?) -> Void) {
+        guard let oktaCredentials = getOktaAuth() else { return }
+
+        let requestURL = baseURL
+            .appendingPathComponent("questions")
+            .appendingPathComponent("leader")
+            .appendingPathComponent(surveyId.description)
+
+        var request = URLRequest(url: requestURL)
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                NSLog("Error fetching questions: \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                NSLog("No question data")
+                completion(nil)
+                return
+            }
+
+            do {
+                let questions = try JSONDecoder().decode(QuestionResults.self, from: data)
+                DispatchQueue.main.async {
+                    completion(questions)
+                    print("successful")
+                }
+            } catch {
+                NSLog("Error decoding question data: \(error)")
+                completion(nil)
+            }
+        }.resume()
+    }
+
     func joinTopic(_ joincode: String, completion: @escaping (Bool) -> Void) {
         guard let oktaCredentials = getOktaAuth() else { return }
 
