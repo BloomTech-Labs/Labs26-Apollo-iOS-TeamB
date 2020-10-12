@@ -175,6 +175,11 @@
 				2BED232D251922B4006C5DE8 /* TopicTableViewController.swift */,
 				2BED2333251922B4006C5DE8 /* SurveyViewController.swift */,
 				2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */,
+				2BED2332251922B4006C5DE8 /* Topics.storyboard */,
+				2BED2331251922B4006C5DE8 /* HomeViewController.swift */,
+				2BED232D251922B4006C5DE8 /* TopicTableViewController.swift */,
+				2BED232F251922B4006C5DE8 /* SurveyResponseTableViewCell.swift */,
+				2BED2333251922B4006C5DE8 /* SurveyViewController.swift */,
 				2BED2330251922B4006C5DE8 /* ThreadViewController.swift */,
 				2BED232E251922B4006C5DE8 /* ProfileDetailViewController.swift */,
 			);
