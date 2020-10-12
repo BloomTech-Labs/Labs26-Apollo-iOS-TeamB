@@ -13,6 +13,7 @@ class SurveyViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var surveyButton: UIButton!
     @IBOutlet var surveyTableView: UITableView!
+    @IBOutlet var respondRequestButton: UIButton!
 
     var topicTitle: String?
     var surveys: [Survey]?
@@ -40,6 +41,7 @@ class SurveyViewController: UIViewController {
 
     private func setUpView() {
         surveyButton.layer.borderWidth = 1
+        respondRequestButton.layer.borderWidth = 1
         title = topicTitle
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedSectionHeaderHeight = 44
