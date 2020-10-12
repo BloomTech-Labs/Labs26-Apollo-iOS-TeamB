@@ -44,6 +44,8 @@
 		2C61BF0B2523C44200460C2B /* TopicCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF062523C44200460C2B /* TopicCodeViewController.swift */; };
 		2C61BF0E2523CA9C00460C2B /* ContextResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF0D2523CA9C00460C2B /* ContextResults.swift */; };
 		2C984FE6252F825300A462A1 /* AnswerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C984FE5252F825300A462A1 /* AnswerResults.swift */; };
+		2CA3591E25311F1A001A5537 /* LeaderAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */; };
+		2CA3592225311FD8001A5537 /* AnswersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
 		466C4276249A8748007D033E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4275249A8748007D033E /* SceneDelegate.swift */; };
@@ -115,6 +117,8 @@
 		2C61BF0D2523CA9C00460C2B /* ContextResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextResults.swift; sourceTree = "<group>"; };
 		2C87489325239B7F0021889C /* labs-ios-starterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "labs-ios-starterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C984FE5252F825300A462A1 /* AnswerResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerResults.swift; sourceTree = "<group>"; };
+		2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderAnswersViewController.swift; sourceTree = "<group>"; };
+		2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersTableViewCell.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* labs-ios-starter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "labs-ios-starter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		466C4273249A8748007D033E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +168,13 @@
 		2BED232C251922B4006C5DE8 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				2BED232F251922B4006C5DE8 /* SurveyResponseTableViewCell.swift */,
+				2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */,
+				2BED2332251922B4006C5DE8 /* Topics.storyboard */,
+				2BED2331251922B4006C5DE8 /* HomeViewController.swift */,
+				2BED232D251922B4006C5DE8 /* TopicTableViewController.swift */,
+				2BED2333251922B4006C5DE8 /* SurveyViewController.swift */,
+				2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */,
 				2BED2332251922B4006C5DE8 /* Topics.storyboard */,
 				2BED2331251922B4006C5DE8 /* HomeViewController.swift */,
 				2BED232D251922B4006C5DE8 /* TopicTableViewController.swift */,
@@ -577,6 +588,7 @@
 				2C61BF0E2523CA9C00460C2B /* ContextResults.swift in Sources */,
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
+				2CA3591E25311F1A001A5537 /* LeaderAnswersViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
 				2C1D0757251D0FDE008B9051 /* UserController+API.swift in Sources */,
 				2BED23DE2523E866006C5DE8 /* QuestionsTableViewCell.swift in Sources */,
@@ -584,6 +596,7 @@
 				2C1D0751251D0EE5008B9051 /* QuestionResults.swift in Sources */,
 				2C61BF082523C44200460C2B /* ContextQuestionsViewController.swift in Sources */,
 				2B1916F1252674B50040CB91 /* OktaProfile.swift in Sources */,
+				2CA3592225311FD8001A5537 /* AnswersTableViewCell.swift in Sources */,
 				2C1D074F251D0ED9008B9051 /* SurveyResults.swift in Sources */,
 				2BED231325191C17006C5DE8 /* Survey.swift in Sources */,
 				2C61BF0A2523C44200460C2B /* NewTopicViewController.swift in Sources */,
