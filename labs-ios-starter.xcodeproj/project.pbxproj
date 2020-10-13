@@ -46,9 +46,11 @@
 		2C61BF0A2523C44200460C2B /* NewTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF052523C44200460C2B /* NewTopicViewController.swift */; };
 		2C61BF0B2523C44200460C2B /* TopicCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF062523C44200460C2B /* TopicCodeViewController.swift */; };
 		2C61BF0E2523CA9C00460C2B /* ContextResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF0D2523CA9C00460C2B /* ContextResults.swift */; };
+		2C7916A82535048D00830C51 /* MemberAnswersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7916A72535048D00830C51 /* MemberAnswersTableViewCell.swift */; };
 		2C984FE6252F825300A462A1 /* AnswerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C984FE5252F825300A462A1 /* AnswerResults.swift */; };
 		2CA3591E25311F1A001A5537 /* LeaderAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */; };
 		2CA3592225311FD8001A5537 /* AnswersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */; };
+		2CDE16472534D08E00B61AD2 /* MemberAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE16462534D08E00B61AD2 /* MemberAnswersViewController.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
 		466C4276249A8748007D033E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4275249A8748007D033E /* SceneDelegate.swift */; };
@@ -121,10 +123,12 @@
 		2C61BF052523C44200460C2B /* NewTopicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTopicViewController.swift; sourceTree = "<group>"; };
 		2C61BF062523C44200460C2B /* TopicCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicCodeViewController.swift; sourceTree = "<group>"; };
 		2C61BF0D2523CA9C00460C2B /* ContextResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextResults.swift; sourceTree = "<group>"; };
+		2C7916A72535048D00830C51 /* MemberAnswersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberAnswersTableViewCell.swift; sourceTree = "<group>"; };
 		2C87489325239B7F0021889C /* labs-ios-starterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "labs-ios-starterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C984FE5252F825300A462A1 /* AnswerResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerResults.swift; sourceTree = "<group>"; };
 		2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderAnswersViewController.swift; sourceTree = "<group>"; };
 		2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersTableViewCell.swift; sourceTree = "<group>"; };
+		2CDE16462534D08E00B61AD2 /* MemberAnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberAnswersViewController.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* labs-ios-starter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "labs-ios-starter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		466C4273249A8748007D033E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,15 +189,18 @@
 			isa = PBXGroup;
 			children = (
 				2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */,
-				2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */,
 				2BED2332251922B4006C5DE8 /* Topics.storyboard */,
 				2BED2331251922B4006C5DE8 /* HomeViewController.swift */,
 				2BED232D251922B4006C5DE8 /* TopicTableViewController.swift */,
-				2BED232F251922B4006C5DE8 /* SurveyResponseTableViewCell.swift */,
 				2BED2333251922B4006C5DE8 /* SurveyViewController.swift */,
+				2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */,
 				2BED2330251922B4006C5DE8 /* ThreadViewController.swift */,
 				2BED232E251922B4006C5DE8 /* ProfileDetailViewController.swift */,
 				2B94871F2534F73000712A0D /* SurveyRequests */,
+				2CDE16462534D08E00B61AD2 /* MemberAnswersViewController.swift */,
+				2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */,
+				2BED232F251922B4006C5DE8 /* SurveyResponseTableViewCell.swift */,
+				2C7916A72535048D00830C51 /* MemberAnswersTableViewCell.swift */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -623,9 +630,11 @@
 				2BED2337251922B4006C5DE8 /* ThreadViewController.swift in Sources */,
 				2BED231525191C17006C5DE8 /* Comment.swift in Sources */,
 				2C984FE6252F825300A462A1 /* AnswerResults.swift in Sources */,
+				2CDE16472534D08E00B61AD2 /* MemberAnswersViewController.swift in Sources */,
 				46C2BC9224D432F90077E49D /* ProfileTabBarViewController.swift in Sources */,
 				46BEB4E524C98CDC00FE0CD1 /* LoginViewController.swift in Sources */,
 				2BED2336251922B4006C5DE8 /* SurveyResponseTableViewCell.swift in Sources */,
+				2C7916A82535048D00830C51 /* MemberAnswersTableViewCell.swift in Sources */,
 				2BED231B25191C17006C5DE8 /* TopicResults.swift in Sources */,
 				2C3469AF252CBAE900FBFF8B /* NetworkDataLoader.swift in Sources */,
 				2C61BF092523C44200460C2B /* NameTopicViewController.swift in Sources */,
