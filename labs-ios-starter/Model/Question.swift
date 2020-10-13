@@ -16,7 +16,7 @@ class Question: Decodable {
     let leader: Bool?
     let answers: [Answer]?
 
-    init(questionid: Int?, surveyId: Int?, body: String, type: String, leader: Bool, answers: [Answer]?) {
+    init(questionid: Int?, surveyId: Int?, body: String, type: String?, leader: Bool?, answers: [Answer]?) {
         self.questionid = questionid
         self.surveyId = surveyId
         self.body = body
@@ -60,6 +60,10 @@ class Question: Decodable {
 
     convenience init(body: String, type: String, leader: Bool, answers: [Answer]) {
         self.init(questionid: nil, surveyId: nil, body: body, type: type, leader: leader, answers: answers)
+    }
+
+    convenience init(questionId: Int, body: String) {
+        self.init(questionid: questionId, surveyId: nil, body: body, type: nil, leader: nil, answers: nil)
     }
 }
 
