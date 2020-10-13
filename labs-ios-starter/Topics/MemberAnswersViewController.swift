@@ -11,7 +11,8 @@ import UIKit
 class MemberAnswersViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
-
+    @IBOutlet var respondButton: UIButton!
+    
     var surveyId: Int?
     var questions: [Question] = []
     var responses: [Question] = []
@@ -19,6 +20,8 @@ class MemberAnswersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchQuestions()
+        tableView.separatorStyle = .none
+        respondButton.layer.cornerRadius = 5
     }
 
     @IBAction func responseButtonTapped(_ sender: Any) {
@@ -29,7 +32,11 @@ class MemberAnswersViewController: UIViewController {
             }
 
             DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
+                for controller in self.navigationController!.viewControllers as Array {
+                    if controller.isKind(of: SurveyViewController.self) {
+                        self.navigationController?.popToViewController(controller, animated: true)
+                    }
+                }
             }
         }
     }
