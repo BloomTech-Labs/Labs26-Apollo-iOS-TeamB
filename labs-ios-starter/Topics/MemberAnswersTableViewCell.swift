@@ -23,5 +23,7 @@ class MemberAnswersTableViewCell: UITableViewCell {
         guard let question = question else { return }
         questionLabel.text = question.body
         answerTextView.text = ""
+        answerTextView.layer.borderWidth = 0.5
+        answerTextView.layer.cornerRadius = 5
     }
 }
