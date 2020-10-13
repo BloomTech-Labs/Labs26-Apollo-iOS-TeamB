@@ -1,5 +1,5 @@
 //
-//  MembersAnswersTableViewCell.swift
+//  MemberAnswersTableViewCell.swift
 //  labs-ios-starter
 //
 //  Created by Tobi Kuyoro on 12/10/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MembersAnswersTableViewCell: UITableViewCell {
+class MemberAnswersTableViewCell: UITableViewCell {
 
     @IBOutlet var questionLabel: UILabel!
     @IBOutlet var answerTextView: UITextView!
@@ -22,8 +22,6 @@ class MembersAnswersTableViewCell: UITableViewCell {
     private func updateViews() {
         guard let question = question else { return }
         questionLabel.text = question.body
-
-        if question.bo
         answerTextView.text = ""
     }
 }
