@@ -29,8 +29,8 @@ class HomeViewController: UIViewController {
     // MARK: - Methods
 
     private func styleButtons() {
-        joinCodeButton.layer.cornerRadius = 10
-        createTopicButton.layer.cornerRadius = 10
+        joinCodeButton.layer.cornerRadius = 5
+        createTopicButton.layer.cornerRadius = 5
     }
 
     private func setTitle() {

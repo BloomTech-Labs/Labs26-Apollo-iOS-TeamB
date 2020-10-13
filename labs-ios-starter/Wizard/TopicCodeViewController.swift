@@ -28,7 +28,7 @@ class TopicCodeViewController: UIViewController {
     // MARK: - Actions
 
     private func styleButton() {
-        completedButton.layer.cornerRadius = 10
+        completedButton.layer.cornerRadius = 5
     }
 
     private func createNewTopic() {

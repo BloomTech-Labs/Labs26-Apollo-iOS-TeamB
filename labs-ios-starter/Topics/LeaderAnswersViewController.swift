@@ -11,6 +11,7 @@ import UIKit
 class LeaderAnswersViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var continueButton: UIButton!
 
     var surveyId: Int?
     var questions: [Question] = []
@@ -18,6 +19,8 @@ class LeaderAnswersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchQuestions()
+        tableView.separatorStyle = .none
+        continueButton.layer.cornerRadius = 5
     }
 
     @IBAction func continueButtonTapped(_ sender: Any) {
