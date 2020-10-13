@@ -18,8 +18,12 @@ class LeaderAnswersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchQuestions()
-        print("Survey ID is \(String(describing: surveyId))")
     }
+
+    @IBAction func continueButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "MembersRespondSegue", sender: self)
+    }
+
 
     private func fetchQuestions() {
         guard let surveyId = surveyId else { return }
@@ -29,6 +33,14 @@ class LeaderAnswersViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+            }
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MembersRespondSegue" {
+            if let destinationVC = segue.destination as? MemberAnswersViewController {
+                destinationVC.surveyId = surveyId
             }
         }
     }
