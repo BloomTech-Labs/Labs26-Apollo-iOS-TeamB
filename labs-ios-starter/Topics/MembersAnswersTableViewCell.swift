@@ -1,14 +1,14 @@
 //
-//  AnswersTableViewCell.swift
+//  MembersAnswersTableViewCell.swift
 //  labs-ios-starter
 //
-//  Created by Tobi Kuyoro on 09/10/2020.
+//  Created by Tobi Kuyoro on 12/10/2020.
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
 import UIKit
 
-class AnswersTableViewCell: UITableViewCell {
+class MembersAnswersTableViewCell: UITableViewCell {
 
     @IBOutlet var questionLabel: UILabel!
     @IBOutlet var answerTextView: UITextView!
@@ -22,6 +22,8 @@ class AnswersTableViewCell: UITableViewCell {
     private func updateViews() {
         guard let question = question else { return }
         questionLabel.text = question.body
-        answerTextView.text = question.answers?.first?.body
+
+        if question.bo
+        answerTextView.text = ""
     }
 }
