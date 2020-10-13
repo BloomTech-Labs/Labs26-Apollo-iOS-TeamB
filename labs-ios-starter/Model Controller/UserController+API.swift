@@ -340,10 +340,45 @@ extension UserController {
                 let questions = try JSONDecoder().decode(QuestionResults.self, from: data)
                 DispatchQueue.main.async {
                     completion(questions)
-                    print("successful")
                 }
             } catch {
                 NSLog("Error decoding question data: \(error)")
+                completion(nil)
+            }
+        }.resume()
+    }
+
+    func fetchSpecificSurvey(with surveyId: Int, completion: @escaping (Survey?) -> Void) {
+        guard let oktaCredentials = getOktaAuth() else { return }
+
+        let requestURL = baseURL
+            .appendingPathComponent("surveys")
+            .appendingPathComponent("survey")
+            .appendingPathComponent(surveyId.description)
+
+        var request = URLRequest(url: requestURL)
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                NSLog("Error fetching survey with \(surveyId.description): \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                NSLog("No survey data")
+                completion(nil)
+                return
+            }
+
+            do {
+                let survey = try JSONDecoder().decode(Survey.self, from: data)
+                DispatchQueue.main.async {
+                    completion(survey)
+                }
+            } catch {
+                NSLog("Error decoding survey data: \(error)")
                 completion(nil)
             }
         }.resume()
