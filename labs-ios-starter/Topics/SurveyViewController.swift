@@ -95,8 +95,7 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch tableView {
         case self.tableView:
-            // TODO: - Figure out how to add a leading constraint instead of spacing here
-            return "     \(selectedSurveyQuestions?[section].body ?? "No question")"
+            return selectedSurveyQuestions?[section].body
         default:
             return nil
         }
@@ -113,6 +112,7 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             questionLabel.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
             questionLabel.layer.borderWidth = 1
             questionLabel.layer.cornerRadius = 5
+            questionLabel.textAlignment = .center
             return questionLabel
         default:
             return UIView()
@@ -120,7 +120,12 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        switch tableView {
+        case surveyTableView:
+            return 0
+        default:
+            return 50
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -155,7 +160,6 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyResponseCell", for: indexPath) as? SurveyResponseTableViewCell else {
                 return UITableViewCell()
             }
-            updateViews()
             cell.usernameLabel.text = selectedSurveyQuestions?[indexPath.section].answers?[indexPath.row].username
             cell.responseTextView.text = selectedSurveyQuestions?[indexPath.section].answers?[indexPath.row].body
             return cell
@@ -165,6 +169,7 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case surveyTableView:
+            updateViews()
             let survey = surveys?[indexPath.row]
             let date = String((survey?.createdDate?.split(separator: " ")[0])!)
             surveyButton.setTitle(date, for: .normal)
