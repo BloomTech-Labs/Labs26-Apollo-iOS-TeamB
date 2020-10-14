@@ -28,11 +28,12 @@ class Question: Decodable {
     enum CodingKeys: String, CodingKey {
         case questionid, body, type, leader, answers, answer
         case survey, surveyId
+        case questionId
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.questionid = try container.decodeIfPresent(Int.self, forKey: .questionid)
+        self.questionid = try container.decodeIfPresent(Int.self, forKey: .questionId)
         self.body = try container.decodeIfPresent(String.self, forKey: .body)
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
         self.leader = try container.decodeIfPresent(Bool.self, forKey: .leader)
