@@ -76,6 +76,41 @@ extension UserController {
         }
     }
 
+    func fetchSingleSurvey(isMock: Bool = false, using surveyId: Int, completion: @escaping (Survey?) -> Void) {
+        let requestURL = baseURL
+            .appendingPathComponent("surveys")
+            .appendingPathComponent("survey")
+            .appendingPathComponent(surveyId.description)
+        var request = URLRequest(url: requestURL)
+
+        if !isMock {
+            guard let oktaCredentials = getOktaAuth() else { return }
+            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+        dataLoader.loadData(using: request) { data, _, error in
+            if let error = error {
+                NSLog("Error fetching surveys: \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                NSLog("No survey data for surveys request")
+                completion(nil)
+                return
+            }
+
+            do {
+                let survey = try JSONDecoder().decode(Survey.self, from: data)
+                DispatchQueue.main.async { completion(survey) }
+            } catch {
+                NSLog("Error decoding surveys data: \(error)")
+                completion(nil)
+            }
+        }
+    }
+
     func fetchQuestions(isMock: Bool = false, completion: @escaping (QuestionResults?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("questions").appendingPathComponent("all")
         var request = URLRequest(url: requestURL)
@@ -188,6 +223,58 @@ extension UserController {
                 completion(nil)
             }
         }.resume()
+    }
+
+    func sendSurveyRequest(with questions: [Question], topicId: Int, completion: @escaping (Survey?) -> Void) {
+        guard let oktaCredentials = getOktaAuth() else { return }
+
+        let requestURL = baseURL.appendingPathComponent("surveys")
+            .appendingPathComponent("topic")
+            .appendingPathComponent(topicId.description)
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "POST"
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            let questions = try JSONEncoder().encode(questions)
+            request.httpBody = questions
+        } catch {
+            NSLog("Error sending survey request: \(error)")
+            completion(nil)
+            return
+        }
+
+        dataLoader.loadData(using: request) { data, response, error in
+            if let error = error {
+                NSLog("Error posting request: \(error)")
+                completion(nil)
+                return
+            }
+
+            if let response = response as? HTTPURLResponse,
+               response.statusCode != 201 {
+                NSLog("Received \(response.statusCode) code while answering survey request")
+                completion(nil)
+                return
+            }
+
+            guard let data = data else {
+                print("Data returned was nil")
+                completion(nil)
+                return
+            }
+
+            do {
+                let survey = try JSONDecoder().decode(Survey.self, from: data)
+                DispatchQueue.main.async {
+                    completion(survey)
+                }
+            } catch {
+                NSLog("Error decoding contexts data: \(error)")
+                completion(nil)
+            }
+        }
     }
 
     func answerSurveyRequest(for questions: [Question], completion: @escaping (Error?) -> Void) {
