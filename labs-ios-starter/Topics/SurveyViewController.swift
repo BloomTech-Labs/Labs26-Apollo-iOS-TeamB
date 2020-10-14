@@ -42,6 +42,7 @@ class SurveyViewController: UIViewController {
         surveyTableView.isHidden = true
         surveyTableView.separatorStyle = .none
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         surveyButton.layer.borderWidth = 1
         surveyButton.layer.cornerRadius = 5
         respondButton.layer.cornerRadius = 5
@@ -93,6 +94,9 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             questionLabel.numberOfLines = 0
             questionLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
             questionLabel.backgroundColor = UIColor(red: 241/255, green: 238/255, blue: 253/255, alpha: 1)
+            questionLabel.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
+            questionLabel.layer.borderWidth = 1
+            questionLabel.layer.cornerRadius = 5
             return questionLabel
         default:
             return UIView()
