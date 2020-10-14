@@ -31,6 +31,10 @@ class Answer: Decodable {
         self.body = try container.decode(String.self, forKey: .body)
         self.username = try userContainer.decode(String.self, forKey: .username)
     }
+
+    convenience init(body: String) {
+        self.init(answerId: 0, body: body, username: "TEMP")
+    }
 }
 
 extension Answer: Encodable {
