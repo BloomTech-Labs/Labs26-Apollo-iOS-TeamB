@@ -15,23 +15,19 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        UIApplication.shared.open(UserController.shared.oktaAuth.identityAuthURL()!)
+
         NotificationCenter.default.addObserver(forName: .oktaAuthenticationSuccessful,
                                                object: nil,
                                                queue: .main,
                                                using: checkForExistingUser)
-        
+
         NotificationCenter.default.addObserver(forName: .oktaAuthenticationExpired,
                                                object: nil,
                                                queue: .main,
                                                using: alertUserOfExpiredCredentials)
 
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func signIn(_ sender: Any) {
-        UIApplication.shared.open(UserController.shared.oktaAuth.identityAuthURL()!)
     }
     
     // MARK: - Private Methods
