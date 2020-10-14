@@ -11,6 +11,7 @@ import UIKit
 class LeaderAnswersViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var continueButton: UIButton!
 
     var surveyId: Int?
     var questions: [Question] = []
@@ -18,8 +19,14 @@ class LeaderAnswersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchQuestions()
-        print("Survey ID is \(String(describing: surveyId))")
+        tableView.separatorStyle = .none
+        continueButton.layer.cornerRadius = 5
     }
+
+    @IBAction func continueButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "MembersRespondSegue", sender: self)
+    }
+
 
     private func fetchQuestions() {
         guard let surveyId = surveyId else { return }
@@ -29,6 +36,14 @@ class LeaderAnswersViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+            }
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MembersRespondSegue" {
+            if let destinationVC = segue.destination as? MemberAnswersViewController {
+                destinationVC.surveyId = surveyId
             }
         }
     }

@@ -9,15 +9,15 @@
 import Foundation
 
 class Question: Decodable {
-    let questionId: Int?
+    let questionid: Int?
     let surveyId: Int?
     var body: String?
     let type: String?
     let leader: Bool?
     let answers: [Answer]?
 
-    init(questionId: Int?, surveyId: Int?, body: String, type: String, leader: Bool, answers: [Answer]?) {
-        self.questionId = questionId
+    init(questionid: Int?, surveyId: Int?, body: String, type: String?, leader: Bool?, answers: [Answer]?) {
+        self.questionid = questionid
         self.surveyId = surveyId
         self.body = body
         self.type = type
@@ -26,13 +26,14 @@ class Question: Decodable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case questionId, body, type, leader, answers
+        case questionid, body, type, leader, answers
         case survey, surveyId
+        case questionId
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.questionId = try container.decodeIfPresent(Int.self, forKey: .questionId)
+        self.questionid = try container.decodeIfPresent(Int.self, forKey: .questionId)
         self.body = try container.decodeIfPresent(String.self, forKey: .body)
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
         self.leader = try container.decodeIfPresent(Bool.self, forKey: .leader)
@@ -55,7 +56,11 @@ class Question: Decodable {
     }
 
     convenience init(body: String, type: String, leader: Bool) {
-        self.init(questionId: nil, surveyId: nil, body: body, type: type, leader: leader, answers: nil)
+        self.init(questionid: nil, surveyId: nil, body: body, type: type, leader: leader, answers: nil)
+    }
+
+    convenience init(questionId: Int, body: String) {
+        self.init(questionid: questionId, surveyId: nil, body: body, type: nil, leader: nil, answers: nil)
     }
 }
 
@@ -64,7 +69,6 @@ extension Question: Encodable {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(body, forKey: .body)
-        try container.encode(type, forKey: .type)
-        try container.encode(questionId, forKey: .questionId)
+        try container.encode(questionid, forKey: .questionid)
     }
 }

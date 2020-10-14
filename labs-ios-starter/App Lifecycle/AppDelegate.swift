@@ -14,7 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UITabBar.appearance().tintColor = UIColor(red: 74/255, green: 43/255, blue: 224/255, alpha: 1)
+        UITabBar.appearance().unselectedItemTintColor = .darkGray
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Poppins-Regular", size: 17)!], for: .normal)
         return true
     }
 
