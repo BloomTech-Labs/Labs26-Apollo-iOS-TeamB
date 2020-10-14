@@ -13,17 +13,16 @@ class SurveyViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var surveyButton: UIButton!
     @IBOutlet var surveyTableView: UITableView!
-    @IBOutlet var respondRequestButton: UIButton!
+    @IBOutlet var respondButton: UIButton!
 
     var topicTitle: String?
     var surveys: [Survey]?
     var selectedSurveyQuestions: [Question]?
+
     var index: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        surveyTableView.isHidden = true
-        surveyTableView.separatorStyle = .none
         setUpView()
     }
 
@@ -40,11 +39,22 @@ class SurveyViewController: UIViewController {
     }
 
     private func setUpView() {
+        surveyTableView.isHidden = true
+        surveyTableView.separatorStyle = .none
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         surveyButton.layer.borderWidth = 1
-        respondRequestButton.layer.borderWidth = 1
+        surveyButton.layer.cornerRadius = 5
+        respondButton.layer.cornerRadius = 5
+        respondButton.isEnabled = false
+        respondButton.backgroundColor = .lightGray
         title = topicTitle
-        tableView.sectionHeaderHeight = UITableView.automaticDimension
-        tableView.estimatedSectionHeaderHeight = 44
+    }
+
+    private func updateViews() {
+        tableView.separatorStyle = .singleLine
+        respondButton.isEnabled = true
+        respondButton.backgroundColor = UIColor(red: 74/255, green: 43/255, blue: 224/255, alpha: 1)
     }
 
     @IBAction func surveyButtonTapped(_ sender: Any) {
@@ -79,15 +89,26 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
         switch tableView {
         case self.tableView:
             let questionLabel = UILabel()
-            questionLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            questionLabel.font = UIFont(name: "Poppins-SemiBold", size: 16)
             questionLabel.numberOfLines = 0
-            questionLabel.textAlignment = .center
             questionLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
-            questionLabel.backgroundColor = UIColor.opaqueSeparator
-
+            questionLabel.backgroundColor = UIColor(red: 241/255, green: 238/255, blue: 253/255, alpha: 1)
+            questionLabel.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
+            questionLabel.layer.borderWidth = 1
+            questionLabel.layer.cornerRadius = 5
+            questionLabel.textAlignment = .center
             return questionLabel
         default:
             return UIView()
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch tableView {
+        case surveyTableView:
+            return 0
+        default:
+            return 50
         }
     }
 
@@ -123,7 +144,6 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyResponseCell", for: indexPath) as? SurveyResponseTableViewCell else {
                 return UITableViewCell()
             }
-
             cell.usernameLabel.text = selectedSurveyQuestions?[indexPath.section].answers?[indexPath.row].username
             cell.responseTextView.text = selectedSurveyQuestions?[indexPath.section].answers?[indexPath.row].body
             return cell
@@ -133,6 +153,7 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case surveyTableView:
+            updateViews()
             let survey = surveys?[indexPath.row]
             let date = String((survey?.createdDate?.split(separator: " ")[0])!)
             surveyButton.setTitle(date, for: .normal)

@@ -11,7 +11,8 @@ import UIKit
 class MemberAnswersViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
-
+    @IBOutlet var respondButton: UIButton!
+    
     var surveyId: Int?
     var questions: [Question] = []
     var responses: [Question] = []
@@ -19,6 +20,8 @@ class MemberAnswersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchQuestions()
+        tableView.separatorStyle = .none
+        respondButton.layer.cornerRadius = 5
     }
 
     @IBAction func responseButtonTapped(_ sender: Any) {
@@ -29,13 +32,22 @@ class MemberAnswersViewController: UIViewController {
             }
 
             DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
+                for controller in self.navigationController!.viewControllers as Array {
+                    if controller.isKind(of: SurveyViewController.self) {
+                        self.navigationController?.popToViewController(controller, animated: true)
+                    }
+                }
             }
         }
     }
 
     private func getResponses() {
-        guard let cells = tableView.visibleCells as? [MemberAnswersTableViewCell] else { return }
+        var cells = [MemberAnswersTableViewCell]()
+        for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? MemberAnswersTableViewCell {
+                cells.append(cell)
+            }
+        }
 
         for cell in cells {
             guard

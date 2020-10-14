@@ -17,13 +17,11 @@ class TopicTableViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         refreshTableView()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setUpRefreshControl()
     }
 
@@ -60,7 +58,7 @@ class TopicTableViewController: UIViewController {
                 let indexPath = tableView.indexPathForSelectedRow {
                 guard let surveys = topics[indexPath.row].surveys else { return }
                 destionationVC.topicTitle = topics[indexPath.row].title
-                destionationVC.surveys = surveys
+                destionationVC.surveys = surveys.reversed()
             }
         }
     }
