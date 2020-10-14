@@ -61,6 +61,8 @@ class TopicTableViewController: UIViewController {
                 destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
                 destionationVC.topicId = topics[indexPath.row].topicId
                 destionationVC.surveys = surveys.reversed()
+                destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
+                destionationVC.topicId = topics[indexPath.row].topicId
             }
         }
     }
