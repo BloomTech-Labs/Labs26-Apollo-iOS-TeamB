@@ -16,15 +16,20 @@ class SurveyViewController: UIViewController {
     @IBOutlet var respondRequestButton: UIButton!
 
     var topicTitle: String?
+    var topicId: Int?
+    var defaultSurvey: Survey?
     var surveys: [Survey]?
     var selectedSurveyQuestions: [Question]?
     var index: Int?
+
+    var delegate: SurveyRequestDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         surveyTableView.isHidden = true
         surveyTableView.separatorStyle = .none
         setUpView()
+        self.delegate = self
     }
 
     private func animate(toggle: Bool) {
@@ -55,11 +60,22 @@ class SurveyViewController: UIViewController {
         performSegue(withIdentifier: "ContextQuestionsSegue", sender: self)
     }
 
+    @IBAction func respondRequestButtonTapped(_ sender: Any) {
+        // Here there will be a check if you are the leader or not
+        performSegue(withIdentifier: "OwnerRequestSegue", sender: self)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ContextQuestionsSegue" {
             if let destinationVC = segue.destination as? LeaderAnswersViewController,
                 let index = index {
                 destinationVC.surveyId = surveys?[index].surveyId
+            }
+        } else if segue.identifier == "OwnerRequestSegue" {
+            if let destinationVC = segue.destination as? RequestContextViewController {
+                destinationVC.defaultSurvey = defaultSurvey
+                destinationVC.topicId = topicId
+                destinationVC.delegate = delegate
             }
         }
     }
@@ -157,5 +173,21 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension SurveyViewController: SurveyRequestDelegate {
+    func didGetSurveyRequest(_ request: Survey) {
+        self.surveys?.append(request)
+        self.surveyTableView.reloadData()
+        var newMemberQuestions: [Question] = []
+        guard let questions = request.questions else { return }
+        for question in questions {
+            if !(question.leader ?? false) {
+                newMemberQuestions.append(question)
+            }
+        }
+        self.selectedSurveyQuestions = newMemberQuestions
+        self.tableView.reloadData()
     }
 }

@@ -61,6 +61,8 @@ class TopicTableViewController: UIViewController {
                 guard let surveys = topics[indexPath.row].surveys else { return }
                 destionationVC.topicTitle = topics[indexPath.row].title
                 destionationVC.surveys = surveys
+                destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
+                destionationVC.topicId = topics[indexPath.row].topicId
             }
         }
     }
