@@ -42,7 +42,12 @@ class MemberAnswersViewController: UIViewController {
     }
 
     private func getResponses() {
-        guard let cells = tableView.visibleCells as? [MemberAnswersTableViewCell] else { return }
+        var cells = [MemberAnswersTableViewCell]()
+        for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? MemberAnswersTableViewCell {
+                cells.append(cell)
+            }
+        }
 
         for cell in cells {
             guard
