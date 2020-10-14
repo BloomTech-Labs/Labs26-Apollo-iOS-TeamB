@@ -205,6 +205,7 @@
 				2BED2331251922B4006C5DE8 /* HomeViewController.swift */,
 				2BED232D251922B4006C5DE8 /* TopicTableViewController.swift */,
 				2BED2333251922B4006C5DE8 /* SurveyViewController.swift */,
+				2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */,
 				2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */,
 				2BED2330251922B4006C5DE8 /* ThreadViewController.swift */,
 				2BED232E251922B4006C5DE8 /* ProfileDetailViewController.swift */,
@@ -213,6 +214,7 @@
 				2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */,
 				2BED232F251922B4006C5DE8 /* SurveyResponseTableViewCell.swift */,
 				2C7916A72535048D00830C51 /* MemberAnswersTableViewCell.swift */,
+				2B94871F2534F73000712A0D /* SurveyRequests */,
 			);
 			path = Topics;
 			sourceTree = "<group>";

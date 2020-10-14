@@ -102,7 +102,6 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
         cell.answerTextView.text = leaderQuestions[indexPath.row].answers?.first?.body
 
         cell.questionTextField.borderStyle = .none
-
         cell.answerTextView.delegate = self
         cell.answerTextView.text = placeholderText
         cell.answerTextView.textColor = UIColor.placeholderText
