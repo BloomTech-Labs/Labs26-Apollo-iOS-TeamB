@@ -66,6 +66,10 @@ class Question: Decodable {
     convenience init(questionId: Int, body: String) {
         self.init(questionid: questionId, surveyId: nil, body: body, type: nil, leader: nil, answers: nil)
     }
+
+    convenience init(body: String, type: String, leader: Bool, answers: [Answer]) {
+        self.init(questionid: nil, surveyId: nil, body: body, type: type, leader: leader, answers: answers)
+    }
 }
 
 extension Question: Encodable {
