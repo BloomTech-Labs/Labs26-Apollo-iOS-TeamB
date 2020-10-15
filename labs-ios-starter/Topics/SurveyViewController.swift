@@ -16,14 +16,20 @@ class SurveyViewController: UIViewController {
     @IBOutlet var respondButton: UIButton!
 
     var topicTitle: String?
+    var topicId: Int?
+    var defaultSurvey: Survey?
     var surveys: [Survey]?
     var selectedSurveyQuestions: [Question]?
+    var isLeader: Bool = false
 
     var index: Int?
+
+    var delegate: SurveyRequestDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        self.delegate = self
     }
 
     private func animate(toggle: Bool) {
@@ -46,9 +52,16 @@ class SurveyViewController: UIViewController {
         surveyButton.layer.borderWidth = 1
         surveyButton.layer.cornerRadius = 5
         respondButton.layer.cornerRadius = 5
-        respondButton.isEnabled = false
-        respondButton.backgroundColor = .lightGray
         title = topicTitle
+
+        if isLeader {
+            respondButton.backgroundColor = UIColor(red: 74/255, green: 43/255, blue: 224/255, alpha: 1)
+            respondButton.setTitle("Send Request", for: .normal)
+        } else {
+            respondButton.backgroundColor = .lightGray
+            respondButton.isEnabled = false
+            respondButton.setTitle("Respond", for: .normal)
+        }
     }
 
     private func updateViews() {
@@ -61,8 +74,12 @@ class SurveyViewController: UIViewController {
         surveyTableView.isHidden ? animate(toggle: true) : animate(toggle: false)
     }
 
-    @IBAction func answerButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "ContextQuestionsSegue", sender: self)
+    @IBAction func respondRequestButtonTapped(_ sender: Any) {
+        if isLeader {
+            performSegue(withIdentifier: "OwnerRequestSegue", sender: self)
+        } else {
+            performSegue(withIdentifier: "ContextQuestionsSegue", sender: self)
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,6 +87,12 @@ class SurveyViewController: UIViewController {
             if let destinationVC = segue.destination as? LeaderAnswersViewController,
                 let index = index {
                 destinationVC.surveyId = surveys?[index].surveyid
+            }
+        } else if segue.identifier == "OwnerRequestSegue" {
+            if let destinationVC = segue.destination as? RequestContextViewController {
+                destinationVC.defaultSurvey = defaultSurvey
+                destinationVC.topicId = topicId
+                destinationVC.delegate = delegate
             }
         }
     }
@@ -178,5 +201,21 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension SurveyViewController: SurveyRequestDelegate {
+    func didGetSurveyRequest(_ request: Survey) {
+        self.surveys?.append(request)
+        self.surveyTableView.reloadData()
+        var newMemberQuestions: [Question] = []
+        guard let questions = request.questions else { return }
+        for question in questions {
+            if !(question.leader ?? false) {
+                newMemberQuestions.append(question)
+            }
+        }
+        self.selectedSurveyQuestions = newMemberQuestions
+        self.tableView.reloadData()
     }
 }

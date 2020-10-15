@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2B1916F1252674B50040CB91 /* OktaProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1916F0252674B50040CB91 /* OktaProfile.swift */; };
+		2B9487162534D99100712A0D /* RequestContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9487152534D99100712A0D /* RequestContextViewController.swift */; };
+		2B94871B2534F72700712A0D /* RequestMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94871A2534F72700712A0D /* RequestMemberViewController.swift */; };
+		2B94873B2537781B00712A0D /* AnswerContextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94873A2537781B00712A0D /* AnswerContextTableViewCell.swift */; };
 		2BED231325191C17006C5DE8 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230925191C17006C5DE8 /* Survey.swift */; };
 		2BED231425191C17006C5DE8 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230A25191C17006C5DE8 /* Topic.swift */; };
 		2BED231525191C17006C5DE8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BED230B25191C17006C5DE8 /* Comment.swift */; };
@@ -87,6 +90,9 @@
 
 /* Begin PBXFileReference section */
 		2B1916F0252674B50040CB91 /* OktaProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktaProfile.swift; sourceTree = "<group>"; };
+		2B9487152534D99100712A0D /* RequestContextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestContextViewController.swift; sourceTree = "<group>"; };
+		2B94871A2534F72700712A0D /* RequestMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMemberViewController.swift; sourceTree = "<group>"; };
+		2B94873A2537781B00712A0D /* AnswerContextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerContextTableViewCell.swift; sourceTree = "<group>"; };
 		2BED230925191C17006C5DE8 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		2BED230A25191C17006C5DE8 /* Topic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		2BED230B25191C17006C5DE8 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -181,20 +187,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B94871F2534F73000712A0D /* SurveyRequests */ = {
+			isa = PBXGroup;
+			children = (
+				2B9487152534D99100712A0D /* RequestContextViewController.swift */,
+				2B94871A2534F72700712A0D /* RequestMemberViewController.swift */,
+				2B94873A2537781B00712A0D /* AnswerContextTableViewCell.swift */,
+			);
+			path = SurveyRequests;
+			sourceTree = "<group>";
+		};
 		2BED232C251922B4006C5DE8 /* Topics */ = {
 			isa = PBXGroup;
 			children = (
+				2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */,
 				2BED2332251922B4006C5DE8 /* Topics.storyboard */,
 				2BED2331251922B4006C5DE8 /* HomeViewController.swift */,
 				2BED232D251922B4006C5DE8 /* TopicTableViewController.swift */,
 				2BED2333251922B4006C5DE8 /* SurveyViewController.swift */,
+				2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */,
 				2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */,
 				2BED2330251922B4006C5DE8 /* ThreadViewController.swift */,
 				2BED232E251922B4006C5DE8 /* ProfileDetailViewController.swift */,
+				2B94871F2534F73000712A0D /* SurveyRequests */,
 				2CDE16462534D08E00B61AD2 /* MemberAnswersViewController.swift */,
 				2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */,
 				2BED232F251922B4006C5DE8 /* SurveyResponseTableViewCell.swift */,
 				2C7916A72535048D00830C51 /* MemberAnswersTableViewCell.swift */,
+				2B94871F2534F73000712A0D /* SurveyRequests */,
 			);
 			path = Topics;
 			sourceTree = "<group>";
@@ -611,6 +631,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B9487162534D99100712A0D /* RequestContextViewController.swift in Sources */,
 				46BEB4EE24C98ECC00FE0CD1 /* UserController.swift in Sources */,
 				2BED231425191C17006C5DE8 /* Topic.swift in Sources */,
 				46BF10BE24D388FF001C6753 /* UIViewController+SimpleAlert.swift in Sources */,
@@ -622,7 +643,9 @@
 				46BEB4E724C98D8900FE0CD1 /* Notifications.swift in Sources */,
 				463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */,
 				2CA3591E25311F1A001A5537 /* LeaderAnswersViewController.swift in Sources */,
+				2B94871B2534F72700712A0D /* RequestMemberViewController.swift in Sources */,
 				466C4274249A8748007D033E /* AppDelegate.swift in Sources */,
+				2B94873B2537781B00712A0D /* AnswerContextTableViewCell.swift in Sources */,
 				2C1D0757251D0FDE008B9051 /* UserController+API.swift in Sources */,
 				2BED23DE2523E866006C5DE8 /* QuestionsTableViewCell.swift in Sources */,
 				2BED2338251922B4006C5DE8 /* HomeViewController.swift in Sources */,

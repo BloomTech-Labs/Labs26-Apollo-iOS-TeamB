@@ -26,7 +26,7 @@ class Question: Decodable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case questionid, body, type, leader, answers
+        case questionid, body, type, leader, answers, answer
         case survey, surveyId
         case questionId
     }
@@ -64,6 +64,10 @@ class Question: Decodable {
         self.init(questionid: nil, surveyId: nil, body: body, type: type, leader: leader, answers: nil)
     }
 
+    convenience init(body: String, type: String, leader: Bool, answers: [Answer]) {
+        self.init(questionid: nil, surveyId: nil, body: body, type: type, leader: leader, answers: answers)
+    }
+
     convenience init(questionId: Int, body: String) {
         self.init(questionid: questionId, surveyId: nil, body: body, type: nil, leader: nil, answers: nil)
     }
@@ -74,21 +78,21 @@ extension Question: Encodable {
       var container = encoder.container(keyedBy: CodingKeys.self)
       try container.encode(body, forKey: .body)
 
-        if let questionid = questionid {
-            try container.encode(questionid, forKey: .questionid)
-        }
+      if let questionid = questionid {
+          try container.encode(questionid, forKey: .questionid)
+      }
 
-        if let type = type {
-            try container.encode(type, forKey: .type)
-        }
+      if let type = type {
+          try container.encode(type, forKey: .type)
+      }
 
-        if let leader = leader {
-            try container.encode(leader, forKey: .leader)
-        }
+      if let leader = leader {
+          try container.encode(leader, forKey: .leader)
+      }
 
-        if let answers = answers,
-            let answer = answers.first {
-            try container.encode(answer.body, forKey: .answers)
-        }
-    }
+      if let answers = answers,
+          let answer = answers.first {
+          try container.encode(answer.body, forKey: .answers)
+      }
+   }
 }
