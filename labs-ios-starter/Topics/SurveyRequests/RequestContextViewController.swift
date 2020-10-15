@@ -35,7 +35,9 @@ class RequestContextViewController: UIViewController {
 
     private func setUpView() {
         addNewQuestionButton.layer.borderWidth = 1
+        addNewQuestionButton.layer.cornerRadius = 5
         submitContextQuestionButton.layer.borderWidth = 1
+        submitContextQuestionButton.layer.cornerRadius = 5
     }
 
     private func setUpQuestions(questions: [Question]) {
