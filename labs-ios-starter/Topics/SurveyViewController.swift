@@ -69,7 +69,7 @@ class SurveyViewController: UIViewController {
         if segue.identifier == "ContextQuestionsSegue" {
             if let destinationVC = segue.destination as? LeaderAnswersViewController,
                 let index = index {
-                destinationVC.surveyId = surveys?[index].surveyId
+                destinationVC.surveyId = surveys?[index].surveyid
             }
         }
     }

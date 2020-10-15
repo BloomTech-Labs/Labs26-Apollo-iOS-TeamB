@@ -33,10 +33,15 @@ class Question: Decodable {
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.questionid = try container.decodeIfPresent(Int.self, forKey: .questionId)
         self.body = try container.decodeIfPresent(String.self, forKey: .body)
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
         self.leader = try container.decodeIfPresent(Bool.self, forKey: .leader)
+
+        if let questionId = try container.decodeIfPresent(Int.self, forKey: .questionId) {
+            self.questionid = questionId
+        } else {
+            self.questionid = try container.decodeIfPresent(Int.self, forKey: .questionid)
+        }
 
         var answersContainer = try container.nestedUnkeyedContainer(forKey: .answers)
         var answersArray: [Answer] = []
@@ -66,9 +71,24 @@ class Question: Decodable {
 
 extension Question: Encodable {
     func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(body, forKey: .body)
 
-        try container.encode(body, forKey: .body)
-        try container.encode(questionid, forKey: .questionid)
+        if let questionid = questionid {
+            try container.encode(questionid, forKey: .questionid)
+        }
+
+        if let type = type {
+            try container.encode(type, forKey: .type)
+        }
+
+        if let leader = leader {
+            try container.encode(leader, forKey: .leader)
+        }
+
+        if let answers = answers,
+            let answer = answers.first {
+            try container.encode(answer.body, forKey: .answers)
+        }
     }
 }
