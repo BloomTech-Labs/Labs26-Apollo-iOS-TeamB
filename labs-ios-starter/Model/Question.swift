@@ -92,7 +92,7 @@ extension Question: Encodable {
 
       if let answers = answers,
           let answer = answers.first {
-          try container.encode(answer.body, forKey: .answers)
+          try container.encode(answer.body, forKey: .answer)
       }
    }
 }

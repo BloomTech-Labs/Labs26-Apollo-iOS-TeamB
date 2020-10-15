@@ -40,6 +40,7 @@ class RequestMemberViewController: UIViewController {
     }
 
     @IBAction func sendRequestButtonTapped(_ sender: Any) {
+        updateMemberQuestions()
         let allQuestions: [Question] = leaderQuestions + memberQuestions
         postSurveyRequest(questions: allQuestions)
     }

@@ -286,7 +286,7 @@ extension UserController {
 
             if let response = response as? HTTPURLResponse,
                response.statusCode != 201 {
-                NSLog("Received \(response.statusCode) code while answering survey request")
+                NSLog("Received \(response.statusCode) code while sending survey request")
                 completion(nil)
                 return
             }
