@@ -47,12 +47,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-zq-zWz">
-                                <rect key="frame" x="0.0" y="140" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l8F-rO-7M5">
-                                <rect key="frame" x="0.0" y="196" width="414" height="617"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TopicCell" textLabel="5dG-AA-xc6" rowHeight="69" style="IBUITableViewCellStyleDefault" id="Pya-z1-aFP">
@@ -84,12 +80,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="l8F-rO-7M5" firstAttribute="top" secondItem="Paf-zq-zWz" secondAttribute="bottom" id="LWq-Qh-eGZ"/>
+                            <constraint firstItem="l8F-rO-7M5" firstAttribute="top" secondItem="1H7-aC-Jps" secondAttribute="top" id="WnS-rp-KFg"/>
                             <constraint firstItem="l8F-rO-7M5" firstAttribute="trailing" secondItem="1H7-aC-Jps" secondAttribute="trailing" id="fk1-Nu-D4d"/>
                             <constraint firstItem="l8F-rO-7M5" firstAttribute="bottom" secondItem="1H7-aC-Jps" secondAttribute="bottom" id="gUp-q3-m2w"/>
-                            <constraint firstItem="Paf-zq-zWz" firstAttribute="leading" secondItem="1H7-aC-Jps" secondAttribute="leading" id="iN7-9f-PLf"/>
-                            <constraint firstItem="Paf-zq-zWz" firstAttribute="trailing" secondItem="1H7-aC-Jps" secondAttribute="trailing" id="kmv-Cn-wfN"/>
-                            <constraint firstItem="Paf-zq-zWz" firstAttribute="top" secondItem="1H7-aC-Jps" secondAttribute="top" id="r6n-zh-mYM"/>
                             <constraint firstItem="l8F-rO-7M5" firstAttribute="leading" secondItem="1H7-aC-Jps" secondAttribute="leading" id="v2n-aL-o7b"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1H7-aC-Jps"/>
