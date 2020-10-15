@@ -32,11 +32,8 @@ class MemberAnswersViewController: UIViewController {
             }
 
             DispatchQueue.main.async {
-                for controller in self.navigationController!.viewControllers as Array {
-                    if controller.isKind(of: SurveyViewController.self) {
-                        self.navigationController?.popToViewController(controller, animated: true)
-                    }
-                }
+                self.presentingViewController?.dismiss(animated: false, completion: nil)
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
             }
         }
     }
