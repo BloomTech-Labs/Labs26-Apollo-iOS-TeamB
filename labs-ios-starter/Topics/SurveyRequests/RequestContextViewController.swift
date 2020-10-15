@@ -62,10 +62,6 @@ class RequestContextViewController: UIViewController {
         leaderQuestions = answeredLeaderQuestions
     }
 
-    @objc private func addNewQuestion(_ sender: UIButton) {
-        print(sender.tag)
-    }
-
     @IBAction func submitContextQuestionsButtonTapped(_ sender: Any) {
         updateLeaderQuestions()
         performSegue(withIdentifier: "RequestMemberViewSegue", sender: self)
