@@ -65,10 +65,12 @@ class RequestMemberViewController: UIViewController {
                 print("Failed to get result from server")
                 return
             }
-            self.presentingViewController?.dismiss(animated: false, completion: nil)
-            self.presentingViewController?.dismiss(animated: true, completion: {
-                self.delegate?.didGetSurveyRequest(result)
-            })
+            DispatchQueue.main.async {
+                self.presentingViewController?.dismiss(animated: false, completion: nil)
+                self.presentingViewController?.dismiss(animated: true, completion: {
+                    self.delegate?.didGetSurveyRequest(result)
+                })
+            }
         }
     }
 }

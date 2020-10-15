@@ -33,10 +33,15 @@ class Question: Decodable {
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.questionid = try container.decodeIfPresent(Int.self, forKey: .questionId)
         self.body = try container.decodeIfPresent(String.self, forKey: .body)
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
         self.leader = try container.decodeIfPresent(Bool.self, forKey: .leader)
+
+        if let questionId = try container.decodeIfPresent(Int.self, forKey: .questionId) {
+            self.questionid = questionId
+        } else {
+            self.questionid = try container.decodeIfPresent(Int.self, forKey: .questionid)
+        }
 
         var answersContainer = try container.nestedUnkeyedContainer(forKey: .answers)
         var answersArray: [Answer] = []
@@ -65,10 +70,6 @@ class Question: Decodable {
 
     convenience init(questionId: Int, body: String) {
         self.init(questionid: questionId, surveyId: nil, body: body, type: nil, leader: nil, answers: nil)
-    }
-
-    convenience init(body: String, type: String, leader: Bool, answers: [Answer]) {
-        self.init(questionid: nil, surveyId: nil, body: body, type: type, leader: leader, answers: answers)
     }
 }
 

@@ -94,12 +94,6 @@ class SurveyViewController: UIViewController {
                 destinationVC.topicId = topicId
                 destinationVC.delegate = delegate
             }
-        } else if segue.identifier == "OwnerRequestSegue" {
-            if let destinationVC = segue.destination as? RequestContextViewController {
-                destinationVC.defaultSurvey = defaultSurvey
-                destinationVC.topicId = topicId
-                destinationVC.delegate = delegate
-            }
         }
     }
 }

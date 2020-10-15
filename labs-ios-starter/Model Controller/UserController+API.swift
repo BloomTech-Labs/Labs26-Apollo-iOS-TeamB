@@ -320,6 +320,7 @@ extension UserController {
 
         do {
             let memberQuestions = try JSONEncoder().encode(questions)
+            print(String(data: memberQuestions, encoding: .utf8)!)
             request.httpBody = memberQuestions
         } catch {
             NSLog("Error answering survey request: \(error)")
