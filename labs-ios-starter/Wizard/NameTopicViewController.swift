@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NameTopicViewController: UIViewController {
+class NameTopicViewController: ShiftableViewController {
 
     // MARK: - Outlets
 
@@ -28,6 +28,7 @@ class NameTopicViewController: UIViewController {
         super.viewDidLoad()
 
         nextButton.isEnabled = false
+        topicNameTextField.delegate = self
         topicNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
 
         if let selectedContext = selectedContext {
