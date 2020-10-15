@@ -55,14 +55,19 @@ class TopicTableViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowTopicDetailSegue" {
             if let destionationVC = segue.destination as? SurveyViewController,
-                let indexPath = tableView.indexPathForSelectedRow {
-                guard let surveys = topics[indexPath.row].surveys else { return }
+                let indexPath = tableView.indexPathForSelectedRow,
+                let surveys = topics[indexPath.row].surveys {
                 destionationVC.topicTitle = topics[indexPath.row].title
                 destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
                 destionationVC.topicId = topics[indexPath.row].topicId
                 destionationVC.surveys = surveys.reversed()
                 destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
                 destionationVC.topicId = topics[indexPath.row].topicId
+
+                let userid = UserDefaults.standard.integer(forKey: "User")
+                if userid == topics[indexPath.row].userid {
+                    destionationVC.isLeader = true
+                }
             }
         }
     }

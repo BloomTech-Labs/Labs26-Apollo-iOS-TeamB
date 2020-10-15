@@ -12,6 +12,38 @@ import OktaAuth
 
 extension UserController {
 
+    func fetchUser(isMock: Bool = false, completion: @escaping (User?) -> Void) {
+        let requestURL = baseURL.appendingPathComponent("users").appendingPathComponent("getuserinfo")
+        var request = URLRequest(url: requestURL)
+
+        if !isMock {
+            guard let oktaCredentials = getOktaAuth() else { return }
+            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+        dataLoader.loadData(using: request) { data, response, error in
+            if let error = error {
+                    NSLog("Error fetching topics: \(error)")
+                    completion(nil)
+                    return
+            }
+
+            guard let data = data else {
+                NSLog("No topic data for topics request")
+                completion(nil)
+                return
+            }
+
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                DispatchQueue.main.async { completion(user) }
+            } catch {
+                NSLog("Error decoding topics data: \(error)")
+                completion(nil)
+            }
+        }
+    }
+
     func fetchTopics(isMock: Bool = false, completion: @escaping (TopicResults?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
         var request = URLRequest(url: requestURL)
@@ -26,22 +58,22 @@ extension UserController {
                     NSLog("Error fetching topics: \(error)")
                     completion(nil)
                     return
-                }
-
-                guard let data = data else {
-                    NSLog("No topic data for topics request")
-                    completion(nil)
-                    return
-                }
-
-                do {
-                    let topics = try JSONDecoder().decode(TopicResults.self, from: data)
-                    DispatchQueue.main.async { completion(topics) }
-                } catch {
-                    NSLog("Error decoding topics data: \(error)")
-                    completion(nil)
-                }
             }
+
+            guard let data = data else {
+                NSLog("No topic data for topics request")
+                completion(nil)
+                return
+            }
+
+            do {
+                let topics = try JSONDecoder().decode(TopicResults.self, from: data)
+                DispatchQueue.main.async { completion(topics) }
+            } catch {
+                NSLog("Error decoding topics data: \(error)")
+                completion(nil)
+            }
+        }
     }
 
     func fetchSurveys(isMock: Bool = false, completion: @escaping (SurveyResults?) -> Void) {

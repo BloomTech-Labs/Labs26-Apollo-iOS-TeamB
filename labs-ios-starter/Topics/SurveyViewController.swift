@@ -20,6 +20,7 @@ class SurveyViewController: UIViewController {
     var defaultSurvey: Survey?
     var surveys: [Survey]?
     var selectedSurveyQuestions: [Question]?
+    var isLeader: Bool = false
 
     var index: Int?
 
@@ -51,9 +52,16 @@ class SurveyViewController: UIViewController {
         surveyButton.layer.borderWidth = 1
         surveyButton.layer.cornerRadius = 5
         respondButton.layer.cornerRadius = 5
-        respondButton.isEnabled = false
-        respondButton.backgroundColor = .lightGray
         title = topicTitle
+
+        if isLeader {
+            respondButton.backgroundColor = UIColor(red: 74/255, green: 43/255, blue: 224/255, alpha: 1)
+            respondButton.setTitle("Send Request", for: .normal)
+        } else {
+            respondButton.backgroundColor = .lightGray
+            respondButton.isEnabled = false
+            respondButton.setTitle("Respond", for: .normal)
+        }
     }
 
     private func updateViews() {
@@ -66,13 +74,12 @@ class SurveyViewController: UIViewController {
         surveyTableView.isHidden ? animate(toggle: true) : animate(toggle: false)
     }
 
-    @IBAction func answerButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "ContextQuestionsSegue", sender: self)
-    }
-
     @IBAction func respondRequestButtonTapped(_ sender: Any) {
-        // Here there will be a check if you are the leader or not
-        performSegue(withIdentifier: "OwnerRequestSegue", sender: self)
+        if isLeader {
+            performSegue(withIdentifier: "OwnerRequestSegue", sender: self)
+        } else {
+            performSegue(withIdentifier: "ContextQuestionsSegue", sender: self)
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
