@@ -58,7 +58,7 @@ class TopicTableViewController: UIViewController {
                 let indexPath = tableView.indexPathForSelectedRow {
                 guard let surveys = topics[indexPath.row].surveys else { return }
                 destionationVC.topicTitle = topics[indexPath.row].title
-                destionationVC.surveys = surveys.reversed()
+                destionationVC.surveys = surveys
             }
         }
     }
