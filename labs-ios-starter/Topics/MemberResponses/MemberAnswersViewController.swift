@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemberAnswersViewController: ShiftableViewController {
+class MemberAnswersViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var respondButton: UIButton!
@@ -32,8 +32,11 @@ class MemberAnswersViewController: ShiftableViewController {
             }
 
             DispatchQueue.main.async {
-                self.presentingViewController?.dismiss(animated: false, completion: nil)
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
+                for controller in self.navigationController!.viewControllers as Array {
+                    if controller.isKind(of: SurveyViewController.self) {
+                        self.navigationController?.popToViewController(controller, animated: true)
+                    }
+                }
             }
         }
     }
