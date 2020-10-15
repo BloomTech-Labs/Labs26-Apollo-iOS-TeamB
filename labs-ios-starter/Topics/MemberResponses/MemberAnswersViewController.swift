@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemberAnswersViewController: UIViewController {
+class MemberAnswersViewController: ShiftableViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var respondButton: UIButton!
