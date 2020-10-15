@@ -52,7 +52,6 @@ extension Survey: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: EncodingCodingKeys.self)
-
         try container.encode(questions, forKey: .questions)
     }
 }

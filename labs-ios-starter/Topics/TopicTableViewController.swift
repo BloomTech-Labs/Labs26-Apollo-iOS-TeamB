@@ -58,9 +58,9 @@ class TopicTableViewController: UIViewController {
                 let indexPath = tableView.indexPathForSelectedRow,
                 let surveys = topics[indexPath.row].surveys {
                 destionationVC.topicTitle = topics[indexPath.row].title
+                destionationVC.surveys = surveys
                 destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
                 destionationVC.topicId = topics[indexPath.row].topicId
-                destionationVC.surveys = surveys.reversed()
                 destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
                 destionationVC.topicId = topics[indexPath.row].topicId
 

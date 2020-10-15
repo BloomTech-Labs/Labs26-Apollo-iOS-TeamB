@@ -44,7 +44,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="69" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L0y-Fg-wC8">
-                                <rect key="frame" x="0.0" y="259.5" width="414" height="636.5"/>
+                                <rect key="frame" x="0.0" y="224" width="414" height="672"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewTopicCell" textLabel="qsR-gf-2q0" rowHeight="69" style="IBUITableViewCellStyleDefault" id="9bF-x9-L2S">
@@ -74,7 +74,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qtV-nM-IWc">
-                                <rect key="frame" x="20" y="180" width="374" height="79.5"/>
+                                <rect key="frame" x="20" y="180" width="374" height="44"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Please select the type of surveys you will be sending to the team, also known as context.">
                                         <attributes>
@@ -495,7 +495,7 @@
                                                 <rect key="frame" x="0.0" y="44" width="334" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                 <state key="normal" image="doc.on.doc" catalog="system">
-                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.2901960784" green="0.16862745100000001" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="codeCopyTapped:" destination="bhv-hp-bGH" eventType="touchUpInside" id="Niy-Oc-6Da"/>

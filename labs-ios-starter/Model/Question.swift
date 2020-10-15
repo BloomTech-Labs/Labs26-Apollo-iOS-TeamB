@@ -75,21 +75,24 @@ class Question: Decodable {
 
 extension Question: Encodable {
     func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+      var container = encoder.container(keyedBy: CodingKeys.self)
+      try container.encode(body, forKey: .body)
 
-        try container.encode(body, forKey: .body)
-        if let questionid = questionid {
-            try container.encode(questionid, forKey: .questionid)
-        }
-        if let type = type {
-            try container.encode(type, forKey: .type)
-        }
-        if let leader = leader {
-            try container.encode(leader, forKey: .leader)
-        }
-        if let answers = answers,
-           let answer = answers.first {
-            try container.encode(answer.body, forKey: .answer)
-        }
-    }
+      if let questionid = questionid {
+          try container.encode(questionid, forKey: .questionid)
+      }
+
+      if let type = type {
+          try container.encode(type, forKey: .type)
+      }
+
+      if let leader = leader {
+          try container.encode(leader, forKey: .leader)
+      }
+
+      if let answers = answers,
+          let answer = answers.first {
+          try container.encode(answer.body, forKey: .answers)
+      }
+   }
 }
