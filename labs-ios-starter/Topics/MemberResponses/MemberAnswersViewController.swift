@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemberAnswersViewController: UIViewController {
+class MemberAnswersViewController: ShiftableViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var respondButton: UIButton!
@@ -88,6 +88,7 @@ extension MemberAnswersViewController: UITableViewDataSource, UITableViewDelegat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MembersCell", for: indexPath) as? MemberAnswersTableViewCell else { return UITableViewCell() }
 
         cell.question = questions[indexPath.row]
+        cell.answerTextView.delegate = self
         return cell
     }
 }

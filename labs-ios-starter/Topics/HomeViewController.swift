@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: ShiftableViewController {
 
     // MARK: - Outlets
 
@@ -27,8 +27,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         styleButtons()
-        navigationController?.setNavigationBarHidden(true, animated: false)
         fetchUser()
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        codeTextField.delegate = self
     }
 
     // MARK: - Methods

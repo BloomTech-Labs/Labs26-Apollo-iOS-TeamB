@@ -12,7 +12,7 @@ protocol SurveyRequestDelegate {
     func didGetSurveyRequest(_ request: Survey)
 }
 
-class RequestMemberViewController: UIViewController {
+class RequestMemberViewController: ShiftableViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var addNewQuestionButton: UIButton!
@@ -92,6 +92,7 @@ extension RequestMemberViewController: UITableViewDelegate, UITableViewDataSourc
         }
         cell.questionLabel.text = "Question \(indexPath.row + 1)"
         cell.answerTextView.text = memberQuestions[indexPath.row].body
+        cell.answerTextView.delegate = self
         return cell
     }
 
