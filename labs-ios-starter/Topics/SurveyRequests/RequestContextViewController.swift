@@ -52,14 +52,20 @@ class RequestContextViewController: ShiftableViewController {
     }
 
     private func updateLeaderQuestions() {
-        guard let cells = tableView.visibleCells as? [AnswerContextTableViewCell] else { return }
+        var cells = [AnswerContextTableViewCell]()
+        for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? AnswerContextTableViewCell {
+                cells.append(cell)
+            }
+        }
+
         var answeredLeaderQuestions: [Question] = []
         for cell in cells {
-            guard let body = cell.questionTextField.text,
-                  let answerText = cell.answerTextView.text else { return }
-            let answer = Answer(body: answerText)
-            let newQuestion = Question(body: body, type: "TEXT", leader: true, answers: [answer])
-            answeredLeaderQuestions.append(newQuestion)
+            guard let leaderQuestionText = cell.questionTextField.text,
+                let leaderAnswerText = cell.answerTextView.text else { return }
+            let leaderAnswer = Answer(body: leaderAnswerText)
+            let response = Question(body: leaderQuestionText, type: "TEXT", leader: false, answers: [leaderAnswer])
+            answeredLeaderQuestions.append(response)
         }
         leaderQuestions = answeredLeaderQuestions
     }
@@ -97,13 +103,16 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell()
         }
         cell.questionTextField.text = leaderQuestions[indexPath.row].body
-        cell.answerTextView.text = leaderQuestions[indexPath.row].answers?.first?.body
+        if let answerText = leaderQuestions[indexPath.row].answers?.first?.body {
+            cell.answerTextView.text = answerText
+        } else {
+            cell.answerTextView.text = placeholderText
+            cell.answerTextView.textColor = UIColor.placeholderText
+        }
 
         cell.questionTextField.borderStyle = .none
         cell.questionTextField.delegate = self
         cell.answerTextView.delegate = self
-        cell.answerTextView.text = placeholderText
-        cell.answerTextView.textColor = UIColor.placeholderText
         return cell
     }
 

@@ -49,14 +49,20 @@ class RequestMemberViewController: ShiftableViewController {
     }
 
     private func updateMemberQuestions() {
-        guard let cells = tableView.visibleCells as? [AnswersTableViewCell] else { return }
-        var questions: [Question] = []
+        var cells = [MemberAnswersTableViewCell]()
+        for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? MemberAnswersTableViewCell {
+                cells.append(cell)
+            }
+        }
+
+        var responses: [Question] = []
         for cell in cells {
             guard let memberQuestion = cell.answerTextView.text else { return }
-            let newMemberQuestion = Question(body: memberQuestion, type: "TEXT", leader: false)
-            questions.append(newMemberQuestion)
+            let response = Question(body: memberQuestion, type: "TEXT", leader: false)
+            responses.append(response)
         }
-        memberQuestions = questions
+        memberQuestions = responses
     }
 
     private func postSurveyRequest(questions: [Question]) {
