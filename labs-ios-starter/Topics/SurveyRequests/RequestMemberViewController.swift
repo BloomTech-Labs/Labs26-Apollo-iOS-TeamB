@@ -12,10 +12,11 @@ protocol SurveyRequestDelegate {
     func didGetSurveyRequest(_ request: Survey)
 }
 
-class RequestMemberViewController: UIViewController {
+class RequestMemberViewController: ShiftableViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var addNewQuestionButton: UIButton!
+    @IBOutlet var sendRequestButton: UIButton!
 
     var topicId: Int?
     var leaderQuestions: [Question] = []
@@ -30,6 +31,8 @@ class RequestMemberViewController: UIViewController {
 
     private func setUpView() {
         addNewQuestionButton.layer.borderWidth = 1
+        addNewQuestionButton.layer.cornerRadius = 5
+        sendRequestButton.layer.cornerRadius = 5
     }
 
     @IBAction func addNewQuestionButtonTapped(_ sender: Any) {
@@ -67,10 +70,12 @@ class RequestMemberViewController: UIViewController {
                 return
             }
             DispatchQueue.main.async {
-                self.presentingViewController?.dismiss(animated: false, completion: nil)
-                self.presentingViewController?.dismiss(animated: true, completion: {
-                    self.delegate?.didGetSurveyRequest(result)
-                })
+                for controller in self.navigationController!.viewControllers as Array {
+                    if controller.isKind(of: SurveyViewController.self) {
+                        self.delegate?.didGetSurveyRequest(result)
+                        self.navigationController?.popToViewController(controller, animated: true)
+                    }
+                }
             }
         }
     }
@@ -87,6 +92,7 @@ extension RequestMemberViewController: UITableViewDelegate, UITableViewDataSourc
         }
         cell.questionLabel.text = "Question \(indexPath.row + 1)"
         cell.answerTextView.text = memberQuestions[indexPath.row].body
+        cell.answerTextView.delegate = self
         return cell
     }
 

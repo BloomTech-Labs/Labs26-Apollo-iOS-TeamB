@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemberQuestionsViewController: UIViewController {
+class MemberQuestionsViewController: ShiftableViewController {
 
     @IBOutlet var tableView: UITableView!
 
@@ -43,6 +43,19 @@ class MemberQuestionsViewController: UIViewController {
         memberQuestions.append(newQuestion)
         tableView.reloadData()
     }
+
+    override func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldBeingEdited = textField
+        indexToEdit = memberQuestions.firstIndex(where: { question -> Bool in
+            guard let questionText = textField.text else { return false }
+            return question.body == questionText
+        })
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let indexToEdit = indexToEdit, let questionText = textField.text else { return }
+        memberQuestions[indexToEdit].body = questionText
+    }
 }
 
 extension MemberQuestionsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -71,19 +84,5 @@ extension MemberQuestionsViewController: UITableViewDelegate, UITableViewDataSou
                 destionationVC.newTopic = newTopic
             }
         }
-    }
-}
-
-extension MemberQuestionsViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        indexToEdit = memberQuestions.firstIndex(where: { question -> Bool in
-            guard let questionText = textField.text else { return false }
-            return question.body == questionText
-        })
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let indexToEdit = indexToEdit, let questionText = textField.text else { return }
-        memberQuestions[indexToEdit].body = questionText
     }
 }

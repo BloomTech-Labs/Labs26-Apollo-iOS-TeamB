@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContextQuestionsViewController: UIViewController {
+class ContextQuestionsViewController: ShiftableViewController {
 
     @IBOutlet var tableView: UITableView!
 
@@ -53,6 +53,19 @@ class ContextQuestionsViewController: UIViewController {
             }
         }
     }
+
+    override func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldBeingEdited = textField
+        indexToEdit = leaderQuestions.firstIndex(where: { question -> Bool in
+            guard let questionText = textField.text else { return false }
+            return question.body == questionText
+        })
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let indexToEdit = indexToEdit, let questionText = textField.text else { return }
+        leaderQuestions[indexToEdit].body = questionText
+    }
 }
 
 extension ContextQuestionsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -72,19 +85,5 @@ extension ContextQuestionsViewController: UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension ContextQuestionsViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        indexToEdit = leaderQuestions.firstIndex(where: { question -> Bool in
-            guard let questionText = textField.text else { return false }
-            return question.body == questionText
-        })
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let indexToEdit = indexToEdit, let questionText = textField.text else { return }
-        leaderQuestions[indexToEdit].body = questionText
     }
 }

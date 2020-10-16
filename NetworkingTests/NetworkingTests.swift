@@ -62,7 +62,7 @@ class NetworkingTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(results.questions[0].questionId, 56)
+            XCTAssertEqual(results.questions[0].questionid, 56)
             XCTAssertTrue(results.questions[1].body == "Leader Question 2")
             expectation.fulfill()
         }

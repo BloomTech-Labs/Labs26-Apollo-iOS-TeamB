@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestContextViewController: UIViewController {
+class RequestContextViewController: ShiftableViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var addNewQuestionButton: UIButton!
@@ -35,7 +35,9 @@ class RequestContextViewController: UIViewController {
 
     private func setUpView() {
         addNewQuestionButton.layer.borderWidth = 1
+        addNewQuestionButton.layer.cornerRadius = 5
         submitContextQuestionButton.layer.borderWidth = 1
+        submitContextQuestionButton.layer.cornerRadius = 5
     }
 
     private func setUpQuestions(questions: [Question]) {
@@ -98,6 +100,7 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
         cell.answerTextView.text = leaderQuestions[indexPath.row].answers?.first?.body
 
         cell.questionTextField.borderStyle = .none
+        cell.questionTextField.delegate = self
         cell.answerTextView.delegate = self
         cell.answerTextView.text = placeholderText
         cell.answerTextView.textColor = UIColor.placeholderText
@@ -116,7 +119,7 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
-extension RequestContextViewController: UITextViewDelegate {
+extension RequestContextViewController {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == placeholderText {
             textView.text = ""

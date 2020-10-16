@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopicTableViewController: UIViewController {
+class TopicTableViewController: ShiftableViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
