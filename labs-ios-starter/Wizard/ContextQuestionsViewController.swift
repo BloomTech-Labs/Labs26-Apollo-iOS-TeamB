@@ -42,6 +42,8 @@ class ContextQuestionsViewController: ShiftableViewController {
         tableView.reloadData()
     }
 
+    // MARK: - Navigation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MemberQuestionsSegue" {
             if let destinationVC = segue.destination as? MemberQuestionsViewController {
@@ -53,6 +55,8 @@ class ContextQuestionsViewController: ShiftableViewController {
             }
         }
     }
+
+    // MARK: - TextField Delegate Methods
 
     override func textFieldDidBeginEditing(_ textField: UITextField) {
         textFieldBeingEdited = textField
@@ -85,5 +89,12 @@ extension ContextQuestionsViewController: UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            leaderQuestions.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }

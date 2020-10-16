@@ -44,6 +44,19 @@ class MemberQuestionsViewController: ShiftableViewController {
         tableView.reloadData()
     }
 
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TopicCodeSegue" {
+            if let destionationVC = segue.destination as? TopicCodeViewController {
+                newTopic?.defaultSurvey?.questions?.append(contentsOf: memberQuestions)
+                destionationVC.newTopic = newTopic
+            }
+        }
+    }
+
+    // MARK: - TextField Delegate Methods
+
     override func textFieldDidBeginEditing(_ textField: UITextField) {
         textFieldBeingEdited = textField
         indexToEdit = memberQuestions.firstIndex(where: { question -> Bool in
@@ -77,12 +90,10 @@ extension MemberQuestionsViewController: UITableViewDelegate, UITableViewDataSou
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TopicCodeSegue" {
-            if let destionationVC = segue.destination as? TopicCodeViewController {
-                newTopic?.defaultSurvey?.questions?.append(contentsOf: memberQuestions)
-                destionationVC.newTopic = newTopic
-            }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            memberQuestions.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 }
