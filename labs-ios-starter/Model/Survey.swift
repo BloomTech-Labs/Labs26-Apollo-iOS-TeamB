@@ -9,31 +9,31 @@
 import Foundation
 
 class Survey: Decodable {
-    let surveyId: Int?
+    let surveyid: Int?
     let topicId: Int?
     var questions: [Question]?
     let createdDate: String?
 
-    init(surveyId: Int?, topicId: Int?, questions: [Question]?, createdDate: String?) {
-        self.surveyId = surveyId
+    init(surveyid: Int?, topicId: Int?, questions: [Question]?, createdDate: String?) {
+        self.surveyid = surveyid
         self.topicId = topicId
         self.questions = questions
         self.createdDate = createdDate
     }
 
     convenience init() {
-        self.init(surveyId: nil, topicId: nil, questions: nil, createdDate: nil)
+        self.init(surveyid: nil, topicId: nil, questions: nil, createdDate: nil)
     }
 
     enum CodingKeys: String, CodingKey {
-        case surveyId, questions, createdDate
+        case surveyid, questions, createdDate
         case topic, topicId
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.surveyId = try container.decode(Int.self, forKey: .surveyId)
+        self.surveyid = try container.decode(Int.self, forKey: .surveyid)
         self.questions = try container.decode([Question].self, forKey: .questions)
         self.createdDate = try container.decode(String.self, forKey: .createdDate)
 
@@ -52,7 +52,6 @@ extension Survey: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: EncodingCodingKeys.self)
-
         try container.encode(questions, forKey: .questions)
     }
 }

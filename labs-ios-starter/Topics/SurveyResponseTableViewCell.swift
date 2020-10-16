@@ -9,7 +9,6 @@
 import UIKit
 
 class SurveyResponseTableViewCell: UITableViewCell {
-
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var responseTextView: UITextView!
 }

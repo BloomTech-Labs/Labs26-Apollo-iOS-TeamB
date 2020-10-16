@@ -16,13 +16,13 @@ class NameTopicViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var nextButton: UIBarButtonItem!
 
+    // MARK: - Properties
+
+    var selectedFrequency: FrequencyTableViewCell?
     var selectedContext: Context?
-    let frequencyArray = ["Daily",
-                          "Weekly",
-                          "Monthly",
-                          "Custom",
-                          "Off"]
-    private var selectedFrequency: FrequencyTableViewCell?
+    let frequencyArray = ["Daily", "Weekly", "Monthly", "Custom", "Off"]
+
+    // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,8 @@ class NameTopicViewController: UIViewController {
         }
     }
 
+    // MARK: - Methods
+
     @objc func textFieldDidChange(_ textField: UITextField) {
         if !(topicNameTextField.text?.isEmpty ?? false) && (selectedFrequency != nil) {
             nextButton.isEnabled = true
@@ -45,9 +47,11 @@ class NameTopicViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ContextQuestionsSegue" {
-            guard let vc = segue.destination as? ContextQuestionsViewController,
-                  let topicTitle = topicNameTextField.text,
-                  let frequency = selectedFrequency?.frequencyLabel?.text else { return }
+            guard
+                let vc = segue.destination as? ContextQuestionsViewController,
+                let topicTitle = topicNameTextField.text,
+                let frequency = selectedFrequency?.frequencyLabel?.text else { return }
+
             let newTopic = Topic()
             newTopic.title = topicTitle
             newTopic.frequency = frequency.uppercased()
@@ -63,9 +67,8 @@ extension NameTopicViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FrequencyCell", for: indexPath) as? FrequencyTableViewCell else {
-            return UITableViewCell()
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FrequencyCell", for: indexPath) as? FrequencyTableViewCell else { return UITableViewCell() }
+
         cell.frequencyLabel.text = frequencyArray[indexPath.row]
         cell.checkmarkImageView.image = UIImage(systemName: "circle")
         return cell

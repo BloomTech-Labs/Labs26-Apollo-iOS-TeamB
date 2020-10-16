@@ -8,6 +8,20 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Bold.ttf">
+            <string>Poppins-Bold</string>
+        </array>
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
+        </array>
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+        <array key="Poppins-SemiBold.ttf">
+            <string>Poppins-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--New Topic-->
         <scene sceneID="63p-IN-GZg">
@@ -31,8 +45,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L0y-Fg-wC8">
-                                <rect key="frame" x="0.0" y="275.5" width="414" height="620.5"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="69" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L0y-Fg-wC8">
+                                <rect key="frame" x="0.0" y="225" width="414" height="671"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewTopicCell" textLabel="qsR-gf-2q0" rowHeight="69" style="IBUITableViewCellStyleDefault" id="9bF-x9-L2S">
@@ -45,7 +59,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Context Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qsR-gf-2q0">
                                                     <rect key="frame" x="20" y="0.0" width="355" height="69"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -61,17 +75,24 @@
                                     <outlet property="delegate" destination="9vY-a2-0ad" id="uNf-zQ-VQG"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select the type of surveys you will be sending to the team, also known as context." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtV-nM-IWc">
-                                <rect key="frame" x="20" y="180" width="374" height="75.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qtV-nM-IWc">
+                                <rect key="frame" x="20" y="180" width="374" height="45"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Please select the type of surveys you will be sending to the team, also known as context.">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Kkz-2C-njs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="L0y-Fg-wC8" firstAttribute="top" secondItem="qtV-nM-IWc" secondAttribute="bottom" constant="20" id="3IH-Bb-n9v"/>
+                            <constraint firstItem="L0y-Fg-wC8" firstAttribute="top" secondItem="qtV-nM-IWc" secondAttribute="bottom" id="3IH-Bb-n9v"/>
                             <constraint firstItem="L0y-Fg-wC8" firstAttribute="trailing" secondItem="Kkz-2C-njs" secondAttribute="trailing" id="DKJ-dp-wN3"/>
                             <constraint firstAttribute="bottom" secondItem="L0y-Fg-wC8" secondAttribute="bottom" id="PIf-aB-k4z"/>
                             <constraint firstItem="qtV-nM-IWc" firstAttribute="top" secondItem="Kkz-2C-njs" secondAttribute="top" constant="40" id="Th4-DU-3an"/>
@@ -98,34 +119,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="azc-Y7-DDp">
-                                <rect key="frame" x="20" y="180" width="374" height="168"/>
+                                <rect key="frame" x="20" y="180" width="374" height="140"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ltl-Zm-DWx">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="67.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="66"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0Z-kw-ruj">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Context Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WlI-xh-l3Z">
-                                                <rect key="frame" x="0.0" y="33.5" width="374" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <rect key="frame" x="0.0" y="32" width="374" height="34"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How frequently do you want to be notified?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w55-yV-UwR">
-                                        <rect key="frame" x="0.0" y="117.5" width="374" height="50.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How frequently do you want to be notified?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="w55-yV-UwR">
+                                        <rect key="frame" x="0.0" y="116" width="374" height="24"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gf9-Aq-alx">
-                                <rect key="frame" x="0.0" y="368" width="414" height="528"/>
+                                <rect key="frame" x="0.0" y="340" width="414" height="556"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FrequencyCell" rowHeight="67" id="aum-Ez-t5b" customClass="FrequencyTableViewCell" customModule="labs_ios_starter" customModuleProvider="target">
@@ -136,8 +157,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKu-Fa-VQA">
-                                                    <rect key="frame" x="20" y="23.5" width="289" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="20" y="21.5" width="289" height="24"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -208,14 +229,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's setup the questions you will answer for the team as part of your request." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vW-v4-o4o">
-                                <rect key="frame" x="20" y="180" width="374" height="50.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vW-v4-o4o">
+                                <rect key="frame" x="20" y="180" width="374" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="wkb-tw-vEt"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Let's setup the questions you will answer for the team as part of your request.">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="Poppins-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x3P-V2-Qje">
-                                <rect key="frame" x="0.0" y="250.5" width="414" height="561.5"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x3P-V2-Qje">
+                                <rect key="frame" x="0.0" y="260" width="414" height="546"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContextQuestionCell" rowHeight="112" id="4dC-JB-6Qm" customClass="QuestionsTableViewCell" customModule="labs_ios_starter" customModuleProvider="target">
@@ -229,14 +259,14 @@
                                                     <rect key="frame" x="20" y="11" width="374" height="90"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOU-so-9UM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-H3-0Sf">
-                                                            <rect key="frame" x="0.0" y="40.5" width="374" height="49.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <rect key="frame" x="0.0" y="44" width="374" height="46"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
@@ -261,7 +291,8 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu8-z7-G7M">
-                                <rect key="frame" x="143" y="832" width="128" height="30"/>
+                                <rect key="frame" x="100" y="826" width="214" height="36"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
                                 <state key="normal" title="Add New Question"/>
                                 <connections>
                                     <action selector="addNewQuestionTapped:" destination="jL0-0O-voG" eventType="touchUpInside" id="zJq-Gc-Rdm"/>
@@ -272,7 +303,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="x3P-V2-Qje" firstAttribute="top" secondItem="4vW-v4-o4o" secondAttribute="bottom" constant="20" id="9BY-d6-YTa"/>
-                            <constraint firstItem="Hu8-z7-G7M" firstAttribute="leading" secondItem="Sao-sN-PPu" secondAttribute="leading" constant="143" id="CR9-MI-MPe"/>
+                            <constraint firstItem="Hu8-z7-G7M" firstAttribute="leading" secondItem="Sao-sN-PPu" secondAttribute="leading" constant="100" id="CR9-MI-MPe"/>
                             <constraint firstItem="4vW-v4-o4o" firstAttribute="leading" secondItem="Sao-sN-PPu" secondAttribute="leading" constant="20" id="Nfo-Rh-V81"/>
                             <constraint firstItem="x3P-V2-Qje" firstAttribute="leading" secondItem="Sao-sN-PPu" secondAttribute="leading" id="OMY-6N-20K"/>
                             <constraint firstItem="x3P-V2-Qje" firstAttribute="trailing" secondItem="Sao-sN-PPu" secondAttribute="trailing" id="T9G-8S-Jiz"/>
@@ -280,7 +311,7 @@
                             <constraint firstItem="4vW-v4-o4o" firstAttribute="top" secondItem="Sao-sN-PPu" secondAttribute="top" constant="40" id="kQr-Fg-GX0"/>
                             <constraint firstItem="Sao-sN-PPu" firstAttribute="trailing" secondItem="4vW-v4-o4o" secondAttribute="trailing" constant="20" id="lE2-0Y-NKm"/>
                             <constraint firstItem="Hu8-z7-G7M" firstAttribute="bottom" secondItem="Sao-sN-PPu" secondAttribute="bottom" id="lPS-rg-QVy"/>
-                            <constraint firstItem="Sao-sN-PPu" firstAttribute="trailing" secondItem="Hu8-z7-G7M" secondAttribute="trailing" constant="143" id="tiZ-9W-G7d"/>
+                            <constraint firstItem="Sao-sN-PPu" firstAttribute="trailing" secondItem="Hu8-z7-G7M" secondAttribute="trailing" constant="100" id="tiZ-9W-G7d"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Context Title" id="m1i-J4-wo9">
@@ -306,6 +337,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="pvc-o7-hec">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="Poppins-ExtraBold" family="Poppins" pointSize="31"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -324,14 +358,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What default questions do you want to set for your requests?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0C-LX-hZU">
-                                <rect key="frame" x="20" y="180" width="374" height="50.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0C-LX-hZU">
+                                <rect key="frame" x="20" y="180" width="374" height="52"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="What default questions do you want to set for your requests?">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="Poppins-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbi-ZQ-p1Z">
-                                <rect key="frame" x="0.0" y="250.5" width="414" height="561.5"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbi-ZQ-p1Z">
+                                <rect key="frame" x="0.0" y="252" width="414" height="554"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberQuestionCell" rowHeight="112" id="Ncd-45-Ffw" customClass="QuestionsTableViewCell" customModule="labs_ios_starter" customModuleProvider="target">
@@ -345,14 +385,14 @@
                                                     <rect key="frame" x="20" y="11" width="374" height="90"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwh-ps-p34">
-                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NJx-Dw-GFw">
-                                                            <rect key="frame" x="0.0" y="40.5" width="374" height="49.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <rect key="frame" x="0.0" y="44" width="374" height="46"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
                                                     </subviews>
@@ -377,7 +417,8 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsz-WB-3gt">
-                                <rect key="frame" x="143" y="832" width="128" height="30"/>
+                                <rect key="frame" x="100" y="826" width="214" height="36"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
                                 <state key="normal" title="Add New Question"/>
                                 <connections>
                                     <action selector="addNewQuestionTapped:" destination="Gsa-qB-RFk" eventType="touchUpInside" id="ZPw-rp-zhB"/>
@@ -391,12 +432,12 @@
                             <constraint firstItem="Tbi-ZQ-p1Z" firstAttribute="trailing" secondItem="LVm-Ym-b8Q" secondAttribute="trailing" id="3G5-nz-e7y"/>
                             <constraint firstItem="g0C-LX-hZU" firstAttribute="leading" secondItem="LVm-Ym-b8Q" secondAttribute="leading" constant="20" id="CFQ-gi-ib9"/>
                             <constraint firstItem="LVm-Ym-b8Q" firstAttribute="trailing" secondItem="g0C-LX-hZU" secondAttribute="trailing" constant="20" id="XuJ-vW-JUc"/>
-                            <constraint firstItem="nsz-WB-3gt" firstAttribute="leading" secondItem="LVm-Ym-b8Q" secondAttribute="leading" constant="143" id="bWo-Gy-oVl"/>
+                            <constraint firstItem="nsz-WB-3gt" firstAttribute="leading" secondItem="LVm-Ym-b8Q" secondAttribute="leading" constant="100" id="bWo-Gy-oVl"/>
                             <constraint firstItem="nsz-WB-3gt" firstAttribute="bottom" secondItem="LVm-Ym-b8Q" secondAttribute="bottom" id="gPZ-dc-w9M"/>
                             <constraint firstItem="nsz-WB-3gt" firstAttribute="top" secondItem="Tbi-ZQ-p1Z" secondAttribute="bottom" constant="20" id="mqe-jW-qX8"/>
                             <constraint firstItem="Tbi-ZQ-p1Z" firstAttribute="leading" secondItem="LVm-Ym-b8Q" secondAttribute="leading" id="vxg-Pw-mjI"/>
                             <constraint firstItem="g0C-LX-hZU" firstAttribute="top" secondItem="LVm-Ym-b8Q" secondAttribute="top" constant="40" id="yMP-S1-GSY"/>
-                            <constraint firstItem="LVm-Ym-b8Q" firstAttribute="trailing" secondItem="nsz-WB-3gt" secondAttribute="trailing" constant="143" id="ytb-T7-40N"/>
+                            <constraint firstItem="LVm-Ym-b8Q" firstAttribute="trailing" secondItem="nsz-WB-3gt" secondAttribute="trailing" constant="100" id="ytb-T7-40N"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Context Title" id="VFI-kk-puw">
@@ -426,31 +467,37 @@
                                 <rect key="frame" x="20" y="180" width="374" height="308"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Topic Created!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ud-pK-sHD">
-                                        <rect key="frame" x="68.5" y="0.0" width="237" height="42"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                        <rect key="frame" x="73" y="0.0" width="228" height="42"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why not send this to a few people and get some tasty data?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvk-fF-Apq">
-                                        <rect key="frame" x="11" y="112" width="352" height="50.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvk-fF-Apq">
+                                        <rect key="frame" x="6" y="112" width="362.5" height="52"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Why not send this to a few people and get some tasty data?">
+                                                <attributes>
+                                                    <font key="NSFont" size="17" name="Poppins-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="4" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="18B-6Z-vFC">
-                                        <rect key="frame" x="20" y="232.5" width="334" height="75.5"/>
+                                        <rect key="frame" x="20" y="234" width="334" height="74"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8v-bv-wAn">
-                                                <rect key="frame" x="0.0" y="0.0" width="334" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="24"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glt-f5-1ct">
-                                                <rect key="frame" x="0.0" y="45.5" width="334" height="30"/>
+                                                <rect key="frame" x="0.0" y="44" width="334" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                 <state key="normal" image="doc.on.doc" catalog="system">
-                                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                                    <color key="titleColor" red="0.2901960784" green="0.16862745100000001" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="codeCopyTapped:" destination="bhv-hp-bGH" eventType="touchUpInside" id="Niy-Oc-6Da"/>
@@ -466,11 +513,11 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dlZ-zV-12l">
                                 <rect key="frame" x="60" y="558" width="294" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <color key="backgroundColor" red="0.2901960784" green="0.16862745100000001" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Hgd-mq-y8A"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Take me there"/>
                                 <connections>
@@ -507,6 +554,7 @@
             <point key="canvasLocation" x="4000.0000000000005" y="156.69642857142856"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.2901960784" green="0.16862745100000001" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
         <image name="doc.on.doc" catalog="system" width="116" height="128"/>
         <systemColor name="labelColor">
@@ -514,9 +562,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

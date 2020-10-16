@@ -18,22 +18,41 @@ class HomeViewController: UIViewController {
     @IBOutlet var joinCodeButton: UIButton!
     @IBOutlet var createTopicButton: UIButton!
 
+    // MARK: - Variables
+
+    var user: User?
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         styleButtons()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        fetchUser()
     }
 
     // MARK: - Methods
 
     private func styleButtons() {
-        joinCodeButton.layer.cornerRadius = 10
-        createTopicButton.layer.cornerRadius = 10
+        joinCodeButton.layer.cornerRadius = 5
+        createTopicButton.layer.cornerRadius = 5
     }
 
     private func setTitle() {
+        guard let user = user else { return }
+        titleLabel.text = "Hello \(user.username)"
+    }
+
+    private func fetchUser() {
+        UserController.shared.fetchUser { result in
+            if let result = result {
+                self.user = result
+                UserDefaults.standard.set(result.userid, forKey: "User")
+                DispatchQueue.main.async {
+                    self.setTitle()
+                }
+            }
+        }
     }
 
     // MARK: - Actions

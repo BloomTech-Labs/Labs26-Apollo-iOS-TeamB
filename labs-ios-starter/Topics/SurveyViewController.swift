@@ -13,13 +13,23 @@ class SurveyViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var surveyButton: UIButton!
     @IBOutlet var surveyTableView: UITableView!
+    @IBOutlet var respondButton: UIButton!
 
+    var topicTitle: String?
+    var topicId: Int?
+    var defaultSurvey: Survey?
     var surveys: [Survey]?
+    var selectedSurveyQuestions: [Question]?
+    var isLeader: Bool = false
+
+    var index: Int?
+
+    var delegate: SurveyRequestDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        surveyTableView.isHidden = true
-        surveyTableView.separatorStyle = .none
+        setUpView()
+        self.delegate = self
     }
 
     private func animate(toggle: Bool) {
@@ -34,18 +44,114 @@ class SurveyViewController: UIViewController {
         }
     }
 
+    private func setUpView() {
+        surveyTableView.isHidden = true
+        surveyTableView.separatorStyle = .none
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        surveyButton.layer.borderWidth = 1
+        surveyButton.layer.cornerRadius = 5
+        respondButton.layer.cornerRadius = 5
+        title = topicTitle
+
+        if isLeader {
+            respondButton.backgroundColor = UIColor(red: 74/255, green: 43/255, blue: 224/255, alpha: 1)
+            respondButton.setTitle("Send Request", for: .normal)
+        } else {
+            respondButton.backgroundColor = .lightGray
+            respondButton.isEnabled = false
+            respondButton.setTitle("Respond", for: .normal)
+        }
+    }
+
+    private func updateViews() {
+        tableView.separatorStyle = .singleLine
+        respondButton.isEnabled = true
+        respondButton.backgroundColor = UIColor(red: 74/255, green: 43/255, blue: 224/255, alpha: 1)
+    }
+
     @IBAction func surveyButtonTapped(_ sender: Any) {
         surveyTableView.isHidden ? animate(toggle: true) : animate(toggle: false)
+    }
+
+    @IBAction func respondRequestButtonTapped(_ sender: Any) {
+        if isLeader {
+            performSegue(withIdentifier: "OwnerRequestSegue", sender: self)
+        } else {
+            performSegue(withIdentifier: "ContextQuestionsSegue", sender: self)
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ContextQuestionsSegue" {
+            if let destinationVC = segue.destination as? LeaderAnswersViewController,
+                let index = index {
+                destinationVC.surveyId = surveys?[index].surveyid
+            }
+        } else if segue.identifier == "OwnerRequestSegue" {
+            if let destinationVC = segue.destination as? RequestContextViewController {
+                destinationVC.defaultSurvey = defaultSurvey
+                destinationVC.topicId = topicId
+                destinationVC.delegate = delegate
+            }
+        }
     }
 }
 
 extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch tableView {
+        case self.tableView:
+            return selectedSurveyQuestions?[section].body
+        default:
+            return nil
+        }
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch tableView {
+        case self.tableView:
+            let questionLabel = UILabel()
+            questionLabel.font = UIFont(name: "Poppins-SemiBold", size: 16)
+            questionLabel.numberOfLines = 0
+            questionLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+            questionLabel.backgroundColor = UIColor(red: 241/255, green: 238/255, blue: 253/255, alpha: 1)
+            questionLabel.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
+            questionLabel.layer.borderWidth = 1
+            questionLabel.layer.cornerRadius = 5
+            questionLabel.textAlignment = .center
+            return questionLabel
+        default:
+            return UIView()
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch tableView {
+        case surveyTableView:
+            return 0
+        default:
+            return 50
+        }
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        switch tableView {
+        case self.tableView:
+            guard let questionCount = selectedSurveyQuestions?.count else { return 0 }
+            return questionCount
+        default:
+            return 1
+        }
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case surveyTableView:
             return surveys?.count ?? 0
         default:
-            return 1
+            guard let answerCount = selectedSurveyQuestions?[section].answers?.count else { return 0 }
+            return answerCount
         }
     }
 
@@ -58,7 +164,11 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = date
             return cell
         default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyResponseCell", for: indexPath) as? SurveyResponseTableViewCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyResponseCell", for: indexPath) as? SurveyResponseTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.usernameLabel.text = selectedSurveyQuestions?[indexPath.section].answers?[indexPath.row].username
+            cell.responseTextView.text = selectedSurveyQuestions?[indexPath.section].answers?[indexPath.row].body
             return cell
         }
     }
@@ -66,10 +176,24 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case surveyTableView:
+            updateViews()
             let survey = surveys?[indexPath.row]
             let date = String((survey?.createdDate?.split(separator: " ")[0])!)
             surveyButton.setTitle(date, for: .normal)
+            index = indexPath.row
             animate(toggle: false)
+
+            var memberQuestions:[Question] = []
+            if let survey = survey,
+               let questions = survey.questions {
+                for question in questions {
+                    if !(question.leader ?? false) {
+                        memberQuestions.append(question)
+                    }
+                }
+            }
+            self.selectedSurveyQuestions = memberQuestions
+            self.tableView.reloadData()
         default:
             let threadViewController = ThreadViewController()
             threadViewController.title = "Thread"
@@ -77,5 +201,21 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension SurveyViewController: SurveyRequestDelegate {
+    func didGetSurveyRequest(_ request: Survey) {
+        self.surveys?.append(request)
+        self.surveyTableView.reloadData()
+        var newMemberQuestions: [Question] = []
+        guard let questions = request.questions else { return }
+        for question in questions {
+            if !(question.leader ?? false) {
+                newMemberQuestions.append(question)
+            }
+        }
+        self.selectedSurveyQuestions = newMemberQuestions
+        self.tableView.reloadData()
     }
 }
