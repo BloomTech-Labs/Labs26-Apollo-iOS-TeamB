@@ -55,18 +55,17 @@ class MemberQuestionsViewController: ShiftableViewController {
         }
     }
 
-    // MARK: - TextField Delegate Methods
+    // MARK: - TextView Delegate Methods
 
-    override func textFieldDidBeginEditing(_ textField: UITextField) {
-        textFieldBeingEdited = textField
+    func textViewDidBeginEditing(_ textView: UITextView) {
         indexToEdit = memberQuestions.firstIndex(where: { question -> Bool in
-            guard let questionText = textField.text else { return false }
+            guard let questionText = textView.text else { return false }
             return question.body == questionText
         })
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let indexToEdit = indexToEdit, let questionText = textField.text else { return }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        guard let indexToEdit = indexToEdit, let questionText = textView.text else { return }
         memberQuestions[indexToEdit].body = questionText
     }
 }
@@ -81,8 +80,8 @@ extension MemberQuestionsViewController: UITableViewDelegate, UITableViewDataSou
             return UITableViewCell()
         }
         cell.questionNumberLabel.text = "Question \(indexPath.row + 1)"
-        cell.questionBodyTextField.text = memberQuestions[indexPath.row].body
-        cell.questionBodyTextField.delegate = self
+        cell.questionBodyTextView.text = memberQuestions[indexPath.row].body
+        cell.questionBodyTextView.delegate = self
         return cell
     }
 
