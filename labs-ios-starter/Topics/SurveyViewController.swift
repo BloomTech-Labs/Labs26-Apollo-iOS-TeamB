@@ -206,20 +206,10 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             index = indexPath.row
             animate(toggle: false)
 
-            var memberQuestions:[Question] = []
-            if let survey = survey,
-               let questions = survey.questions {
+            if let survey = survey {
                 surveyId = survey.surveyid
                 updateQuestions()
-
-                for question in questions {
-                    if !(question.leader ?? false) {
-                        memberQuestions.append(question)
-                    }
-                }
             }
-            self.selectedSurveyQuestions = memberQuestions
-            self.tableView.reloadData()
         default:
             let threadViewController = ThreadViewController()
             threadViewController.title = "Thread"
