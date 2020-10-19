@@ -45,7 +45,7 @@ class TopicTableViewController: ShiftableViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.presentSimpleAlert(with: "ERROR", message: "Failed to get topics from server. Please try again later.", preferredStyle: .alert, dismissText: "OK")
+                    self.unableToFetchTopicsAlert()
                     self.refreshControl.endRefreshing()
                 }
             }

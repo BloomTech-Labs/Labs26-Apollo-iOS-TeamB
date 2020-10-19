@@ -35,4 +35,9 @@ extension UIViewController {
                             self.dismiss(animated: true, completion: nil)
         }
     }
+
+    func unableToFetchTopicsAlert() {
+        presentSimpleAlert(with: "Error fetching topics",
+                           message: "We are currently unable to get topics from server. Please try again later")
+    }
 }
