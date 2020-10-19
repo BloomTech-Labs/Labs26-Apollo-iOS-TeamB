@@ -21,6 +21,7 @@ class SurveyViewController: UIViewController {
     var surveys: [Survey]?
     var selectedSurveyQuestions: [Question]?
     var isLeader: Bool = false
+    var surveyId: Int?
 
     var index: Int?
 
@@ -32,6 +33,10 @@ class SurveyViewController: UIViewController {
         self.delegate = self
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        updateQuestions()
+    }
+
     private func animate(toggle: Bool) {
         if toggle {
             UIView.animate(withDuration: 0.3) {
@@ -41,6 +46,24 @@ class SurveyViewController: UIViewController {
             UIView.animate(withDuration: 0.3) {
                 self.surveyTableView.isHidden = true
             }
+        }
+    }
+
+    private func updateQuestions() {
+        guard let surveyId = surveyId else { return }
+
+        UserController.shared.fetchSingleSurvey(using: surveyId) { survey in
+            guard let survey = survey, let questions = survey.questions else { return }
+
+            var memberQuestions: [Question] = []
+            for question in questions {
+                if question.leader == false {
+                    memberQuestions.append(question)
+                }
+            }
+
+            self.selectedSurveyQuestions = memberQuestions
+            self.tableView.reloadData()
         }
     }
 
@@ -183,17 +206,10 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
             index = indexPath.row
             animate(toggle: false)
 
-            var memberQuestions:[Question] = []
-            if let survey = survey,
-               let questions = survey.questions {
-                for question in questions {
-                    if !(question.leader ?? false) {
-                        memberQuestions.append(question)
-                    }
-                }
+            if let survey = survey {
+                surveyId = survey.surveyid
+                updateQuestions()
             }
-            self.selectedSurveyQuestions = memberQuestions
-            self.tableView.reloadData()
         default:
             let threadViewController = ThreadViewController()
             threadViewController.title = "Thread"
