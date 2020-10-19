@@ -42,6 +42,8 @@ class ContextQuestionsViewController: ShiftableViewController {
         tableView.reloadData()
     }
 
+    // MARK: - Navigation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MemberQuestionsSegue" {
             if let destinationVC = segue.destination as? MemberQuestionsViewController {
@@ -54,16 +56,17 @@ class ContextQuestionsViewController: ShiftableViewController {
         }
     }
 
-    override func textFieldDidBeginEditing(_ textField: UITextField) {
-        textFieldBeingEdited = textField
+    // MARK: - TextView Delegate Methods
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
         indexToEdit = leaderQuestions.firstIndex(where: { question -> Bool in
-            guard let questionText = textField.text else { return false }
+            guard let questionText = textView.text else { return false }
             return question.body == questionText
         })
     }
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let indexToEdit = indexToEdit, let questionText = textField.text else { return }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        guard let indexToEdit = indexToEdit, let questionText = textView.text else { return }
         leaderQuestions[indexToEdit].body = questionText
     }
 }
@@ -78,12 +81,19 @@ extension ContextQuestionsViewController: UITableViewDelegate, UITableViewDataSo
             return UITableViewCell()
         }
         cell.questionNumberLabel.text = "Question \(indexPath.row + 1)"
-        cell.questionBodyTextField.text = leaderQuestions[indexPath.row].body
-        cell.questionBodyTextField.delegate = self
+        cell.questionBodyTextView.text = leaderQuestions[indexPath.row].body
+        cell.questionBodyTextView.delegate = self
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            leaderQuestions.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }
