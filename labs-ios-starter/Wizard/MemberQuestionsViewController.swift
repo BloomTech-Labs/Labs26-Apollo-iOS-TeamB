@@ -39,22 +39,31 @@ class MemberQuestionsViewController: ShiftableViewController {
     }
 
     @IBAction func addNewQuestionTapped(_ sender: Any) {
+        updateMemberQuestions()
         let newQuestion = Question(body: "", type: "TEXT", leader: false)
         memberQuestions.append(newQuestion)
         tableView.reloadData()
     }
 
-    override func textFieldDidBeginEditing(_ textField: UITextField) {
-        textFieldBeingEdited = textField
-        indexToEdit = memberQuestions.firstIndex(where: { question -> Bool in
-            guard let questionText = textField.text else { return false }
-            return question.body == questionText
-        })
+    private func updateMemberQuestions() {
+        var cells = [QuestionsTableViewCell]()
+        for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? QuestionsTableViewCell {
+                cells.append(cell)
+            }
+        }
+
+        var newMemberQuestions: [Question] = []
+        for cell in cells {
+            guard let memberQuestionText = cell.questionBodyTextField.text else { return }
+            let response = Question(body: memberQuestionText, type: "TEXT", leader: false)
+            newMemberQuestions.append(response)
+        }
+        memberQuestions = newMemberQuestions
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let indexToEdit = indexToEdit, let questionText = textField.text else { return }
-        memberQuestions[indexToEdit].body = questionText
+        updateMemberQuestions()
     }
 }
 
@@ -80,6 +89,7 @@ extension MemberQuestionsViewController: UITableViewDelegate, UITableViewDataSou
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "TopicCodeSegue" {
             if let destionationVC = segue.destination as? TopicCodeViewController {
+                updateMemberQuestions()
                 newTopic?.defaultSurvey?.questions?.append(contentsOf: memberQuestions)
                 destionationVC.newTopic = newTopic
             }
