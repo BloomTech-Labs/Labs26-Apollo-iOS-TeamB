@@ -28,4 +28,11 @@ extension UIViewController {
                             self.dismiss(animated: true, completion: nil)
         }
     }
+
+    func unableToCreateTopicAlert() {
+        presentSimpleAlert(with: "Error creating topic",
+                           message: "We are currently unable to create a new topic. Please try again later") { _ in
+                            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }
