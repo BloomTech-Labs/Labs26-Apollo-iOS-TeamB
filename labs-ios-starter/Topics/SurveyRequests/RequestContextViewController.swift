@@ -28,6 +28,7 @@ class RequestContextViewController: ShiftableViewController {
         if let defaultQuestions = defaultSurvey?.questions {
             setUpQuestions(questions: defaultQuestions)
         } else {
+            self.unableToGetDefaultQuestionsAlert()
             NSLog("Failed to get default questions")
         }
         setUpView()

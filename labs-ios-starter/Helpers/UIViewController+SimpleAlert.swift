@@ -60,6 +60,13 @@ extension UIViewController {
         }
     }
 
+    func unableToGetDefaultQuestionsAlert() {
+        presentSimpleAlert(with: "Error displaying questions",
+                           message: "We are currently unable to get default questions from our server. Please try again later") { _ in
+                            self.popToSurveyViewController()
+        }
+    }
+
     private func popToSurveyViewController() {
         for controller in self.navigationController!.viewControllers as Array {
             if controller.isKind(of: SurveyViewController.self) {
