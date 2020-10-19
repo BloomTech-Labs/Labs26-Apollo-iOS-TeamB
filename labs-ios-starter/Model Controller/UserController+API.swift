@@ -44,9 +44,20 @@ extension UserController {
         }
     }
 
-    func fetchTopics(isMock: Bool = false, completion: @escaping (TopicResults?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
-        var request = URLRequest(url: requestURL)
+    func fetchTopics(isMock: Bool = false, isTest: Bool = false, completion: @escaping (TopicResults?) -> Void) {
+        var requestURL = URL(string: "")
+
+        if isTest {
+            requestURL = baseURL
+            .appendingPathComponent("test")
+            .appendingPathComponent("topics")
+            .appendingPathComponent("topics")
+        } else {
+            requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
+        }
+
+        guard let url = requestURL else { return }
+        var request = URLRequest(url: url)
 
         if !isMock {
             guard let oktaCredentials = getOktaAuth() else { return }
