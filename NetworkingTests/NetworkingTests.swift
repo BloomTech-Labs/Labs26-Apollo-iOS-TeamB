@@ -2,7 +2,7 @@
 //  NetworkingTests.swift
 //  NetworkingTests
 //
-//  Created by Tobi Kuyoro on 29/09/2020.
+//  Created by Tobi Kuyoro on 19/10/2020.
 //  Copyright © 2020 Spencer Curtis. All rights reserved.
 //
 
@@ -11,82 +11,53 @@ import XCTest
 
 class NetworkingTests: XCTestCase {
 
-    func testFetchinTopics() {
-        let dataLoader = MockDataLoader(data: topics)
-        let expectation = XCTestExpectation(description: "Waiting for topic results")
-        let controller = UserController(dataLoader: dataLoader)
-
-        controller.fetchTopics(isMock: true) { topics in
-            guard let topics = topics else {
-                XCTFail("Failed to get results from mock data")
+    func testFetchingTopics() {
+        let controller = UserController()
+        let expectation = XCTestExpectation(description: "Waiting on topic results")
+        controller.fetchTopics(isMock: true, isTest: true) { topics in
+            guard let topics = topics?.results else {
+                XCTFail("Failed to fetch topics")
                 return
             }
 
-            XCTAssertEqual(topics.results.count, 1, "There should only be one valid topic")
-            XCTAssertTrue(topics.results[0].topicId == 37, "The topic ID should be 37")
+            XCTAssertEqual(topics[0].title, "Standup")
+            XCTAssertEqual(topics[1].topicId, 114)
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 5)
     }
 
     func testFetchingSurveys() {
-        let dataLoader = MockDataLoader(data: surveys)
+        let controller = UserController()
+        let expectation = XCTestExpectation(description: "Waiting on survey results")
+        controller.fetchSurveys(isMock: true, isTest: true) { results in
+            guard let surveys = results?.surveys else {
+                XCTFail("Failed to fetch surveys")
+                return
+            }
+            XCTAssertEqual(surveys.first?.surveyid, 4)
+            XCTAssertEqual(surveys[1].questions?.first?.questionid, 15)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5)
+    }
+
+    func testFetchingSpecificSurvey() {
+        let controller = UserController()
         let expectation = XCTestExpectation(description: "Waiting for survey results")
-        let controller = UserController(dataLoader: dataLoader)
-
-
-        controller.fetchSurveys(isMock: true) { results in
-            guard let results = results else {
-                XCTFail("Failed to get surveys from mock data")
+        controller.fetchSpecificSurvey(isMock: true, isTest: true, with: 94) { survey in
+            guard let survey = survey else {
+                XCTFail("Failed to fetch survey with id 94")
                 return
             }
 
-            XCTAssertLessThanOrEqual(results.surveys.count, 3)
-            XCTAssertEqual(results.surveys[0].questions?.count, 0)
+            XCTAssertEqual(survey.createdDate, "2020-10-09 08:33:51")
+            XCTAssertEqual(survey.topicId, 37)
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 10)
-    }
-
-    func testFetchingQuestions() {
-        let dataLoader = MockDataLoader(data: questions)
-        let expectation = XCTestExpectation(description: "Waiting for question results")
-        let controller = UserController(dataLoader: dataLoader)
-
-
-        controller.fetchQuestions(isMock: true) { results in
-            guard let results = results else {
-                XCTFail("Failed to get surveys from mock data")
-                return
-            }
-
-            XCTAssertEqual(results.questions[0].questionid, 56)
-            XCTAssertTrue(results.questions[1].body == "Leader Question 2")
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 10)
-    }
-
-    func testFetchingContexts() {
-        let dataLoader = MockDataLoader(data: contexts)
-        let expectation = XCTestExpectation(description: "Waiting for context results")
-        let controller = UserController(dataLoader: dataLoader)
-
-
-        controller.fetchContexts(isMock: true) { contexts in
-            guard let contexts = contexts else {
-                XCTFail("Failed to get surveys from mock data")
-                return
-            }
-
-            XCTAssertEqual(contexts.results.count, 4)
-            XCTAssertEqual(contexts.results[1].description, "delivery management")
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 5)
     }
 }

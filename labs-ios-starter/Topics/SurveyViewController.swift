@@ -52,7 +52,7 @@ class SurveyViewController: UIViewController {
     private func updateQuestions() {
         guard let surveyId = surveyId else { return }
 
-        UserController.shared.fetchSingleSurvey(using: surveyId) { survey in
+        UserController.shared.fetchSpecificSurvey(with: surveyId) { survey in
             guard let survey = survey, let questions = survey.questions else {
                 self.unableToFetchSurveyAlert()
                 return
