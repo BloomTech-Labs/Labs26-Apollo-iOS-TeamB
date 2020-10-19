@@ -45,4 +45,15 @@ extension UIViewController {
         presentSimpleAlert(with: "Error fetching survey",
                            message: "Failed to get questions for the selected survey. Please try again later")
     }
+
+    func unableToFetchLeaderQuestionsAlert() {
+        presentSimpleAlert(with: "Error displaying questions",
+                           message: "We are currently unable to get leader questions from server. Please try again later") { _ in
+            for controller in self.navigationController!.viewControllers as Array {
+                if controller.isKind(of: SurveyViewController.self) {
+                    self.navigationController?.popToViewController(controller, animated: true)
+                }
+            }
+        }
+    }
 }
