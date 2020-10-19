@@ -67,6 +67,13 @@ extension UIViewController {
         }
     }
 
+    func errorSendingRequestAlert() {
+        presentSimpleAlert(with: "Error sending survey request",
+                           message: "Failed to get a result from our server. Please try again later") { _ in
+                            self.popToSurveyViewController()
+        }
+    }
+
     private func popToSurveyViewController() {
         for controller in self.navigationController!.viewControllers as Array {
             if controller.isKind(of: SurveyViewController.self) {
