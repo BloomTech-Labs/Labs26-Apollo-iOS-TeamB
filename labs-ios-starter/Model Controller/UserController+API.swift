@@ -391,18 +391,34 @@ extension UserController {
         }.resume()
     }
 
-    func fetchSpecificSurvey(with surveyId: Int, completion: @escaping (Survey?) -> Void) {
-        guard let oktaCredentials = getOktaAuth() else { return }
+    func fetchSpecificSurvey(isMock: Bool = false,
+                             isTest: Bool = false,
+                             with surveyId: Int,
+                             completion: @escaping (Survey?) -> Void) {
+        var requestURL = URL(string: "")
 
-        let requestURL = baseURL
-            .appendingPathComponent("surveys")
-            .appendingPathComponent("survey")
-            .appendingPathComponent(surveyId.description)
+        if isTest {
+            requestURL = baseURL
+                .appendingPathComponent("test")
+                .appendingPathComponent("surveys")
+                .appendingPathComponent("survey")
+                .appendingPathComponent(surveyId.description)
+        } else {
+            requestURL = baseURL
+                .appendingPathComponent("surveys")
+                .appendingPathComponent("survey")
+                .appendingPathComponent(surveyId.description)
+        }
 
-        var request = URLRequest(url: requestURL)
-        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        guard let url = requestURL else { return }
+        var request = URLRequest(url: url)
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        if !isMock {
+            guard let oktaCredentials = getOktaAuth() else { return }
+            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+        dataLoader.loadData(using: request) { data, _, error in
             if let error = error {
                 NSLog("Error fetching survey with \(surveyId.description): \(error)")
                 completion(nil)
@@ -424,7 +440,7 @@ extension UserController {
                 NSLog("Error decoding survey data: \(error)")
                 completion(nil)
             }
-        }.resume()
+        }
     }
 
     func joinTopic(_ joincode: String, completion: @escaping (Bool) -> Void) {

@@ -27,4 +27,21 @@ class NetworkingTests: XCTestCase {
 
         wait(for: [expectation], timeout: 5)
     }
+
+    func testFetchingSpecificSurvey() {
+        let controller = UserController()
+        let expectation = XCTestExpectation(description: "Waiting for survey results")
+        controller.fetchSpecificSurvey(isMock: true, isTest: true, with: 94) { survey in
+            guard let survey = survey else {
+                XCTFail("Failed to fetch survey with id 94")
+                return
+            }
+
+            XCTAssertEqual(survey.createdDate, "2020-10-09 08:33:51")
+            XCTAssertEqual(survey.topicId, 37)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5)
+    }
 }
