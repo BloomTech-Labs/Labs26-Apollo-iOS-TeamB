@@ -111,6 +111,7 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
         }
 
         cell.questionTextView.delegate = self
+        cell.questionTextView.isScrollEnabled = false
         cell.answerTextView.delegate = self
         return cell
     }
