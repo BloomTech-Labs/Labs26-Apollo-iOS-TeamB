@@ -72,6 +72,7 @@ class RequestMemberViewController: ShiftableViewController {
         }
         UserController.shared.sendSurveyRequest(with: questions, topicId: topicId) { result in
             guard let result = result else {
+                self.errorSendingRequestAlert()
                 print("Failed to get result from server")
                 return
             }

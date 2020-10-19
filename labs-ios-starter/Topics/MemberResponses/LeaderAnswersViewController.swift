@@ -37,6 +37,8 @@ class LeaderAnswersViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }
+
+            self.unableToFetchLeaderQuestionsAlert()
         }
     }
 

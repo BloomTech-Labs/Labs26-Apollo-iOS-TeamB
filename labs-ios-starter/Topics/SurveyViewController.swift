@@ -53,7 +53,10 @@ class SurveyViewController: UIViewController {
         guard let surveyId = surveyId else { return }
 
         UserController.shared.fetchSingleSurvey(using: surveyId) { survey in
-            guard let survey = survey, let questions = survey.questions else { return }
+            guard let survey = survey, let questions = survey.questions else {
+                self.unableToFetchSurveyAlert()
+                return
+            }
 
             var memberQuestions: [Question] = []
             for question in questions {
