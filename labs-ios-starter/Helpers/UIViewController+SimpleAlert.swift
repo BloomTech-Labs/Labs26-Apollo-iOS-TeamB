@@ -40,4 +40,9 @@ extension UIViewController {
         presentSimpleAlert(with: "Error fetching topics",
                            message: "We are currently unable to get topics from server. Please try again later")
     }
+
+    func unableToFetchSurveyAlert() {
+        presentSimpleAlert(with: "Error fetching survey",
+                           message: "Failed to get questions for the selected survey. Please try again later")
+    }
 }
