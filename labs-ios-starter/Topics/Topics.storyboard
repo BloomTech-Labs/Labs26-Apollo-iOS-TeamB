@@ -639,7 +639,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="96" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3zD-fK-aLS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdq-MD-Rqy">
+                                <rect key="frame" x="20" y="160" width="374" height="36"/>
+                                <color key="backgroundColor" red="0.35055089" green="0.23297727109999999" blue="0.9448305964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
+                                <state key="normal" title="Add New Question">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addNewQuestionButtonTapped:" destination="CMz-76-Q1K" eventType="touchUpInside" id="65i-jm-ujr"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3zD-fK-aLS">
                                 <rect key="frame" x="0.0" y="204" width="414" height="521"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -650,14 +661,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Context Question" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hFt-Rk-hw8">
-                                                    <rect key="frame" x="8" y="8" width="398" height="34"/>
-                                                    <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nIN-9C-sCY">
-                                                    <rect key="frame" x="8" y="50" width="398" height="77"/>
+                                                    <rect key="frame" x="8" y="56" width="398" height="71"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="77" id="IPO-OK-KWw"/>
+                                                    </constraints>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HH6-fG-m0e">
+                                                    <rect key="frame" x="8" y="8" width="398" height="40"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="evT-Qi-0tJ"/>
+                                                    </constraints>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -665,18 +685,18 @@
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="nIN-9C-sCY" firstAttribute="top" secondItem="hFt-Rk-hw8" secondAttribute="bottom" constant="8" id="5NU-59-MvV"/>
+                                                <constraint firstAttribute="trailing" secondItem="HH6-fG-m0e" secondAttribute="trailing" constant="8" id="4Rw-IW-Fad"/>
                                                 <constraint firstAttribute="bottom" secondItem="nIN-9C-sCY" secondAttribute="bottom" constant="8" id="Ezd-8D-jys"/>
-                                                <constraint firstAttribute="trailing" secondItem="hFt-Rk-hw8" secondAttribute="trailing" constant="8" id="NVf-vh-5Xa"/>
+                                                <constraint firstItem="HH6-fG-m0e" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ztU-6h-Can" secondAttribute="top" constant="8" id="GN5-YX-yzk"/>
                                                 <constraint firstAttribute="trailing" secondItem="nIN-9C-sCY" secondAttribute="trailing" constant="8" id="OCR-f8-YDz"/>
-                                                <constraint firstItem="hFt-Rk-hw8" firstAttribute="leading" secondItem="ztU-6h-Can" secondAttribute="leading" constant="8" id="Ojz-h6-Xb0"/>
                                                 <constraint firstItem="nIN-9C-sCY" firstAttribute="leading" secondItem="ztU-6h-Can" secondAttribute="leading" constant="8" id="Thw-R2-S1l"/>
-                                                <constraint firstItem="hFt-Rk-hw8" firstAttribute="top" secondItem="ztU-6h-Can" secondAttribute="top" constant="8" id="eK5-h0-E9Q"/>
+                                                <constraint firstItem="HH6-fG-m0e" firstAttribute="leading" secondItem="ztU-6h-Can" secondAttribute="leading" constant="8" id="X6S-QG-a9D"/>
+                                                <constraint firstItem="nIN-9C-sCY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="HH6-fG-m0e" secondAttribute="bottom" constant="8" id="Zz5-4l-EmX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="answerTextView" destination="nIN-9C-sCY" id="SOM-uS-NJU"/>
-                                            <outlet property="questionTextField" destination="hFt-Rk-hw8" id="SZF-0n-ibp"/>
+                                            <outlet property="questionTextView" destination="HH6-fG-m0e" id="l9n-G3-y0U"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -697,17 +717,6 @@
                                 </state>
                                 <connections>
                                     <action selector="submitContextQuestionsButtonTapped:" destination="CMz-76-Q1K" eventType="touchUpInside" id="3qi-Y1-EQN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdq-MD-Rqy">
-                                <rect key="frame" x="20" y="160" width="374" height="36"/>
-                                <color key="backgroundColor" red="0.35055089" green="0.23297727109999999" blue="0.9448305964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
-                                <state key="normal" title="Add New Question">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="addNewQuestionButtonTapped:" destination="CMz-76-Q1K" eventType="touchUpInside" id="65i-jm-ujr"/>
                                 </connections>
                             </button>
                         </subviews>
