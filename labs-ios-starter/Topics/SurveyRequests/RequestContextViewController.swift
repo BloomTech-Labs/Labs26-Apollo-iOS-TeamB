@@ -20,7 +20,7 @@ class RequestContextViewController: ShiftableViewController {
     var memberQuestions: [Question] = []
 
     var indexToEdit: Int?
-    let placeholderText = "Please answer your context question"
+    let placeholderText = "Please fill in empty field"
     var delegate: SurveyRequestDelegate?
 
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class RequestContextViewController: ShiftableViewController {
 
         var answeredLeaderQuestions: [Question] = []
         for cell in cells {
-            guard let leaderQuestionText = cell.questionTextField.text,
+            guard let leaderQuestionText = cell.questionTextView.text,
                 let leaderAnswerText = cell.answerTextView.text else { return }
             let leaderAnswer = Answer(body: leaderAnswerText)
             let response = Question(body: leaderQuestionText, type: "TEXT", leader: false, answers: [leaderAnswer])
@@ -77,7 +77,7 @@ class RequestContextViewController: ShiftableViewController {
 
     @IBAction func addNewQuestionButtonTapped(_ sender: Any) {
         updateLeaderQuestions()
-        let newQuestion = Question(body: "", type: "TEXT", leader: true)
+        let newQuestion = Question(body: placeholderText, type: "TEXT", leader: true)
         leaderQuestions.append(newQuestion)
         tableView.reloadData()
     }
@@ -102,16 +102,16 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RequestContextCell", for: indexPath) as? AnswerContextTableViewCell else {
             return UITableViewCell()
         }
-        cell.questionTextField.text = leaderQuestions[indexPath.row].body
+        cell.questionTextView.text = leaderQuestions[indexPath.row].body
         if let answerText = leaderQuestions[indexPath.row].answers?.first?.body {
             cell.answerTextView.text = answerText
         } else {
             cell.answerTextView.text = placeholderText
-            cell.answerTextView.textColor = UIColor.placeholderText
+            cell.answerTextView.textColor = .placeholderText
         }
 
-        cell.questionTextField.borderStyle = .none
-        cell.questionTextField.delegate = self
+        cell.questionTextView.delegate = self
+        cell.questionTextView.isScrollEnabled = false
         cell.answerTextView.delegate = self
         return cell
     }
@@ -130,7 +130,7 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
 
 extension RequestContextViewController {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == placeholderText {
+        if textView.text == placeholderText{
             textView.text = ""
             textView.textColor = UIColor.black
         }

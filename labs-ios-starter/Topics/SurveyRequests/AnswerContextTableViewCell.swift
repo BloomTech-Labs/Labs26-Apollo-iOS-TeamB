@@ -9,6 +9,6 @@
 import UIKit
 
 class AnswerContextTableViewCell: UITableViewCell {
-    @IBOutlet var questionTextField: UITextField!
+    @IBOutlet var questionTextView: UITextView!
     @IBOutlet var answerTextView: UITextView!
 }
