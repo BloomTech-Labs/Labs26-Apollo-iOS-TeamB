@@ -36,9 +36,9 @@ class LeaderAnswersViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+            } else {
+                self.unableToFetchLeaderQuestionsAlert()
             }
-
-            self.unableToFetchLeaderQuestionsAlert()
         }
     }
 
