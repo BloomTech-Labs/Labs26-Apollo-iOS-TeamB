@@ -55,7 +55,7 @@ class MemberQuestionsViewController: ShiftableViewController {
 
         var newMemberQuestions: [Question] = []
         for cell in cells {
-            guard let memberQuestionText = cell.questionBodyTextField.text else { return }
+            guard let memberQuestionText = cell.questionBodyTextView.text else { return }
             let response = Question(body: memberQuestionText, type: "TEXT", leader: false)
             newMemberQuestions.append(response)
         }
@@ -64,6 +64,16 @@ class MemberQuestionsViewController: ShiftableViewController {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         updateMemberQuestions()
+    }
+  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+          if segue.identifier == "TopicCodeSegue" {
+              if let destionationVC = segue.destination as? TopicCodeViewController {
+                  updateMemberQuestions()
+                  newTopic?.defaultSurvey?.questions?.append(contentsOf: memberQuestions)
+                  destionationVC.newTopic = newTopic
+              }
+          }
     }
 }
 
@@ -77,8 +87,8 @@ extension MemberQuestionsViewController: UITableViewDelegate, UITableViewDataSou
             return UITableViewCell()
         }
         cell.questionNumberLabel.text = "Question \(indexPath.row + 1)"
-        cell.questionBodyTextField.text = memberQuestions[indexPath.row].body
-        cell.questionBodyTextField.delegate = self
+        cell.questionBodyTextView.text = memberQuestions[indexPath.row].body
+        cell.questionBodyTextView.delegate = self
         return cell
     }
 
@@ -86,13 +96,10 @@ extension MemberQuestionsViewController: UITableViewDelegate, UITableViewDataSou
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TopicCodeSegue" {
-            if let destionationVC = segue.destination as? TopicCodeViewController {
-                updateMemberQuestions()
-                newTopic?.defaultSurvey?.questions?.append(contentsOf: memberQuestions)
-                destionationVC.newTopic = newTopic
-            }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            memberQuestions.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 }

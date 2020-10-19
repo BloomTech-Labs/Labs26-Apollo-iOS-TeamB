@@ -51,7 +51,7 @@ class ContextQuestionsViewController: ShiftableViewController {
 
         var newLeaderQuestions: [Question] = []
         for cell in cells {
-            guard let leaderQuestionText = cell.questionBodyTextField.text else { return }
+            guard let leaderQuestionText = cell.questionBodyTextView.text else { return }
             let response = Question(body: leaderQuestionText, type: "TEXT", leader: true)
             newLeaderQuestions.append(response)
         }
@@ -86,12 +86,19 @@ extension ContextQuestionsViewController: UITableViewDelegate, UITableViewDataSo
             return UITableViewCell()
         }
         cell.questionNumberLabel.text = "Question \(indexPath.row + 1)"
-        cell.questionBodyTextField.text = leaderQuestions[indexPath.row].body
-        cell.questionBodyTextField.delegate = self
+        cell.questionBodyTextView.text = leaderQuestions[indexPath.row].body
+        cell.questionBodyTextView.delegate = self
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            leaderQuestions.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }

@@ -10,5 +10,17 @@ import UIKit
 
 class QuestionsTableViewCell: UITableViewCell {
     @IBOutlet var questionNumberLabel: UILabel!
-    @IBOutlet var questionBodyTextField: UITextField!
+    @IBOutlet var questionBodyTextView: UITextView!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        textViewSetup()
+    }
+
+    private func textViewSetup() {
+        questionBodyTextView.text = ""
+        questionBodyTextView.layer.cornerRadius = 5
+        questionBodyTextView.layer.borderWidth = 1
+        questionBodyTextView.layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
+    }
 }
