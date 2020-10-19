@@ -28,6 +28,7 @@ class MemberAnswersViewController: ShiftableViewController {
         getResponses()
         UserController.shared.answerSurveyRequest(for: responses) { error in
             if let error = error {
+                self.unableToAnswerRequestAlert()
                 NSLog("Error posting responses: \(error)")
             }
 
