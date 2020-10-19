@@ -130,41 +130,6 @@ extension UserController {
         }
     }
 
-    func fetchSingleSurvey(isMock: Bool = false, using surveyId: Int, completion: @escaping (Survey?) -> Void) {
-        let requestURL = baseURL
-            .appendingPathComponent("surveys")
-            .appendingPathComponent("survey")
-            .appendingPathComponent(surveyId.description)
-        var request = URLRequest(url: requestURL)
-
-        if !isMock {
-            guard let oktaCredentials = getOktaAuth() else { return }
-            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
-        }
-
-        dataLoader.loadData(using: request) { data, _, error in
-            if let error = error {
-                NSLog("Error fetching surveys: \(error)")
-                completion(nil)
-                return
-            }
-
-            guard let data = data else {
-                NSLog("No survey data for surveys request")
-                completion(nil)
-                return
-            }
-
-            do {
-                let survey = try JSONDecoder().decode(Survey.self, from: data)
-                DispatchQueue.main.async { completion(survey) }
-            } catch {
-                NSLog("Error decoding surveys data: \(error)")
-                completion(nil)
-            }
-        }
-    }
-
     func fetchQuestions(isMock: Bool = false, completion: @escaping (QuestionResults?) -> Void) {
         let requestURL = baseURL.appendingPathComponent("questions").appendingPathComponent("all")
         var request = URLRequest(url: requestURL)
