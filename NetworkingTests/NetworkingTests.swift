@@ -28,6 +28,22 @@ class NetworkingTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
 
+    func testFetchingSurveys() {
+        let controller = UserController()
+        let expectation = XCTestExpectation(description: "Waiting on survey results")
+        controller.fetchSurveys(isMock: true, isTest: true) { results in
+            guard let surveys = results?.surveys else {
+                XCTFail("Failed to fetch surveys")
+                return
+            }
+            XCTAssertEqual(surveys.first?.surveyid, 4)
+            XCTAssertEqual(surveys[1].questions?.first?.questionid, 15)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 5)
+    }
+
     func testFetchingSpecificSurvey() {
         let controller = UserController()
         let expectation = XCTestExpectation(description: "Waiting for survey results")

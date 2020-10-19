@@ -87,9 +87,20 @@ extension UserController {
         }
     }
 
-    func fetchSurveys(isMock: Bool = false, completion: @escaping (SurveyResults?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("surveys").appendingPathComponent("all")
-        var request = URLRequest(url: requestURL)
+    func fetchSurveys(isMock: Bool = false, isTest: Bool = false, completion: @escaping (SurveyResults?) -> Void) {
+        var requestURL = URL(string: "")
+
+        if isTest {
+            requestURL = baseURL
+                .appendingPathComponent("test")
+                .appendingPathComponent("surveys")
+                .appendingPathComponent("all")
+        } else {
+            requestURL = baseURL.appendingPathComponent("surveys").appendingPathComponent("all")
+        }
+
+        guard let url = requestURL else { return }
+        var request = URLRequest(url: url)
 
         if !isMock {
             guard let oktaCredentials = getOktaAuth() else { return }
