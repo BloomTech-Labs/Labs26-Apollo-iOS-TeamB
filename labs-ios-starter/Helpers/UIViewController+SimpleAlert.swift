@@ -11,8 +11,8 @@ import UIKit
 extension UIViewController {
     func presentSimpleAlert(with title: String?,
                             message: String?,
-                            preferredStyle: UIAlertController.Style,
-                            dismissText: String,
+                            preferredStyle: UIAlertController.Style = .alert,
+                            dismissText: String = "OK",
                             completionUponDismissal: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
         
@@ -20,5 +20,12 @@ extension UIViewController {
         alert.addAction(dismissAction)
         
         present(alert, animated: true, completion: nil)
+    }
+
+    func unableToFetchContextsAlert() {
+        presentSimpleAlert(with: "Error displaying contexts",
+                           message: "We are currently unable to display the survey types. Please try again later") { _ in
+                            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

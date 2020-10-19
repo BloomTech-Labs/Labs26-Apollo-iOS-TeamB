@@ -25,6 +25,8 @@ class NewTopicViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }
+
+            self.unableToFetchContextsAlert()
         }
     }
 
