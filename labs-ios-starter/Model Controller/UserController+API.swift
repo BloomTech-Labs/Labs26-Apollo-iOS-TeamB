@@ -44,9 +44,20 @@ extension UserController {
         }
     }
 
-    func fetchTopics(isMock: Bool = false, completion: @escaping (TopicResults?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
-        var request = URLRequest(url: requestURL)
+    func fetchTopics(isMock: Bool = false, isTest: Bool = false, completion: @escaping (TopicResults?) -> Void) {
+        var requestURL = URL(string: "")
+
+        if isTest {
+            requestURL = baseURL
+            .appendingPathComponent("test")
+            .appendingPathComponent("topics")
+            .appendingPathComponent("topics")
+        } else {
+            requestURL = baseURL.appendingPathComponent("topics").appendingPathComponent("topics")
+        }
+
+        guard let url = requestURL else { return }
+        var request = URLRequest(url: url)
 
         if !isMock {
             guard let oktaCredentials = getOktaAuth() else { return }
@@ -76,9 +87,20 @@ extension UserController {
         }
     }
 
-    func fetchSurveys(isMock: Bool = false, completion: @escaping (SurveyResults?) -> Void) {
-        let requestURL = baseURL.appendingPathComponent("surveys").appendingPathComponent("all")
-        var request = URLRequest(url: requestURL)
+    func fetchSurveys(isMock: Bool = false, isTest: Bool = false, completion: @escaping (SurveyResults?) -> Void) {
+        var requestURL = URL(string: "")
+
+        if isTest {
+            requestURL = baseURL
+                .appendingPathComponent("test")
+                .appendingPathComponent("surveys")
+                .appendingPathComponent("all")
+        } else {
+            requestURL = baseURL.appendingPathComponent("surveys").appendingPathComponent("all")
+        }
+
+        guard let url = requestURL else { return }
+        var request = URLRequest(url: url)
 
         if !isMock {
             guard let oktaCredentials = getOktaAuth() else { return }
@@ -101,41 +123,6 @@ extension UserController {
             do {
                 let surveys = try JSONDecoder().decode(SurveyResults.self, from: data)
                 DispatchQueue.main.async { completion(surveys) }
-            } catch {
-                NSLog("Error decoding surveys data: \(error)")
-                completion(nil)
-            }
-        }
-    }
-
-    func fetchSingleSurvey(isMock: Bool = false, using surveyId: Int, completion: @escaping (Survey?) -> Void) {
-        let requestURL = baseURL
-            .appendingPathComponent("surveys")
-            .appendingPathComponent("survey")
-            .appendingPathComponent(surveyId.description)
-        var request = URLRequest(url: requestURL)
-
-        if !isMock {
-            guard let oktaCredentials = getOktaAuth() else { return }
-            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
-        }
-
-        dataLoader.loadData(using: request) { data, _, error in
-            if let error = error {
-                NSLog("Error fetching surveys: \(error)")
-                completion(nil)
-                return
-            }
-
-            guard let data = data else {
-                NSLog("No survey data for surveys request")
-                completion(nil)
-                return
-            }
-
-            do {
-                let survey = try JSONDecoder().decode(Survey.self, from: data)
-                DispatchQueue.main.async { completion(survey) }
             } catch {
                 NSLog("Error decoding surveys data: \(error)")
                 completion(nil)
@@ -380,18 +367,34 @@ extension UserController {
         }.resume()
     }
 
-    func fetchSpecificSurvey(with surveyId: Int, completion: @escaping (Survey?) -> Void) {
-        guard let oktaCredentials = getOktaAuth() else { return }
+    func fetchSpecificSurvey(isMock: Bool = false,
+                             isTest: Bool = false,
+                             with surveyId: Int,
+                             completion: @escaping (Survey?) -> Void) {
+        var requestURL = URL(string: "")
 
-        let requestURL = baseURL
-            .appendingPathComponent("surveys")
-            .appendingPathComponent("survey")
-            .appendingPathComponent(surveyId.description)
+        if isTest {
+            requestURL = baseURL
+                .appendingPathComponent("test")
+                .appendingPathComponent("surveys")
+                .appendingPathComponent("survey")
+                .appendingPathComponent(surveyId.description)
+        } else {
+            requestURL = baseURL
+                .appendingPathComponent("surveys")
+                .appendingPathComponent("survey")
+                .appendingPathComponent(surveyId.description)
+        }
 
-        var request = URLRequest(url: requestURL)
-        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        guard let url = requestURL else { return }
+        var request = URLRequest(url: url)
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        if !isMock {
+            guard let oktaCredentials = getOktaAuth() else { return }
+            request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+        }
+
+        dataLoader.loadData(using: request) { data, _, error in
             if let error = error {
                 NSLog("Error fetching survey with \(surveyId.description): \(error)")
                 completion(nil)
@@ -413,7 +416,7 @@ extension UserController {
                 NSLog("Error decoding survey data: \(error)")
                 completion(nil)
             }
-        }.resume()
+        }
     }
 
     func joinTopic(_ joincode: String, completion: @escaping (Bool) -> Void) {

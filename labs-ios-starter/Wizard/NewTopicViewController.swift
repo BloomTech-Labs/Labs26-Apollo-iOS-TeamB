@@ -24,6 +24,8 @@ class NewTopicViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+            } else {
+                self.unableToFetchContextsAlert()
             }
         }
     }

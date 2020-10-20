@@ -39,34 +39,41 @@ class MemberQuestionsViewController: ShiftableViewController {
     }
 
     @IBAction func addNewQuestionTapped(_ sender: Any) {
+        updateMemberQuestions()
         let newQuestion = Question(body: "", type: "TEXT", leader: false)
         memberQuestions.append(newQuestion)
         tableView.reloadData()
     }
 
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TopicCodeSegue" {
-            if let destionationVC = segue.destination as? TopicCodeViewController {
-                newTopic?.defaultSurvey?.questions?.append(contentsOf: memberQuestions)
-                destionationVC.newTopic = newTopic
+    private func updateMemberQuestions() {
+        var cells = [QuestionsTableViewCell]()
+        for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? QuestionsTableViewCell {
+                cells.append(cell)
             }
         }
+
+        var newMemberQuestions: [Question] = []
+        for cell in cells {
+            guard let memberQuestionText = cell.questionBodyTextView.text else { return }
+            let response = Question(body: memberQuestionText, type: "TEXT", leader: false)
+            newMemberQuestions.append(response)
+        }
+        memberQuestions = newMemberQuestions
     }
 
-    // MARK: - TextView Delegate Methods
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        indexToEdit = memberQuestions.firstIndex(where: { question -> Bool in
-            guard let questionText = textView.text else { return false }
-            return question.body == questionText
-        })
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateMemberQuestions()
     }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        guard let indexToEdit = indexToEdit, let questionText = textView.text else { return }
-        memberQuestions[indexToEdit].body = questionText
+  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+          if segue.identifier == "TopicCodeSegue" {
+              if let destionationVC = segue.destination as? TopicCodeViewController {
+                  updateMemberQuestions()
+                  newTopic?.defaultSurvey?.questions?.append(contentsOf: memberQuestions)
+                  destionationVC.newTopic = newTopic
+              }
+          }
     }
 }
 

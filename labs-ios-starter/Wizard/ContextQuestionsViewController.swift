@@ -16,8 +16,6 @@ class ContextQuestionsViewController: ShiftableViewController {
     var selectedContext: Context?
     private var leaderQuestions: [Question] = []
 
-    private var indexToEdit: Int?
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,17 +35,34 @@ class ContextQuestionsViewController: ShiftableViewController {
     }
 
     @IBAction func addNewQuestionTapped(_ sender: Any) {
+        updateLeaderQuestions()
         let newQuestion = Question(body: "", type: "TEXT", leader: true)
         leaderQuestions.append(newQuestion)
         tableView.reloadData()
     }
 
-    // MARK: - Navigation
+    private func updateLeaderQuestions() {
+        var cells = [QuestionsTableViewCell]()
+        for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? QuestionsTableViewCell {
+                cells.append(cell)
+            }
+        }
+
+        var newLeaderQuestions: [Question] = []
+        for cell in cells {
+            guard let leaderQuestionText = cell.questionBodyTextView.text else { return }
+            let response = Question(body: leaderQuestionText, type: "TEXT", leader: true)
+            newLeaderQuestions.append(response)
+        }
+        leaderQuestions = newLeaderQuestions
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MemberQuestionsSegue" {
             if let destinationVC = segue.destination as? MemberQuestionsViewController {
                 let survey = Survey()
+                updateLeaderQuestions()
                 survey.questions = leaderQuestions
                 newTopic?.defaultSurvey = survey
                 destinationVC.newTopic = newTopic
@@ -56,18 +71,8 @@ class ContextQuestionsViewController: ShiftableViewController {
         }
     }
 
-    // MARK: - TextView Delegate Methods
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        indexToEdit = leaderQuestions.firstIndex(where: { question -> Bool in
-            guard let questionText = textView.text else { return false }
-            return question.body == questionText
-        })
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        guard let indexToEdit = indexToEdit, let questionText = textView.text else { return }
-        leaderQuestions[indexToEdit].body = questionText
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        updateLeaderQuestions()
     }
 }
 

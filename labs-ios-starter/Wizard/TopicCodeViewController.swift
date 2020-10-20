@@ -42,7 +42,7 @@ class TopicCodeViewController: UIViewController {
             } else {
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
-                    self.presentSimpleAlert(with: "ERROR", message: "Failed to create topic", preferredStyle: .alert, dismissText: "OK")
+                    self.unableToCreateTopicAlert()
                 }
             }
         }

@@ -45,7 +45,7 @@ class TopicTableViewController: ShiftableViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.presentSimpleAlert(with: "ERROR", message: "Failed to get topics from server. Please try again later.", preferredStyle: .alert, dismissText: "OK")
+                    self.unableToFetchTopicsAlert()
                     self.refreshControl.endRefreshing()
                 }
             }
@@ -59,8 +59,6 @@ class TopicTableViewController: ShiftableViewController {
                 let surveys = topics[indexPath.row].surveys {
                 destionationVC.topicTitle = topics[indexPath.row].title
                 destionationVC.surveys = surveys
-                destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
-                destionationVC.topicId = topics[indexPath.row].topicId
                 destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
                 destionationVC.topicId = topics[indexPath.row].topicId
 

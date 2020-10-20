@@ -20,7 +20,7 @@ class RequestContextViewController: ShiftableViewController {
     var memberQuestions: [Question] = []
 
     var indexToEdit: Int?
-    let placeholderText = "Please answer your context question"
+    let placeholderText = "Please fill in empty field"
     var delegate: SurveyRequestDelegate?
 
     override func viewDidLoad() {
@@ -28,6 +28,7 @@ class RequestContextViewController: ShiftableViewController {
         if let defaultQuestions = defaultSurvey?.questions {
             setUpQuestions(questions: defaultQuestions)
         } else {
+            self.unableToGetDefaultQuestionsAlert()
             NSLog("Failed to get default questions")
         }
         setUpView()
@@ -52,14 +53,20 @@ class RequestContextViewController: ShiftableViewController {
     }
 
     private func updateLeaderQuestions() {
-        guard let cells = tableView.visibleCells as? [AnswerContextTableViewCell] else { return }
+        var cells = [AnswerContextTableViewCell]()
+        for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? AnswerContextTableViewCell {
+                cells.append(cell)
+            }
+        }
+
         var answeredLeaderQuestions: [Question] = []
         for cell in cells {
-            guard let body = cell.questionTextField.text,
-                  let answerText = cell.answerTextView.text else { return }
-            let answer = Answer(body: answerText)
-            let newQuestion = Question(body: body, type: "TEXT", leader: true, answers: [answer])
-            answeredLeaderQuestions.append(newQuestion)
+            guard let leaderQuestionText = cell.questionTextView.text,
+                let leaderAnswerText = cell.answerTextView.text else { return }
+            let leaderAnswer = Answer(body: leaderAnswerText)
+            let response = Question(body: leaderQuestionText, type: "TEXT", leader: false, answers: [leaderAnswer])
+            answeredLeaderQuestions.append(response)
         }
         leaderQuestions = answeredLeaderQuestions
     }
@@ -71,7 +78,7 @@ class RequestContextViewController: ShiftableViewController {
 
     @IBAction func addNewQuestionButtonTapped(_ sender: Any) {
         updateLeaderQuestions()
-        let newQuestion = Question(body: "", type: "TEXT", leader: true)
+        let newQuestion = Question(body: placeholderText, type: "TEXT", leader: true)
         leaderQuestions.append(newQuestion)
         tableView.reloadData()
     }
@@ -96,14 +103,17 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RequestContextCell", for: indexPath) as? AnswerContextTableViewCell else {
             return UITableViewCell()
         }
-        cell.questionTextField.text = leaderQuestions[indexPath.row].body
-        cell.answerTextView.text = leaderQuestions[indexPath.row].answers?.first?.body
+        cell.questionTextView.text = leaderQuestions[indexPath.row].body
+        if let answerText = leaderQuestions[indexPath.row].answers?.first?.body {
+            cell.answerTextView.text = answerText
+        } else {
+            cell.answerTextView.text = placeholderText
+            cell.answerTextView.textColor = .placeholderText
+        }
 
-        cell.questionTextField.borderStyle = .none
-        cell.questionTextField.delegate = self
+        cell.questionTextView.delegate = self
+        cell.questionTextView.isScrollEnabled = false
         cell.answerTextView.delegate = self
-        cell.answerTextView.text = placeholderText
-        cell.answerTextView.textColor = UIColor.placeholderText
         return cell
     }
 
@@ -121,7 +131,7 @@ extension RequestContextViewController: UITableViewDelegate, UITableViewDataSour
 
 extension RequestContextViewController {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == placeholderText {
+        if textView.text == placeholderText{
             textView.text = ""
             textView.textColor = UIColor.black
         }

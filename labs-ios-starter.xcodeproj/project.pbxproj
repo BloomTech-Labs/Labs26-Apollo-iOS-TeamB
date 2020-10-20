@@ -45,7 +45,7 @@
 		2C3CAE92253619A40099ABF4 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C3CAE8C253619A40099ABF4 /* Poppins-Regular.ttf */; };
 		2C3CAE93253619A40099ABF4 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C3CAE8D253619A40099ABF4 /* Poppins-SemiBold.ttf */; };
 		2C429DFE25082A2D002D7F00 /* Wizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C429DFD25082A2D002D7F00 /* Wizard.storyboard */; };
-		2C61BEFB2523B94200460C2B /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BEFA2523B94200460C2B /* NetworkingTests.swift */; };
+		2C61BEFB2523B94200460C2B /* MockNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BEFA2523B94200460C2B /* MockNetworkingTests.swift */; };
 		2C61BF072523C44200460C2B /* MemberQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF022523C44100460C2B /* MemberQuestionsViewController.swift */; };
 		2C61BF082523C44200460C2B /* ContextQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF032523C44200460C2B /* ContextQuestionsViewController.swift */; };
 		2C61BF092523C44200460C2B /* NameTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C61BF042523C44200460C2B /* NameTopicViewController.swift */; };
@@ -57,6 +57,7 @@
 		2CA3591E25311F1A001A5537 /* LeaderAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */; };
 		2CA3592225311FD8001A5537 /* AnswersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */; };
 		2CABF7332539017E00F0239C /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CABF7322539017E00F0239C /* ShiftableViewController.swift */; };
+		2CAD5804253E34A500108DA5 /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD5803253E34A500108DA5 /* NetworkingTests.swift */; };
 		2CDE16472534D08E00B61AD2 /* MemberAnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE16462534D08E00B61AD2 /* MemberAnswersViewController.swift */; };
 		463AD24524CF2CDB00447BB8 /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */; };
 		466C4274249A8748007D033E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466C4273249A8748007D033E /* AppDelegate.swift */; };
@@ -128,7 +129,7 @@
 		2C3CAE8D253619A40099ABF4 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		2C429DFD25082A2D002D7F00 /* Wizard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wizard.storyboard; sourceTree = "<group>"; };
 		2C61BEF82523B94200460C2B /* NetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C61BEFA2523B94200460C2B /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
+		2C61BEFA2523B94200460C2B /* MockNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkingTests.swift; sourceTree = "<group>"; };
 		2C61BEFC2523B94200460C2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C61BF022523C44100460C2B /* MemberQuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberQuestionsViewController.swift; sourceTree = "<group>"; };
 		2C61BF032523C44200460C2B /* ContextQuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextQuestionsViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 		2CA3591D25311F1A001A5537 /* LeaderAnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderAnswersViewController.swift; sourceTree = "<group>"; };
 		2CA3592125311FD8001A5537 /* AnswersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersTableViewCell.swift; sourceTree = "<group>"; };
 		2CABF7322539017E00F0239C /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
+		2CAD5803253E34A500108DA5 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		2CDE16462534D08E00B61AD2 /* MemberAnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberAnswersViewController.swift; sourceTree = "<group>"; };
 		463AD24424CF2CDB00447BB8 /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		466C4270249A8748007D033E /* labs-ios-starter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "labs-ios-starter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -283,7 +285,8 @@
 		2C61BEF92523B94200460C2B /* NetworkingTests */ = {
 			isa = PBXGroup;
 			children = (
-				2C61BEFA2523B94200460C2B /* NetworkingTests.swift */,
+				2CAD5803253E34A500108DA5 /* NetworkingTests.swift */,
+				2C61BEFA2523B94200460C2B /* MockNetworkingTests.swift */,
 				2C3469B2252CBC5400FBFF8B /* MockDataLoader.swift */,
 				2C3469B4252CBDE600FBFF8B /* MockJSON.swift */,
 				2C61BEFC2523B94200460C2B /* Info.plist */,
@@ -624,7 +627,8 @@
 			files = (
 				2C3469B3252CBC5400FBFF8B /* MockDataLoader.swift in Sources */,
 				2C3469B5252CBDE600FBFF8B /* MockJSON.swift in Sources */,
-				2C61BEFB2523B94200460C2B /* NetworkingTests.swift in Sources */,
+				2C61BEFB2523B94200460C2B /* MockNetworkingTests.swift in Sources */,
+				2CAD5804253E34A500108DA5 /* NetworkingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
