@@ -363,10 +363,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JNY-y4-Prs">
-                                <rect key="frame" x="20" y="160" width="374" height="160"/>
+                                <rect key="frame" x="20" y="160" width="374" height="196"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FId-eW-g3b">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="36"/>
+                                        <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
+                                        <state key="normal" title="Joincode"/>
+                                        <connections>
+                                            <action selector="joincodeButtonTapped:" destination="l0w-ui-Ntr" eventType="touchUpInside" id="E9W-u7-GV0"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lX-Bt-xrs">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="36" width="374" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="XKY-Nh-Aon"/>
                                         </constraints>
@@ -379,7 +387,7 @@
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxI-8c-9oN">
-                                        <rect key="frame" x="0.0" y="50" width="374" height="110"/>
+                                        <rect key="frame" x="0.0" y="86" width="374" height="110"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="110" id="gcZ-jp-F6X"/>
@@ -415,10 +423,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cD0-y8-NNk">
-                                <rect key="frame" x="0.0" y="340" width="414" height="443"/>
+                                <rect key="frame" x="0.0" y="376" width="414" height="407"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DS1-HF-NlI">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="385"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="349"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SurveyResponseCell" id="yDB-Pn-MqP" customClass="SurveyResponseTableViewCell" customModule="labs_ios_starter" customModuleProvider="target">
@@ -472,7 +480,7 @@
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWi-fd-2gK">
-                                        <rect key="frame" x="40" y="393" width="334" height="50"/>
+                                        <rect key="frame" x="40" y="357" width="334" height="50"/>
                                         <color key="backgroundColor" red="0.2901960784" green="0.16862745100000001" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="2IZ-yM-62L"/>
@@ -510,6 +518,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Topic Title" id="hal-cB-4dp"/>
                     <connections>
+                        <outlet property="joincodeButton" destination="FId-eW-g3b" id="MPN-zC-cbd"/>
                         <outlet property="respondButton" destination="XWi-fd-2gK" id="h8Z-0B-hR8"/>
                         <outlet property="surveyButton" destination="0lX-Bt-xrs" id="HIZ-MD-bnb"/>
                         <outlet property="surveyTableView" destination="JxI-8c-9oN" id="kK9-m6-qiM"/>

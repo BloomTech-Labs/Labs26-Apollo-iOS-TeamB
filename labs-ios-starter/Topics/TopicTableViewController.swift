@@ -61,6 +61,7 @@ class TopicTableViewController: ShiftableViewController {
                 destionationVC.surveys = surveys
                 destionationVC.defaultSurvey = topics[indexPath.row].defaultSurvey
                 destionationVC.topicId = topics[indexPath.row].topicId
+                destionationVC.joincode = topics[indexPath.row].joincode
 
                 let userid = UserDefaults.standard.integer(forKey: "User")
                 if userid == topics[indexPath.row].userid {

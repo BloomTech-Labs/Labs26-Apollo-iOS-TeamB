@@ -14,6 +14,7 @@ class SurveyViewController: UIViewController {
     @IBOutlet var surveyButton: UIButton!
     @IBOutlet var surveyTableView: UITableView!
     @IBOutlet var respondButton: UIButton!
+    @IBOutlet var joincodeButton: UIButton!
 
     var topicTitle: String?
     var topicId: Int?
@@ -21,6 +22,7 @@ class SurveyViewController: UIViewController {
     var surveys: [Survey]?
     var selectedSurveyQuestions: [Question]?
     var isLeader: Bool = false
+    var joincode: String?
     var surveyId: Int?
 
     var index: Int?
@@ -83,10 +85,14 @@ class SurveyViewController: UIViewController {
         if isLeader {
             respondButton.backgroundColor = UIColor(red: 74/255, green: 43/255, blue: 224/255, alpha: 1)
             respondButton.setTitle("Send Request", for: .normal)
+
+            joincodeButton.setTitle(joincode, for: .normal)
         } else {
             respondButton.backgroundColor = .lightGray
             respondButton.isEnabled = false
             respondButton.setTitle("Respond", for: .normal)
+
+            joincodeButton.isHidden = true
         }
     }
 
@@ -106,6 +112,11 @@ class SurveyViewController: UIViewController {
         } else {
             performSegue(withIdentifier: "ContextQuestionsSegue", sender: self)
         }
+    }
+
+    @IBAction func joincodeButtonTapped(_ sender: Any) {
+        UIPasteboard.general.string = joincodeButton.titleLabel?.text
+        self.presentSimpleAlert(with: "Success", message: "Code was successfully copied.")
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
