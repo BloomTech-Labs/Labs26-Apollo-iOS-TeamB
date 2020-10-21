@@ -109,4 +109,11 @@ extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
+
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        let userid = UserDefaults.standard.integer(forKey: "User")
+        let topic = topics[indexPath.row]
+        let title = userid == topic.userid ? "Delete" : "Leave"
+        return title
+    }
 }
