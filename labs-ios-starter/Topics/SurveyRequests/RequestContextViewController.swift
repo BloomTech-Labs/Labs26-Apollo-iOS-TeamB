@@ -65,7 +65,7 @@ class RequestContextViewController: ShiftableViewController {
             guard let leaderQuestionText = cell.questionTextView.text,
                 let leaderAnswerText = cell.answerTextView.text else { return }
             let leaderAnswer = Answer(body: leaderAnswerText)
-            let response = Question(body: leaderQuestionText, type: "TEXT", leader: false, answers: [leaderAnswer])
+            let response = Question(body: leaderQuestionText, type: "TEXT", leader: true, answers: [leaderAnswer])
             answeredLeaderQuestions.append(response)
         }
         leaderQuestions = answeredLeaderQuestions
