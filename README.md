@@ -27,6 +27,6 @@ Thrid party framewoks and libraries are managed using Cocoapods.
   
 ## Screenshots
 
-<img src="assets/HomeVC.png" width="300"><img src="assets/NameTopicVC.png" width="300"> 
-<img src="assets/ContextQuestionsVC.png" width="300"><img src="assets/MemberQuestionsVC.png" width="300"> 
-<img src="assets/TopicCodeVC.png" width="300"><img src="assets/SurveyVC.png" width="300">
+<img src="assets/HomeVC.png" width="350"><img src="assets/SurveyVC.png" width="350">
+<img src="assets/NameTopicVC.png" width="350"><img src="assets/ContextQuestionsVC.png" width="350">
+<img src="assets/MemberQuestionsVC.png" width="350"><img src="assets/TopicCodeVC.png" width="350">
