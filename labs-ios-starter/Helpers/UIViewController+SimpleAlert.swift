@@ -74,6 +74,16 @@ extension UIViewController {
         }
     }
 
+    func unableToDeleteTopicAlert() {
+        presentSimpleAlert(with: "Error deleting topic",
+                           message: "Failed to delete topic. Please try again later")
+    }
+
+    func unableToLeaveTopicAlert() {
+        presentSimpleAlert(with: "Error leaving topic",
+                           message: "Failed to leave topic. Please try again later")
+    }
+
     private func popToSurveyViewController() {
         for controller in self.navigationController!.viewControllers as Array {
             if controller.isKind(of: SurveyViewController.self) {

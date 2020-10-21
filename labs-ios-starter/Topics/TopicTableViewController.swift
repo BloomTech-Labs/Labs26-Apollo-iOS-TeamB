@@ -52,6 +52,16 @@ class TopicTableViewController: ShiftableViewController {
         }
     }
 
+    private func topicError(failedTo error: String) {
+        DispatchQueue.main.async {
+            if error == "delete" {
+                self.unableToDeleteTopicAlert()
+            } else if error == "leave" {
+                self.unableToLeaveTopicAlert()
+            }
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowTopicDetailSegue" {
             if let destionationVC = segue.destination as? SurveyViewController,
@@ -96,13 +106,17 @@ extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             if userid == topic.userid {
                 UserController.shared.deleteTopic(with: topicId) { error in
-                    if error == nil {
+                    if error != nil {
+                        self.topicError(failedTo: "delete")
+                    } else {
                         self.refreshTableView()
                     }
                 }
             } else {
                 UserController.shared.leaveTopic(with: topicId) { error in
-                    if error == nil {
+                    if error != nil {
+                        self.topicError(failedTo: "leave")
+                    } else {
                         self.refreshTableView()
                     }
                 }
