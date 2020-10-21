@@ -20,13 +20,13 @@ Apollo allows users to create and join topics. These topics contain surveys that
 
 ## Dependencies
 
-Thrid party framewoks and Library are managed using Cocoapods.
+Thrid party framewoks and libraries are managed using Cocoapods.
 
 ### Pods used 
 	- pod 'MessageKit'
   
 ## Screenshots
 
-<img src="assets/HomeVC.png" width="310"><img src="assets/NameTopicVC.png" width="310"> 
-<img src="assets/ContextQuestionsVC.png" width="310"><img src="assets/MemberQuestionsVC.png" width="310"> 
-<img src="assets/TopicCodeVC.png" width="310"><img src="assets/SurveyVC.png" width="310">
+<img src="assets/HomeVC.png" width="300"><img src="assets/NameTopicVC.png" width="300"> 
+<img src="assets/ContextQuestionsVC.png" width="300"><img src="assets/MemberQuestionsVC.png" width="300"> 
+<img src="assets/TopicCodeVC.png" width="300"><img src="assets/SurveyVC.png" width="300">
