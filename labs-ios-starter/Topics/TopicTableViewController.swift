@@ -87,4 +87,26 @@ extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let userid = UserDefaults.standard.integer(forKey: "User")
+        let topic = topics[indexPath.row]
+        guard let topicId = topic.topicId else { return }
+
+        if editingStyle == .delete {
+            if userid == topic.userid {
+                UserController.shared.deleteTopic(with: topicId) { error in
+                    if error == nil {
+                        self.refreshTableView()
+                    }
+                }
+            } else {
+                UserController.shared.leaveTopic(with: topicId) { error in
+                    if error == nil {
+                        self.refreshTableView()
+                    }
+                }
+            }
+        }
+    }
 }
