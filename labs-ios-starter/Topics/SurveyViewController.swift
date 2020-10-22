@@ -236,16 +236,8 @@ extension SurveyViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SurveyViewController: SurveyRequestDelegate {
     func didGetSurveyRequest(_ request: Survey) {
-        self.surveys?.append(request)
+        self.surveys?.insert(request, at: 0)
         self.surveyTableView.reloadData()
-        var newMemberQuestions: [Question] = []
-        guard let questions = request.questions else { return }
-        for question in questions {
-            if !(question.leader ?? false) {
-                newMemberQuestions.append(question)
-            }
-        }
-        self.selectedSurveyQuestions = newMemberQuestions
-        self.tableView.reloadData()
+        tableView(self.surveyTableView, didSelectRowAt: IndexPath(row: 0, section: 0))
     }
 }

@@ -49,9 +49,9 @@ class RequestMemberViewController: ShiftableViewController {
     }
 
     private func updateMemberQuestions() {
-        var cells = [MemberAnswersTableViewCell]()
+        var cells = [AnswersTableViewCell]()
         for cellNumber in 0...tableView.numberOfRows(inSection: 0) {
-            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? MemberAnswersTableViewCell {
+            if let cell = tableView.cellForRow(at: IndexPath(row: cellNumber, section: 0)) as? AnswersTableViewCell {
                 cells.append(cell)
             }
         }
@@ -79,8 +79,8 @@ class RequestMemberViewController: ShiftableViewController {
             DispatchQueue.main.async {
                 for controller in self.navigationController!.viewControllers as Array {
                     if controller.isKind(of: SurveyViewController.self) {
-                        self.delegate?.didGetSurveyRequest(result)
                         self.navigationController?.popToViewController(controller, animated: true)
+                        self.delegate?.didGetSurveyRequest(result)
                     }
                 }
             }
