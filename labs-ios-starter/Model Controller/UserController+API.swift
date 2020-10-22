@@ -419,6 +419,64 @@ extension UserController {
         }
     }
 
+    func deleteTopic(with topicId: Int, completion: @escaping (Error?) -> Void) {
+        guard let oktaCredentials = getOktaAuth() else { return }
+
+        let requestURL = baseURL
+            .appendingPathComponent("topics")
+            .appendingPathComponent("topic")
+            .appendingPathComponent(topicId.description)
+
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error deleting topic \(topicId.description): \(error)")
+                completion(error)
+                return
+            }
+
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 200 {
+                NSLog("Received \(response.statusCode) code while deleting topic")
+                completion(NSError())
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+
+    func leaveTopic(with topicId: Int, completion: @escaping (Error?) -> Void) {
+        guard let oktaCredentials = getOktaAuth() else { return }
+
+        let requestURL = baseURL
+            .appendingPathComponent("topics")
+            .appendingPathComponent("leave")
+            .appendingPathComponent(topicId.description)
+
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+        request.addValue("Bearer \(oktaCredentials.accessToken)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error deleting topic \(topicId.description): \(error)")
+                completion(error)
+                return
+            }
+
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 410 {
+                NSLog("Received \(response.statusCode) code while leaving topic")
+                completion(NSError())
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+
     func joinTopic(_ joincode: String, completion: @escaping (Bool) -> Void) {
         guard let oktaCredentials = getOktaAuth() else { return }
 

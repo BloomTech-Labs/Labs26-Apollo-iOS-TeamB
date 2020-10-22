@@ -52,6 +52,16 @@ class TopicTableViewController: ShiftableViewController {
         }
     }
 
+    private func topicError(failedTo error: String) {
+        DispatchQueue.main.async {
+            if error == "delete" {
+                self.unableToDeleteTopicAlert()
+            } else if error == "leave" {
+                self.unableToLeaveTopicAlert()
+            }
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowTopicDetailSegue" {
             if let destionationVC = segue.destination as? SurveyViewController,
@@ -86,5 +96,38 @@ extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let userid = UserDefaults.standard.integer(forKey: "User")
+        let topic = topics[indexPath.row]
+        guard let topicId = topic.topicId else { return }
+
+        if editingStyle == .delete {
+            if userid == topic.userid {
+                UserController.shared.deleteTopic(with: topicId) { error in
+                    if error != nil {
+                        self.topicError(failedTo: "delete")
+                    } else {
+                        self.refreshTableView()
+                    }
+                }
+            } else {
+                UserController.shared.leaveTopic(with: topicId) { error in
+                    if error != nil {
+                        self.topicError(failedTo: "leave")
+                    } else {
+                        self.refreshTableView()
+                    }
+                }
+            }
+        }
+    }
+
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        let userid = UserDefaults.standard.integer(forKey: "User")
+        let topic = topics[indexPath.row]
+        let title = userid == topic.userid ? "Delete" : "Leave"
+        return title
     }
 }
