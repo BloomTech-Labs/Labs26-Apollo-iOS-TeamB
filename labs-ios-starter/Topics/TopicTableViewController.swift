@@ -13,6 +13,7 @@ class TopicTableViewController: ShiftableViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var topics: [Topic] = []
+    let userid = UserDefaults.standard.integer(forKey: "User")
     private let refreshControl = UIRefreshControl()
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +63,26 @@ class TopicTableViewController: ShiftableViewController {
         }
     }
 
+    private func deleteTopic(with topicId: Int) {
+        UserController.shared.deleteTopic(with: topicId) { error in
+            if error != nil {
+                self.topicError(failedTo: "delete")
+            } else {
+                self.refreshTableView()
+            }
+        }
+    }
+
+    private func leaveTopic(with topicId: Int) {
+        UserController.shared.leaveTopic(with: topicId) { error in
+            if error != nil {
+                self.topicError(failedTo: "leave")
+            } else {
+                self.refreshTableView()
+            }
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowTopicDetailSegue" {
             if let destionationVC = segue.destination as? SurveyViewController,
@@ -73,7 +94,6 @@ class TopicTableViewController: ShiftableViewController {
                 destionationVC.topicId = topics[indexPath.row].topicId
                 destionationVC.joincode = topics[indexPath.row].joincode
 
-                let userid = UserDefaults.standard.integer(forKey: "User")
                 if userid == topics[indexPath.row].userid {
                     destionationVC.isLeader = true
                 }
@@ -99,33 +119,19 @@ extension TopicTableViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let userid = UserDefaults.standard.integer(forKey: "User")
         let topic = topics[indexPath.row]
         guard let topicId = topic.topicId else { return }
 
         if editingStyle == .delete {
             if userid == topic.userid {
-                UserController.shared.deleteTopic(with: topicId) { error in
-                    if error != nil {
-                        self.topicError(failedTo: "delete")
-                    } else {
-                        self.refreshTableView()
-                    }
-                }
+                self.deleteTopic(with: topicId)
             } else {
-                UserController.shared.leaveTopic(with: topicId) { error in
-                    if error != nil {
-                        self.topicError(failedTo: "leave")
-                    } else {
-                        self.refreshTableView()
-                    }
-                }
+                self.leaveTopic(with: topicId)
             }
         }
     }
 
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        let userid = UserDefaults.standard.integer(forKey: "User")
         let topic = topics[indexPath.row]
         let title = userid == topic.userid ? "Delete" : "Leave"
         return title
