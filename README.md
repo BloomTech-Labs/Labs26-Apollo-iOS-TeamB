@@ -22,7 +22,7 @@ Apollo allows users to create and join topics. These topics contain surveys that
 
 Thrid party framewoks and libraries are managed using Cocoapods.
 
-### Pods used 
+### Pods Used 
 	- pod 'MessageKit'
   
 ## Screenshots
@@ -30,3 +30,7 @@ Thrid party framewoks and libraries are managed using Cocoapods.
 <img src="assets/HomeVC.png" width="350"><img src="assets/SurveyVC.png" width="350">
 <img src="assets/NameTopicVC.png" width="350"><img src="assets/ContextQuestionsVC.png" width="350">
 <img src="assets/MemberQuestionsVC.png" width="350"><img src="assets/TopicCodeVC.png" width="350">
+
+### Demo Video
+
+[![App Demo](assets/Demo.png)](https://youtu.be/1okEWP_9itM)
